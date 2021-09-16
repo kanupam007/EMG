@@ -1,0 +1,129 @@
+﻿.dataTables_length {
+    display: none !important;
+}
+
+.table.dataTable thead th, table.dataTable thead td {
+    border-bottom: 0px !important;
+}
+
+.table.dataTable.no-footer {
+    border-bottom: 0px !important;
+}
+
+.custom-input-error {
+    border: 1px solid #a94442 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    background-color: #FBE8E8 !important;
+}
+
+.custom-input-success {
+    border: 1px solid #3c763d !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    background-color: #D6F3D6 !important;
+}
+
+
+/*Master Page Style Start*/
+.input-validation-error {
+    border: 1px solid #a94442 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    background-color: #FBE8E8 !important;
+}
+
+/*Master Page Style End*/
+
+/*Dashboard Page Style Start*/
+.col-md-3 {
+    width: 33%;
+}
+
+.products-list .product-img img {
+    width: 75px;
+    height: 75px;
+}
+
+
+.products-list > .item {
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    padding: 5px 0;
+    background: #fff;
+}
+/*Dashboard Page Style END*/
+
+/* Admin Bulk upload employee css Start*/
+.error-msg {
+    color: #fff;
+    background-color: #CE8888;
+}
+
+.success-msg {
+    color: #fff;
+    background-color: #149053;
+}
+/* Admin Bulk upload employee css End*/
+
+   #LoadMain {
+        position: fixed;
+        background-color: rgba(0,0,0,.6);
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 5;
+        display: none;
+    }
+
+    .loader {
+        position: relative;
+    }
+
+    .ajax-loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px; /* -1 * image width / 2 */
+        margin-top: -32px; /* -1 * image height / 2 */
+    }
+
+    /*Add Company Page css start*/
+    
+    .not-active {
+        pointer-events: none;
+        cursor: default;
+        text-decoration: none;
+        color: black;
+        border: 1px solid #c1c1c1;
+        background-color: #eeeeee;
+        color: black;
+    }
+        /*Add Company Page css End*/
+            /*ManagePurchaseSubscription Page css start*/
+     .searchBox.selectPurchage select {
+        height: 30px;
+        width: 100%;
+    }
+
+    .searchBox.selectPurchage {
+        display: inline-block;
+        margin-bottom: 15px;
+        width: 226px;
+    }
+
+    .box {
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+
+    .norecord {
+        display: block;
+        font-size: 20px;
+        padding: 20px 0;
+        text-align: center;
+        text-transform: capitalize;
+    }
+      /*ManagePurchaseSubscription Page css END*/

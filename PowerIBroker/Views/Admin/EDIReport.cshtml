@@ -1,0 +1,153 @@
+﻿@using PagedList.Mvc;
+@using PowerIBroker.Models;
+@{
+    ViewBag.Title = "EDI Report";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+<link href="~/Content/Admin/css/stylesheet EDI.css" rel="stylesheet" />
+
+
+<section class="content-header">
+    <h1>
+       EDI Report
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                @*<div class="box-header with-border">
+                    <h3 class="box-title">EMG Product</h3>
+                </div>*@
+
+                <div class="col-lg-12">
+                    <div class="@(TempData["CustomMessageED"] != null ? TempData["MessageTypeED"] =="Success"?"alert alert-success" : "alert alert-danger":"")">
+                        @if (TempData["CustomMessageED"] != null)
+                        {
+                            <i class="fa @(TempData["MessageTypeED"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+                        }
+                        <span>@TempData["CustomMessageED"]</span>
+                    </div>
+                </div>
+
+                @using (Html.BeginForm("EDIReport", "Admin", FormMethod.Post, new { Id = "formId" }))
+                {
+                  
+                    <div class="box-body">
+                        <form role="form">
+                            <div >
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <span class="edilbl"> Company</span> <br />                                       
+                                        <div class="edipad10">
+                                            @if (ViewBag.Company != null)
+                                            {
+                                                @Html.DropDownList("CompanyID", ViewBag.Company as SelectList, "Select Company", new { @class = "search", id = "Companylist" })
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span class="edilbl"> EDI Type </span> <br />                                      
+                                        <div class="edipad10">
+                                            <label>
+                                                <input type="radio" name="EDIType" checked value="1"> Cigna CED
+                                            </label>
+                                            <label style="margin-left:50px">
+                                                <input type="radio" name="EDIType" value="2"> Cigna FACETS
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span class="edilbl"> Plan Type</span> <br />
+                                        <div class="edipad10">
+                                            <input type="checkbox" id="chkMedical" name="chkMedical" value="1" /> Medical &nbsp;&nbsp;
+                                            <input type="checkbox" id="checkDental" name="checkDental" value="2" /> Dental &nbsp;&nbsp;
+                                            <input type="checkbox" id="checkVision" name="checkVision" value="3" /> Vision &nbsp;&nbsp;
+                                        </div>
+                                    </div>
+                                    <div class="box-footer"  style="padding: 0px !important;" >
+                                        <button type="submit" id="btnSaveEDIReport" class="btn btn-primary">Export</button>
+                                    </div>
+                                </div>
+                          </div> 
+                        </form>
+                        <br /><br /><br /><br />
+                      
+
+
+                    </div><!-- ./box-body -->
+
+                }<!-- ./box-body -->
+                <!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+
+</section><!-- /.content -->
+@*</div>*@
+
+
+<script>
+    $('#btnSaveEDIReport').click(function (e) {
+        var isValid = true;
+        if ($("#Companylist").val() == '') {
+            isValid = false;
+            toastr["error"]("Please select company", "Error !");
+        }
+        $("#Companylist").change(function () {
+            if ($("#Companylist").val() == '') {
+                isValid = false;
+                toastr["error"]("Please select company", "Error !");
+            }
+        });
+        if (!$('#chkMedical').is(":checked") && !$('#checkDental').is(":checked") && !$('#checkVision').is(":checked")) {
+            isValid = false;
+            toastr["error"]("Please select plan type", "Error !");
+        }
+        if (isValid == false)
+            e.preventDefault();
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="LoadMain" style="display:none">
+    <div id="load">
+        <img src="~/Areas/Employee/Content/images/loading(1).gif" class="ajax-loader" />
+    </div>
+</div>
+
+
+
+<script>
+    $('input[type=checkbox]').each(function () {
+		$(this).wrap( "<span class='checkWrapper'></span>" );
+		$(this).after( "<i class='bg'></i>" );
+    });
+
+    $('input[type=radio]').each(function () {
+        $(this).wrap("<span class='radioWrapper'></span>");
+        $(this).after("<i class='bg'></i>");
+    });
+
+</script>

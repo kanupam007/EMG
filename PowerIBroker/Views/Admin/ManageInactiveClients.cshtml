@@ -1,0 +1,161 @@
+﻿@model PagedList.IPagedList<CompanyMaster>
+@using PagedList.Mvc;
+@using PowerIBrokerBusinessLayer;
+@using PowerIBroker.Models;
+@{
+    ManagePageSize pagesize = new ManagePageSize();
+}
+@using PowerIBrokerDataLayer;
+@{
+    ViewBag.Title = "Manage Compamies";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<link href="~/Content/Admin/css/stylesheet.css" rel="stylesheet" />
+<script>
+    document.title = '@ViewBag.Title';
+</script>
+<style>
+    .container-fluid {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .col-lg-12 {
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+    .addBtns{position:absolute; top:0 ;right:30px;}
+</style>
+
+<!--Start of Right Part-->
+<div class="rightpart">
+    @using (Html.BeginForm("ManageClients", "Admin"))
+    {
+        <input type="checkbox" id="value" onchange="this.form.submit();" style=" float:right;margin-right:140px" />
+    }
+    <label style="float:right;margin-right:10px">Show All Records</label>
+    <h3 class="box-title">
+        Registered Companies
+       
+        <span class="btn btn-primary addBtns" style="float:right"><a href="~/Admin/AddCompany" style="color: white !important;">Add Company</a></span>
+    </h3>
+
+    <div class="compTble-bot">
+        @using (Html.BeginForm("ManageInactiveClients", "Admin"))
+        {
+
+            <div class="box-header with-border">
+                <div class="box-tools pull-right">
+
+                    @*<input type="text" class="form-control input-sm" placeholder="Search Mail"/>*@
+                    <input type="text" class="form-control input-sm" name="search" id="search" placeholder="Enter Company Name" onchange="this.form.submit();" />
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+
+                </div><!-- /.box-tools -->
+            </div><!-- /.box-header -->
+
+
+
+        }
+
+        @using (Html.BeginForm("ManageInactiveClients", "Admin"))
+        {
+            <br />
+            <div class="box-header with-border">
+                @Html.DropDownList("PageSize", new SelectList(new Dictionary<string, string> { { "50", "50" }, { "100", "100" }, { "200", "200" }, { "500", "500" }, { "1", "All" } }, "Key", "Value"), new { @class = "btn btn-default pull-right", id = "pagesizelist", onchange = "this.form.submit();" })
+                <div class="box-tools pull-left">
+
+                </div><!-- /.box-tools -->
+            </div><!-- /.box-header -->
+
+        }
+
+
+        @if (Model.Count > 0)
+        {
+            <div class="col-lg-12">
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Company List</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th width="30%">@Html.ActionLink("Company Name", "ManageClients", new { page = ViewBag.PageNumber, sort = ViewBag.SortingOrder, filter = "clientname", pageSize = ViewBag.PageSize }) <span class="fa fa-sort" style="padding-left:5px"></span></th>
+                                    @*<th width="15%">@Html.ActionLink("Employee", "ManageClients", new { page = ViewBag.PageNumber, sort = ViewBag.SortingOrder, filter = "employee", pageSize = ViewBag.PageSize }) <span class="fa fa-sort" style="padding-left:5px"></span></th>*@
+                                    <th width="10%">Employee</th>
+                                    <th width="10%" style="text-align:center">OE</th>
+                                    <th width="10%" style="text-align:center">LE</th>
+                                    <th width="10%">@Html.ActionLink("Status", "ManageClients", new { page = ViewBag.PageNumber, sort = ViewBag.SortingOrder, filter = "status", pageSize = ViewBag.PageSize }) <span class="fa fa-sort" style="padding-left:5px"></span></th>
+                                    <th width="25%" style="text-align:center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    CompanyManagement objClientMngmt = new CompanyManagement();
+                                    var details = objClientMngmt.GetOpenEnrolment(item.ID);
+                                    var lyfevnts = objClientMngmt.GetLifeChangeEvents(item.ID);
+                                    if (item.tblCompany_Employee_BasicInfo.Count > 0)
+                                    {
+                                        long eID = item.tblCompany_Employee_BasicInfo.Where(a => a.CompanyId == item.ID).OrderByDescending(a => a.ID).FirstOrDefault().ID;
+                                        <tr>
+                                            <td class="pdL">@item.CCompanyName</td>
+                                            <td style="text-align:center"><a title="Edit" href="@Url.Action("ManageCountEmployees", "Admin", new { @ID = item.ID })">@item.tblCompany_Employee_BasicInfo.Where(a => a.CompanyId == item.ID).Count()</a></td>
+
+                                            <td style="text-align:center"><a title="Edit" href="@Url.Action("ManageOpenEnrollment", "Admin", new { @CID = item.ID })">@details.Count</a></td>
+                                            <td style="text-align:center"><a title="Edit" href="@Url.Action("ManageLifeEvents", "Admin", new { @CID = item.ID })">@lyfevnts.Count</a></td>
+                                            <td style="text-align:center">@(item.IsActive == true ? "Active" : "Inactive")</td>
+                                            <td class="grey" style="text-align:right">
+
+                                                @*<a href="@Url.Action("EditClient", "Admin", new { @id = item.ID })">Edit</a>*@
+                                                <a title="Edit" class="btn btn-primary btn-xs" href="@Url.Action("AddCompany", "Admin", new { @ID = item.ID })">Edit</a>
+                                                <a title="Access Company" class="btn-warning btn-sm" href="@Url.Action("AccessCompany", "Admin", new { @AdminCompanyid = item.ID,@EmpId= eID})">Access Company</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+
+                        </table>
+                    </div><!-- /.box-body -->
+                </div>
+                <!-- /.box-footer -->
+
+
+                <div id='Paging' style="text-align:right">
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                    of @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("ManageInactiveClients", new { page }))
+                </div>
+            </div>
+        }
+        else
+        {
+            <span>No Companies added</span>
+        }
+
+
+        @{
+            if (ViewBag.Total > pagesize.ManageComapanyPageSize)
+            {
+                <p class="pagingCounter">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                @Html.PagedListPager(Model, page => Url.Action("ManageInactiveClients", new { page, sort = ViewBag.CurrentSort, filter = ViewBag.CurrentFilter, pageSize = ViewBag.PageSize }))
+            }
+        }
+
+
+    </div>
+
+    @*<div class="pager-List"> <a href="#"><</a> <a href="#" class="active">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> ... <a href="#">10</a> <a href="#">></a> </div>*@
+    <div class="clr">&nbsp;</div>
+    @*<footer>Copyright &copy; 2015 ENROLLMYGROUP</footer>*@
+</div>
+<!--Start of Right Part-->

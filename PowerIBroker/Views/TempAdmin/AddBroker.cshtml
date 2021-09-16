@@ -1,0 +1,260 @@
+﻿@{
+    ViewBag.Title = "AddBroker";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Broker Company</li>
+        </ol>
+        <h6 class="slim-pagetitle">Broker Company</h6>
+    </div><!-- slim-pageheader -->
+
+
+
+    <div class="row row-sm mg-t-20">
+        <div class="col-lg-6">
+            <div class="section-wrapper">
+                <label class="section-title">Add Broker Company</label>
+                @*<p class="mg-b-20 mg-sm-b-40">A basic form where labels are aligned in left.</p>*@
+
+                <div class="form-layout form-layout-4">
+                    <!-- row -->
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Broker Company Name: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter Broker Company Name *">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-sm-4 form-control-label">Work Phone: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter Work Phone">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Street: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <textarea rows="2" class="form-control" placeholder="Enter your Street Name "></textarea>
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Country: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  Country Name ">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">State: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  State Name ">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">City: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  City Name ">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Zip Code: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  Zip Code ">
+                        </div>
+                    </div>
+
+
+                </div><!-- form-layout -->
+            </div><!-- section-wrapper -->
+        </div><!-- col-6 -->
+        <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+            <div class="section-wrapper">
+                <label class="section-title">Broker User</label>
+                @*<p class="mg-b-20 mg-sm-b-40">A basic form where labels are aligned in left.</p>*@
+
+                <div class="form-layout form-layout-4">
+                    <div class="row">
+                        <label class="col-sm-4 form-control-label">Broker Company Name: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <select class="form-control">
+                                <option value="">Select</option>
+                                <option value="2">OneDigital - New York</option>
+                                <option value="3">Arthur J. Gallagher &amp; Co - New York</option>
+                                <option value="4">Arthur J. Gallagher &amp; Co - New England</option>
+                                <option value="5">J5 Consulting</option>
+                                <option value="6">MINDIT Systems</option>
+                            </select>
+                        </div>
+                    </div><!-- row -->
+
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Billing Phone: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  Billing Phone ">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">First Name: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <textarea rows="2" class="form-control" placeholder="Enter First Name "></textarea>
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Last Name: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  Last Name ">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Email: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  Email ">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Work Phone: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  Work Phone ">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Mobile Phone: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  Mobile Phone ">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Fax: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Enter  Fax ">
+                        </div>
+                    </div>
+
+                </div><!-- form-layout -->
+            </div>
+
+            <!-- col-6 -->
+        </div><!-- row -->
+        <br />
+
+        <div class="col-lg-12" style="padding-top: 3%;">
+            <div class="section-wrapper">
+                <label class="section-title"> Broker User Details</label>
+                <div id="slWrapper2" class="parsley-select wd-250 mg-t-30">
+                    <select class="form-control select2" data-placeholder="Choose one" data-parsley-class-handler="#slWrapper2" data-parsley-errors-container="#slErrorContainer2">
+                        <option value="">Select</option>
+                        <option selected value="2">OneDigital - New York</option>
+                        <option value="3">Arthur J. Gallagher &amp; Co - New York</option>
+                        <option value="4">Arthur J. Gallagher &amp; Co - New England</option>
+                        <option value="5">J5 Consulting</option>
+                        <option value="6">MINDIT Systems</option>
+                    </select>
+
+                </div>
+                <br />
+                <div class="table-responsive">
+                    <table class="table mg-b-0">
+
+                        <tbody>
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Work Phone</th>
+                                <th>Mobile Phone</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+
+
+
+
+
+
+                        <tbody>
+                            <tr>
+                                <td>Beth</td>
+                                <td>Kelley</td>
+                                <td>bkelley@onedigital.com</td>
+                                <td>(212) 455-9797</td>
+                                <td>(212) 455-9797</td>
+                                <td>Active</td>
+
+                                <td>
+                                    <a href="javascript:void(0)" style="margin-bottom:2px;" class="btn btn-primary btn-xs editSubBroker">Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a href="javascript:void(0)" style="margin-bottom:2px;" class="btn btn-danger btn-xs SubBrokerStatus">Suspend</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-xs SubBrokerDeactivate">Delete&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Bob</td>
+                                <td>Simeone</td>
+                                <td>bsimeone@onedigital.com</td>
+                                <td>(212) 455-9790</td>
+                                <td>(212) 455-9790</td>
+                                <td>Active</td>
+
+                                <td>
+                                    <a href="javascript:void(0)" style="margin-bottom:2px;" class="btn btn-primary btn-xs editSubBroker">Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a href="javascript:void(0)" style="margin-bottom:2px;" class="btn btn-danger btn-xs SubBrokerStatus">Suspend</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-xs SubBrokerDeactivate">Delete&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Kelly</td>
+                                <td>Natale</td>
+                                <td>knatale@onedigital.com</td>
+                                <td>(212) 455-9792</td>
+                                <td>(212) 455-9792</td>
+                                <td>Active</td>
+
+                                <td>
+                                    <a href="javascript:void(0)" style="margin-bottom:2px;" class="btn btn-primary btn-xs editSubBroker">Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a href="javascript:void(0)" style="margin-bottom:2px;" class="btn btn-danger btn-xs SubBrokerStatus">Suspend</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-xs SubBrokerDeactivate">Delete&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+
+
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>Tamara</td>
+                                <td>Lawton</td>
+                                <td>tamara.lawton@onedigital.com</td>
+                                <td>(212) 455-9782</td>
+                                <td></td>
+                                <td>Active</td>
+
+                                <td>
+                                    <a href="javascript:void(0)" style="margin-bottom:2px;" class="btn btn-primary btn-xs editSubBroker">Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a href="javascript:void(0)" style="margin-bottom:2px;" class="btn btn-danger btn-xs SubBrokerStatus">Suspend</a>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-xs SubBrokerDeactivate">Delete&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- section-wrapper -->
+        </div>
+
+
+    </div>
+    </div>

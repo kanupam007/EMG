@@ -1,0 +1,34 @@
+﻿<table id="tblSystemConfigAdmin" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td width="35%" style="font:bold;">Key Name</td>
+            <td width="35%" style="font:bold;">Value</td>
+            <td width="15%" style="font:bold;">Status</td>
+            <th width="20%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.SystemConfigurationAdmin != null)
+        {
+
+            foreach (var systemConfigurationAdmin in ViewBag.SystemConfigurationAdmin)
+            {
+
+                <tr style="display:@(systemConfigurationAdmin.PropertyName == "EmailNotification" || systemConfigurationAdmin.PropertyName == "SMSNotification" ? "none" : "")">
+                    <td>@systemConfigurationAdmin.PropertyName</td>
+                    <td>@systemConfigurationAdmin.Value</td>
+                    <td>
+                        @(systemConfigurationAdmin.IsActive == true ? "Active" : "Inactive")
+                    </td>
+                    <td>
+                        <a href="@Url.Action("EditSystemConfigurationAdmin", "Admin", new { @id = systemConfigurationAdmin.Id })" class="btn btn-primary btn-xs">Edit</a>
+                    </td>
+
+                </tr>
+
+
+            }
+        }
+
+    </tbody>
+</table>

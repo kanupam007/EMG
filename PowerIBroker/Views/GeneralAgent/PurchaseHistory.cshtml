@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "PurchaseHistory";
+    Layout = "~/Views/Shared/_GeneralAgent.cshtml";
+}
+
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/GeneralAgent">General Agent</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Purchase History</li>
+        </ol>
+        <h6 class="slim-pagetitle">Purchase History</h6>
+    </div><!-- slim-pageheader -->
+
+    <div class="section-wrapper">
+        @*<label class="section-title">Registered Companies</label>*@
+        @*<p class="mg-b-20 mg-sm-b-40">Using the most basic table markup.</p>*@
+
+        <div class="table-responsive">
+            <table class="table mg-b-0">
+                <thead>
+                    <tr>
+                        <th width="15%"><a href="#">Company Name</a> <span class="fa fa-sort" style="padding-left:5px"></span></th>
+
+                        <th width="15%" style="text-align:center">Plan Name</th>
+                        <th width="15%" style="text-align:center">No of Employees</th>
+                        <th width="15%" style="text-align:center">Cost Per Month</th>
+                        <th width="10%" style="text-align:center">Total Cost</th>
+                        <th width="10%" style="text-align:center">Status</th>
+                        <th width="15%" style="text-align:center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td class="pdL">Demogo Co</td>
+                        <td style="text-align:center"><a href="#">ACA</a></td>
+
+                        <td style="text-align:center"><a href="#">210</a></td>
+                        <td style="text-align:center"><a href="#">10</a></td>
+                        <td style="text-align:center">2100</td>
+                        <td style="text-align:center">Subscribed</td>
+                        <td style="text-align:center"><a href="#">View Details</a></td>
+                        
+                    </tr>
+                    <tr>
+                        <td class="pdL">i2Systems</td>
+                        <td style="text-align:center"><a href="#">Benefits Statements</a></td>
+
+                        <td style="text-align:center"><a href="#">100</a></td>
+                        <td style="text-align:center"><a href="#">25</a></td>
+                        <td style="text-align:center">2500</td>
+                        <td style="text-align:center">Subscribed</td>
+                        <td style="text-align:center"><a href="#">View Details</a></td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div><!-- table-responsive -->
+    </div><!-- section-wrapper -->
+
+
+
+</div>

@@ -1,0 +1,254 @@
+﻿@using PowerIBrokerDataLayer
+@{
+    ViewBag.Title = "ManageCompanyEmployees";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    PowerIBrokerEntities context = new PowerIBrokerEntities();
+    var ObjClient = context.CompanyMasters.Where(s => s.IsActive).ToList();
+}
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/Super-Admin">Super Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Manage Employees</li>
+        </ol>
+        <h6 class="slim-pagetitle">Manage Employees</h6>
+    </div><!-- slim-pageheader -->
+
+
+
+
+
+    <div class="section-wrapper mg-t-20">
+        @*<label class="section-title">Card with Tabs</label>*@
+        @*<p class="mg-b-20 mg-sm-b-40">Add a tab navigation in header of a card.</p>*@
+
+        <div class="row">
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item active show" width="20%">
+                                <a class="nav-link" href="#popular" data-toggle="tab">Upload Census</a>
+                            </li>
+                            <li class="nav-item" width="20%">
+                                <a class="nav-link" href="#recent" data-toggle="tab">Upload Plan</a>
+                            </li>
+                            <li class="nav-item" width="20%">
+                                <a class="nav-link " href="#toprated" data-toggle="tab">Upload Terminate</a>
+                            </li>
+                        </ul>
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active show" id="popular">
+                                <label class="section-title">Upload Census</label>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div id="slWrapper2" class="parsley-select wd-350 mg-t-30">
+                                            <select class="form-control select2" data-placeholder="Choose one" data-parsley-class-handler="#slWrapper2" data-parsley-errors-container="#slErrorContainer2" required id="CensusCompany">
+                                                <option value="0">Choose One</option>
+                                                @foreach (var item in ObjClient)
+                                                {
+                                                    <option value="@item.ID">@item.CCompanyName</option>
+                                                }
+
+
+                                            </select>
+                                            <div id="slErrorContainer2"></div>
+                                        </div>
+                                        <ul class="parsley-errors-list filled" id="parsley-CensusCompany"><li class="parsley-required">This value is required.</li></ul>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="/Uploads/Admin/Employee-BasicInfo-Template.xlsx" target="_blank"><button type="button" class="btn btn-primary pd-x-20 mg-t-30" style="color: #1b84e7; background: #fff;float:right;">Download Template</button></a>
+
+                                    </div>
+                                </div>
+                                <div class="parsley-select wd-350 mg-t-30">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="FileCensus">
+                                        <label class="custom-file-label custom-file-label-primary" for="FileCensus">Choose file</label>
+                                    </div><!-- custom-file -->
+                                    <ul class="parsley-errors-list filled" id="parsley-FileCensus"><li class="parsley-required">This value is required.</li></ul>
+                                </div>
+                                <div class="mg-t-30">
+
+                                    <button type="button" class="btn btn-primary pd-x-20" id="btnCensus" onclick="UploadValidate('Census', 'btnCensus');">Validate</button>
+                                </div>
+                            </div><!-- tab-pane -->
+                            <div class="tab-pane" id="recent">
+                                <label class="section-title">Upload Plan</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div id="slWrapper2" class="parsley-select wd-350 mg-t-30">
+                                            <select class="form-control select2" data-placeholder="Choose one" data-parsley-class-handler="#slWrapper2" data-parsley-errors-container="#slErrorContainer2" required id="PlanCompany">
+                                                <option value="0">Choose One</option>
+                                                @foreach (var item in ObjClient)
+                                                {
+                                                    <option value="@item.ID">@item.CCompanyName</option>
+                                                }
+
+                                            </select>
+                                            <div id="slErrorContainer2"></div>
+                                        </div>
+                                        <ul class="parsley-errors-list filled" id="parsley-PlanCompany"><li class="parsley-required">This value is required.</li></ul>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="/Uploads/Admin/Plan_ Upload_Template.xlsx" target="_blank"><button type="button" class="btn btn-primary pd-x-20 mg-t-30" style="color: #1b84e7; background: #fff;float:right;">Download Template</button></a>
+
+                                    </div>
+                                </div>
+                                <div class="parsley-select wd-350 mg-t-30">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="FilePlan">
+                                        <label class="custom-file-label custom-file-label-primary" for="FilePlan">Choose file</label>
+                                    </div><!-- custom-file -->
+                                    <ul class="parsley-errors-list filled" id="parsley-FilePlan"><li class="parsley-required">This value is required.</li></ul>
+                                </div>
+                                <div class="mg-t-30">
+                                    <button type="button" class="btn btn-primary pd-x-20" id="btnPlan" onclick="UploadValidate('Plan', 'btnPlan');">Validate</button>
+                                </div>
+                            </div><!-- tab-pane -->
+                            <div class="tab-pane" id="toprated">
+                                <label class="section-title">Upload Terminate Employee</label>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div id="slWrapper2" class="parsley-select wd-350 mg-t-30">
+                                            <select class="form-control select2" data-placeholder="Choose one" data-parsley-class-handler="#slWrapper2" data-parsley-errors-container="#slErrorContainer2" required id="TerminateCompany">
+                                                <option value="0">Choose One</option>
+                                                @foreach (var item in ObjClient)
+                                                {
+                                                    <option value="@item.ID">@item.CCompanyName</option>
+                                                }
+
+                                            </select>
+                                            <div id="slErrorContainer2"></div>
+                                        </div>
+                                        <ul class="parsley-errors-list filled" id="parsley-TerminateCompany"><li class="parsley-required">This value is required.</li></ul>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <a href="/Uploads/Admin/Terminate-Employee-Template.xlsx" target="_blank"><button type="button" class="btn btn-primary pd-x-20 mg-t-30" style="color: #1b84e7; background: #fff;float:right;">Download Template</button></a>
+
+                                    </div>
+                                </div>
+                                <div class="parsley-select wd-350 mg-t-30">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="FileTerminate">
+                                        <label class="custom-file-label custom-file-label-primary" for="FileTerminate">Choose file</label>
+                                    </div><!-- custom-file -->
+                                    <ul class="parsley-errors-list filled" id="parsley-FileTerminate"><li class="parsley-required">This value is required.</li></ul>
+                                </div>
+                                <div class="mg-t-30">
+                                    <button type="button" class="btn btn-primary pd-x-20" id="btnTerminate" onclick="UploadValidate('Terminate', 'btnTerminate');">Validate</button>
+                                </div>
+                            </div><!-- tab-pane -->
+                        </div><!-- tab-content -->
+                    </div><!-- card-body -->
+                </div><!-- card -->
+            </div><!-- col -->
+            <!-- col -->
+        </div><!-- row -->
+    </div>
+</div>
+<script>
+    function FocusError(Id) {
+        $('#' + Id).addClass('parsley-error');
+        $('#parsley-' + Id).show();
+        $('#' + Id).val('0');
+        return false;
+    }
+    function ValidateForms(files) {
+        var valid = true;
+        $('.filled').hide();
+        $('.custom-file-input').removeClass('parsley-error');
+        $('.form-control').removeClass('parsley-error');
+
+        if ($('#popular').hasClass('show')) {
+            if ($('#CensusCompany').val() == "0") {
+                valid = FocusError('CensusCompany');
+            }
+            if (files.length == 0) {
+                $('#FileCensus').addClass('parsley-error');
+                $('#parsley-FileCensus').show();
+                valid = false;
+            }
+        }
+        if ($('#recent').hasClass('show')) {
+            if ($('#PlanCompany').val() == "0") {
+                valid = FocusError('PlanCompany');
+            }
+            if (files.length == 0) {
+                $('#FilePlan').addClass('parsley-error');
+                $('#parsley-FilePlan').show();
+                valid = false;
+            }
+        }
+        if ($('#toprated').hasClass('show')) {
+            if ($('#TerminateCompany').val() == "0") {
+                valid = FocusError('TerminateCompany');
+            }
+            if (files.length == 0) {
+                $('#FileTerminate').addClass('parsley-error');
+                $('#parsley-FileTerminate').show();
+                valid = false;
+            }
+        }
+        return valid;
+    }
+    function UploadValidate(type, btnid) {
+        var url = '';
+        var fileUpload = $("#FileCensus").get(0);
+        var companyid = 0;
+        switch (type) {
+            case 'Census':
+                url = '/Broker-Admin/UploadCensusValidate';
+                fileUpload = $("#FileCensus").get(0);
+                companyid = parseInt($('#CensusCompany').val());
+                break;
+            case 'Terminate':
+                url = '/Broker-Admin/UploadTerminateValidate';
+                fileUpload = $("#FileTerminate").get(0);
+                companyid = parseInt($('#TerminateCompany').val());
+                break;
+            case 'Plan':
+                url = '/Broker-Admin/UploadPlanValidate';
+                fileUpload = $("#FilePlan").get(0);
+                companyid = parseInt($('#PlanCompany').val());
+                break;
+        }
+        if (ValidateForms(fileUpload.files)) {
+            var temptext = $('#' + btnid).text();
+            $('#' + btnid).text('Processing...');
+            $('#' + btnid).prop('disabled', true);
+            var formData = new FormData();
+            var files = fileUpload.files[0];
+            formData.append("FileUpload", files);
+            formData.append("CompanyId", companyid);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $('#' + btnid).text(temptext);
+                    $('#' + btnid).prop('disabled', false);
+                    if (response.flag) {
+                        ShowAlert('Success', 'Files uploaded successfully', 'success');
+                    }
+                    else {
+                        ShowAlert('Uploading failed', response.Message, 'error');
+                    }
+                },
+                failure: function (msg) {
+                    $('#' + btnid).text(temptext);
+                    $('#' + btnid).prop('disabled', false);
+                    ShowAlertLoad('Uploading failed', msg, 'error');
+
+                }
+            });
+        }
+
+    }
+</script>

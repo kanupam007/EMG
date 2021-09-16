@@ -1,0 +1,180 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>PowerIBroker - Super-Admin</title>
+    <link rel="shortcut icon" type="image/ico" href="/Content/Frontend/images/favicon.ico">
+    <link href="/Content/assets/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/Content/assets/lib/Ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="/Content/assets/lib/datatables/css/jquery.dataTables.css" rel="stylesheet">
+    <link href="/Content/assets/lib/jqvmap/css/jqvmap.min.css" rel="stylesheet">
+    <link href="/Content/assets/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="/Content/assets/lib/chartist/css/chartist.css" rel="stylesheet">
+    <link href="/Content/assets/lib/rickshaw/css/rickshaw.min.css" rel="stylesheet">
+    <link href="/Content/assets/lib/select2/css/select2.min.css" rel="stylesheet">
+    <link href="~/Content/assets/css/slim.css" rel="stylesheet" />
+    <link href="~/Content/assets/js/Alert/stylesheets/jquery.Alert.css" rel="stylesheet" />
+    <link href="~/Content/assets/js/sweetalert.css" rel="stylesheet" />
+    <script src="/Content/assets/lib/jquery/js/jquery.js"></script>
+    <script src="/Content/assets/js/sweetalert.js"></script>
+    <script src="/Content/assets/js/Alert/javascripts/jquery.Message.js"></script>
+    <script src="/Content/assets/js/Alert/javascripts/sample.js"></script>
+    <script src="/Content/assets/js/common.js"></script>
+
+</head>
+<body>
+    <div class="slim-header">
+        <div class="container">
+            <div class="slim-header-left">
+                <h2 class="slim-logo"><a href="#">EMG<span>.</span></a></h2>
+
+
+            </div><!-- slim-header-left -->
+            <div class="slim-header-right">
+
+                <div class="dropdown dropdown-c">
+                    <a href="#" class="logged-user" data-toggle="dropdown">
+                        <img src="http://via.placeholder.com//500x500" alt="">
+                        <span>Admin</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <nav class="nav">
+
+                            @*<a href="#" class="nav-link"><i class="icon ion-compose"></i> Edit Profile</a>*@
+
+                            <a href="@(Url.Content("~/Admin/Logout"))" class="nav-link"><i class="icon ion-forward"></i> Sign Out</a>
+                        </nav>
+                    </div><!-- dropdown-menu -->
+                </div><!-- dropdown -->
+            </div><!-- header-right -->
+        </div><!-- container -->
+    </div><!-- slim-header -->
+
+    <div class="slim-navbar">
+        <div class="container">
+            <ul class="nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Super-Admin">
+                        <i class="icon ion-ios-home-outline"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                </li>
+                <li class="nav-item with-sub">
+                    <a class="nav-link" href="#">
+                        <i class="icon ion-ios-filing-outline"></i>
+                        <span>Company</span>
+                    </a>
+                    <div class="sub-item">
+                        <ul>
+                            <li><a href="/Super-Admin/CreateCompany">Create Company</a></li>
+                            <li><a href="/Super-Admin/ManageClient">Manage Company</a></li>
+
+                        </ul>
+                    </div><!-- sub-item -->
+                </li>
+                <li class="nav-item with-sub">
+                    <a class="nav-link" href="#">
+                        <i class="icon ion-ios-book-outline"></i>
+                        <span>Employees</span>
+                    </a>
+                    <div class="sub-item">
+                        <ul>
+                            <li><a href="/Super-Admin/ManageCompanyEmployees">Bulk Upload</a></li>
+                            <li><a href="/Super-Admin/ManageEmployees">Manage Employees</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item with-sub">
+                    <a class="nav-link" href="#" data-toggle="dropdown">
+                        <i class="icon ion-ios-gear-outline"></i>
+                        <span>Broker</span>
+                    </a>
+                    <div class="sub-item">
+                        <ul>
+                            <li><a href="/Super-Admin/ManageGeneralAgent">Manage General Agent</a></li>
+                            <li><a href="/Super-Admin/ManageBroker">Manage Broker</a></li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="nav-item with-sub">
+                    <a class="nav-link" href="#" data-toggle="dropdown">
+                        <i class="icon ion-ios-gear-outline"></i>
+                        <span>Products</span>
+                    </a>
+                    <div class="sub-item">
+                        <ul>
+
+                            <li><a href="/Super-Admin/SubscriptionPlan">Manage EMG Product</a></li>
+                            <li><a href="/Super-Admin/PurchaseSubscription">Purchase Allocation</a></li>
+                            <li><a href="/Super-Admin/PurchaseHistory">Manage Purchase History</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                @*<li class="nav-item">
+                        <a class="nav-link" href="page-messages.html">
+                            <i class="icon ion-ios-chatboxes-outline"></i>
+                            <span>Messages</span>
+                            <span class="square-8"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="widgets.html">
+                            <i class="icon ion-ios-analytics-outline"></i>
+                            <span>Widgets</span>
+                        </a>
+                    </li>*@
+            </ul>
+        </div><!-- container -->
+    </div><!-- slim-navbar -->
+
+    <div class="slim-mainpanel">
+        @RenderBody()
+    </div><!-- slim-mainpanel -->
+
+    <div class="slim-footer">
+        <div class="container">
+            <p>Copyright @@2021 &copy; All Rights Reserved</p>
+            @*<p>Designed by: <a href="">ThemePixels</a></p>*@
+        </div><!-- container -->
+    </div><!-- slim-footer -->
+
+    <script>
+        $(function () {
+            'use strict';
+            $('.datatable').DataTable({
+                responsive: true,
+                bLengthChange: false,
+                language: {
+                    searchPlaceholder: 'Search...',
+                    sSearch: '',
+                    lengthMenu: '_MENU_ items/page',
+                }
+            });
+        });
+    </script>
+    <script src="/Content/assets/lib/popper.js/js/popper.js"></script>
+    <script src="/Content/assets/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="/Content/assets/lib/jquery.cookie/js/jquery.cookie.js"></script>
+    <script src="/Content/assets/lib/datatables/js/jquery.dataTables.js"></script>
+    <script src="/Content/assets/lib/datatables-responsive/js/dataTables.responsive.js"></script>
+    <script src="/Content/assets/lib/select2/js/select2.full.min.js"></script>
+    <script src="/Content/assets/lib/moment/js/moment.js"></script>
+    <script src="/Content/assets/lib/d3/js/d3.js"></script>
+    <script src="/Content/assets/lib/rickshaw/js/rickshaw.min.js"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyAEt_DBLTknLexNbTVwbXyq2HSf2UbRBU8"></script>
+    <script src="/Content/assets/lib/gmaps/js/gmaps.js"></script>
+    <script src="/Content/assets/lib/peity/js/jquery.peity.js"></script>
+    <script src="/Content/assets/js/slim.js"></script>
+    <script src="/Content/assets/js/ResizeSensor.js"></script>
+    <script src="/Content/assets/js/widgets.js"></script>
+</body>
+</html>

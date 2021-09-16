@@ -1,0 +1,122 @@
+﻿@using PagedList.Mvc;
+@using PowerIBrokerBusinessLayer;
+@using PowerIBroker.Models;
+@{
+    ViewBag.Title = "Manage Open Enrollment";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<link href="~/Content/Admin/css/stylesheet.css" rel="stylesheet" />
+<script>
+    document.title = '@ViewBag.Title';
+</script>
+
+<!--Start of Right Part-->
+<section class="content">
+
+    <h3 class="box-title">
+        @{
+
+            CompanyManagement objClientMngmt = new CompanyManagement();
+            var details = objClientMngmt.GetCompanyName(ViewBag.CompanyId);
+        }
+
+    </h3>
+    <div class="compTble-bot">
+        @if (ViewBag.OpenEnrollment != null)
+        {
+            if (ViewBag.OpenEnrollment.Count > 0)
+            {
+
+                <div class="col-lg-12" style="padding-right: 0px; padding-left: 0px;">
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Open Enrollment List (@details.CCompanyName)</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="30%">Open Enrollment</th>
+                                        <th width="10%">Start Date</th>
+                                        <th width="10%">End Date</th>
+                                        <th width="10%">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in ViewBag.OpenEnrollment)
+                                    {
+                                        <tr>
+                                            <td>@item.Description</td>
+                                            @if (@item.StartDate != null)
+                                            {
+                                                @*<td style="text-align:center">@item.StartDate.ToString("MM/dd/yyyy")</td>*@
+                                                <td>@Helper.CurrencyFormat(Convert.ToDateTime(item.StartDate), 0, "", "Date")</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                            @if (@item.EndDate != null)
+                                            {
+                                                @*<td style="text-align:center">@item.EndDate.ToString("MM/dd/yyyy")</td>*@
+                                                <td>@Helper.CurrencyFormat(Convert.ToDateTime(item.EndDate), 0, "", "Date")</td>
+                                            }
+                                            else
+                                            {
+                                                <td></td>
+                                            }
+                                            <td>@(item.IsActive == true ? "Active" : "Inactive")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+            }
+            else
+            {
+                @*<span>No Record Found</span>*@
+             <div class="col-lg-12" style="padding-right: 0px; padding-left: 0px;">
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Open Enrollment List (@details.CCompanyName)</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="30%">Open Enrollment</th>
+                                        <th width="10%">Start Date</th>
+                                        <th width="10%">End Date</th>
+                                        <th width="10%">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4">
+                                            <span>No Record Found</span>
+                                        </td>
+                                    </tr>
+                                   
+                                </tbody>
+
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+            }
+        }
+    </div>
+
+    @*<div class="pager-List"> <a href="javascript:void(0)"><</a> <a href="javascript:void(0)" class="active">1</a> <a href="javascript:void(0)">2</a> <a href="javascript:void(0)">3</a> <a href="javascript:void(0)">4</a> <a href="javascript:void(0)">5</a> ... <a href="javascript:void(0)">10</a> <a href="javascript:void(0)">></a> </div>*@
+    <div class="clr">&nbsp;</div>
+    @*<footer>Copyright &copy; 2015 ENROLLMYGROUP</footer>*@
+</section>
+<!--Start of Right Part-->

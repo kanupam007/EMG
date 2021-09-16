@@ -1,0 +1,126 @@
+﻿@using PagedList.Mvc;
+@using PowerIBroker.Models;
+@model PagedList.PagedList<PowerIBrokerDataLayer.CompanyMaster>
+@{
+    ViewBag.Title = "Manage Company Demos";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<style>
+
+    .container-fluid {
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .col-lg-12 {
+        padding-right: 0px;
+        padding-left: 0px;
+  
+    }
+    
+</style>
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div>
+
+        </div>
+        <div class="col-lg-12">
+            <h2>Manage Demo Request</h2>
+            @*@Html.ActionLink("Export to Csv", "ExportClientsListToCSV")*@
+            <div class="@(TempData["CustomMessageDS"] != null ? TempData["MessageTypeDS"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                @if (TempData["CustomMessageDS"] != null)
+                {
+                    <i class="fa @(TempData["MessageTypeDS"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                }
+                <span>@TempData["CustomMessageDS"]</span>
+            </div>
+
+
+            @if (Model.Count > 0)
+            {
+                <div class="col-lg-12">
+
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Demo Request List</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="15%">Company Name</th>
+                                        <th width="15%">Client Name</th>
+                                        <th width="10%">Contact</th>
+                                        <th width="10%">Email</th>                                        
+                                        <th width="6%">Status</th>
+                                        <th width="10%">Completed Date</th>
+                                        <th width="14%">Created Date</th>
+                                        <th width="10%">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var content in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <span>@content.CCompanyName</span>
+                                            </td>
+                                            <td>
+                                                <span>@content.CName</span>
+                                            </td>
+                                            <td>
+                                                <span>@content.CContact</span>
+                                            </td>
+                                            <td>
+                                                <span>@content.CEmail</span>
+                                            </td>
+                                            <td>
+                                                <span>@(content.Status == "C" ? "Completed" : "Pending")</span>
+                                            </td>
+                                            <td>
+                                                <span> @content.DemoCompletedDate</span>
+                                            </td>
+                                            <td>
+                                                <span>@content.CreatedOn</span>
+                                            </td>
+                                          
+                                            <td align="right">
+                                                @if (content.Status != "C")
+                                                {
+                                                    <a title="Mark Complete" onclick="return confirm('Are you sure to give the company demo ?');" href="@Url.Content("~/Admin/UpdateCompanyDemoStatus?ID=" + content.ID+"&flag=0")" class="btn btn-primary btn-xs">Done</a>
+                                                }
+
+                                                <a title="Create Company" onclick="return confirm('Are you sure to create company ?');" href="@Url.Content("~/Admin/UpdateCompanyDemoStatus?ID=" + content.ID + "&flag=1")" class="btn btn-primary btn-xs" style="background-color:Green;">Create Company</a> 
+                                            </td>
+                                        </tr>
+                                    }                                  
+
+                                </tbody>
+
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div>
+                    <!-- /.box-footer -->
+
+
+                    <div id='Paging' style="text-align:right">
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                        of @Model.PageCount
+
+                        @Html.PagedListPager(Model, page => Url.Action("ManageCompanyDemos", new { page }))
+                    </div>
+                </div>
+            }
+            else
+            {
+                <span>No Enquries found</span>
+            }
+        </div>
+
+
+    </div>
+</div>

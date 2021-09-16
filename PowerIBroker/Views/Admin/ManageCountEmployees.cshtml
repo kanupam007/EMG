@@ -1,0 +1,114 @@
+﻿@model PagedList.IPagedList<VW_Company_Employee>
+@using PagedList.Mvc;
+@using PowerIBrokerBusinessLayer;
+@using PowerIBroker.Models;
+@{
+    ManagePageSize pagesize = new ManagePageSize();
+}
+@using PowerIBrokerDataLayer;
+@{
+    ViewBag.Title = "Manage Employees";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<link href="~/Content/Admin/css/stylesheet.css" rel="stylesheet" />
+<script>
+    document.title = '@ViewBag.Title';
+</script>
+<!--Start of Right Part-->
+<section class="content">
+    <h3 class="box-title">
+        @{
+
+            CompanyManagement objClientMngmt = new CompanyManagement();
+            var details = objClientMngmt.GetCompanyName(ViewBag.CompanyId);
+            @*<div>@details.CCompanyName</div>*@
+        }
+
+    </h3>
+
+    <div class="compTble-bot">
+        @using (Html.BeginForm("ManageCountEmployees", "Admin"))
+        {
+            <br />
+            <div class="box-header with-border">
+                @Html.DropDownList("PageSize", new SelectList(new Dictionary<string, string> { { "50", "50" }, { "100", "100" }, { "200", "200" }, { "500", "500" }, { "1", "All" } }, "Key", "Value"), new { @class = "btn btn-default pull-right", id = "pagesizelist", onchange = "this.form.submit();" })
+                <div class="box-tools pull-left">
+
+                </div><!-- /.box-tools -->
+            </div><!-- /.box-header -->
+        }
+        @if (Model.Count > 0)
+        {
+
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"> Employee List (@details.CCompanyName)</h3>
+                    </div>
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr style="text-align:left">
+                                <td width="15%" style="font-size: 15px; font-weight: bold;">Employee Name</td>
+                                <td width="25%" style="font-size: 15px; font-weight: bold;">Location</td>
+                                <td width="25%" style="font-size: 15px; font-weight: bold;">Department</td>
+                                <td width="25%" style="font-size: 15px; font-weight: bold;">Email</td>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+
+                                <tr>
+                                    <td>@item.EmpName</td>
+                                    <td>@item.Location</td>
+                                    <td>@item.Department</td>
+                                    <td>@item.Email</td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+        else
+        {
+             <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title"> Employee List (@details.CCompanyName)</h3>
+                    </div>
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <tr style="text-align:left">
+                                <td width="15%" style="font-size: 15px; font-weight: bold;">Employee Name</td>
+                                <td width="25%" style="font-size: 15px; font-weight: bold;">Location</td>
+                                <td width="25%" style="font-size: 15px; font-weight: bold;">Department</td>
+                                <td width="25%" style="font-size: 15px; font-weight: bold;">Email</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <span>No Record Found</span>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+      
+        }
+    </div>
+    @{
+        if (ViewBag.Total > pagesize.ManageComapanyPageSize)
+        {
+            <p class="pagingCounter">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+            @Html.PagedListPager(Model, page => Url.Action("ManageClients", new { page, sort = ViewBag.CurrentSort, filter = ViewBag.CurrentFilter, pageSize = ViewBag.PageSize }))
+        }
+    }
+    @*<div class="pager-List"> <a href="javascript:void(0)"><</a> <a href="javascript:void(0)" class="active">1</a> <a href="javascript:void(0)">2</a> <a href="javascript:void(0)">3</a> <a href="javascript:void(0)">4</a> <a href="javascript:void(0)">5</a> ... <a href="javascript:void(0)">10</a> <a href="javascript:void(0)">></a> </div>*@
+    <div class="clr">&nbsp;</div>
+    @*<footer>Copyright &copy; 2015 ENROLLMYGROUP</footer>*@
+</section>
+<!--Start of Right Part-->

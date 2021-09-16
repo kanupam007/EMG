@@ -1,0 +1,61 @@
+﻿
+
+
+<table id="example1" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th width="20%">Company Name</th>
+            <th width="20%">EMG Product</th>
+            <th width="20%">Cost Per Month</th>
+
+            <th width="20%">Status</th>
+            <th width="20%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.SubscriptionData != null)
+        {
+
+            foreach (var options in ViewBag.SubscriptionData)
+            {
+                <tr>
+                    <td>@options.CCompanyName</td>
+                    <td>
+
+                        @*@if (options.SubcriptionPlanID == 1)
+                        {
+                            <span>ACA</span>
+                        }
+                        @if (options.SubcriptionPlanID == 2)
+                        {
+                            <span>Benefits Statements</span>
+                        }
+                        @if (options.SubcriptionPlanID == 3)
+                        {
+                            <span>Benefit Enrollment</span>
+                        }*@
+                        @options.ProductName
+                    </td>
+                    <td>@options.CostPerMonth</td>
+
+                    <td>
+                        @(options.IsActive == true ? "Active" : "Inactive")
+
+                    </td>
+                    <td>
+                        @if (options.IsDeleted != true)
+                        {
+                            <a href="@Url.Action("EditSubscriptionPlan", "Admin", new { @id = options.ID })" class="btn btn-primary btn-xs">Edit</a>
+                            @*<a class="btn btn-danger btn-xs">De-Activate</a>
+                                <a class="btn btn-success btn-xs">Activate</a>*@
+                            <a data-exclude="true" href="javascript:void(0)" onclick="return DeleteSubscriptionPlan(@options.ID);" class="btn btn-primary btn-xs" style="background-color:red;border-color:red"> Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+
+
+
+    </tbody>
+</table>

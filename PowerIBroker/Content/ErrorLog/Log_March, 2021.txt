@@ -1,0 +1,64 @@
+-------------------START-------------06-03-2021 13:23:07
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------06-03-2021 13:23:07
+
+-------------------START-------------06-03-2021 13:26:57
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------06-03-2021 13:26:57
+
+-------------------START-------------22-03-2021 16:13:22
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------22-03-2021 16:13:22
+
+-------------------START-------------22-03-2021 16:22:20
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------22-03-2021 16:22:20
+
+-------------------START-------------22-03-2021 16:23:17
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------22-03-2021 16:23:17
+
+-------------------START-------------22-03-2021 16:32:53
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------22-03-2021 16:32:53
+
+-------------------START-------------22-03-2021 16:33:37
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------22-03-2021 16:33:37
+
+-------------------START-------------22-03-2021 16:34:14
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------22-03-2021 16:34:14
+

@@ -1,0 +1,162 @@
+﻿@model PagedList.IPagedList<CompanyMaster>
+@using PagedList.Mvc;
+@using PowerIBrokerBusinessLayer;
+@using PowerIBroker.Models;
+@{
+    ManagePageSize pagesize = new ManagePageSize();
+}
+@using PowerIBrokerDataLayer;
+@{
+    ViewBag.Title = "Admin | Manage Company";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<link href="~/Content/Admin/css/stylesheet.css" rel="stylesheet" />
+
+<script src="@Url.Content("~/Content/Admin/js/validations.js")"></script>
+<script>
+    document.title = '@ViewBag.Title';
+</script>
+
+<section class="content">
+    <!--Start of Right Part-->
+    <div>
+        @using (Html.BeginForm("ManageInactiveClients", "Admin"))
+        {
+            <input type="checkbox" id="value" onchange="this.form.submit();" style=" float:right;margin-right:140px" />
+        }
+        <label style="float:right;margin-right:10px">Show Inactive Records</label>
+        <h3 class="box-title">
+            Registered Companies
+            <span><a href="~/Admin/AddCompany" class="btn btn-primary addBtns" style="float:right">Add Company</a></span>
+        </h3>
+
+        <div class="compTble-bot">
+            @using (Html.BeginForm("ManageClients", "Admin"))
+            {
+
+                <div class="box-header with-border">
+                    <div class="box-tools pull-right">
+
+                        @*<input type="text" class="form-control input-sm" placeholder="Search Mail"/>*@
+                        <input type="text" class="form-control input-sm" name="search" id="search" placeholder="Enter Company Name" onchange="this.form.submit();" />
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+
+
+
+            }
+
+            @using (Html.BeginForm("ManageClients", "Admin"))
+            {
+                <br />
+                <div class="box-header with-border">
+                    @Html.DropDownList("PageSize", new SelectList(new Dictionary<string, string> { { "50", "50" }, { "100", "100" }, { "200", "200" }, { "500", "500" }, { "1", "All" } }, "Key", "Value"), new { @class = "btn btn-default pull-right", id = "pagesizelist", onchange = "this.form.submit();" })
+                    <div class="box-tools pull-left">
+
+                    </div><!-- /.box-tools -->
+                </div><!-- /.box-header -->
+
+            }
+
+
+            @if (Model.Count > 0)
+            {
+                <div class="col-lg-12">
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Company List</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="30%">@Html.ActionLink("Company Name", "ManageClients", new { page = ViewBag.PageNumber, sort = ViewBag.SortingOrder, filter = "clientname", pageSize = ViewBag.PageSize }) <span class="fa fa-sort" style="padding-left:5px"></span></th>
+                                        @*<th width="15%">@Html.ActionLink("Employee", "ManageClients", new { page = ViewBag.PageNumber, sort = ViewBag.SortingOrder, filter = "employee", pageSize = ViewBag.PageSize }) <span class="fa fa-sort" style="padding-left:5px"></span></th>*@
+                                        <th width="10%" style="text-align:center">Employee</th>
+                                        <th width="10%" style="text-align:center">OE</th>
+                                        <th width="10%" style="text-align:center">LE</th>
+                                        <th width="10%" style="text-align:center">@Html.ActionLink("Status", "ManageClients", new { page = ViewBag.PageNumber, sort = ViewBag.SortingOrder, filter = "status", pageSize = ViewBag.PageSize }) <span class="fa fa-sort" style="padding-left:5px"></span></th>
+                                        <th width="25%" style="text-align:center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        CompanyManagement objClientMngmt = new CompanyManagement();
+                                        var details = objClientMngmt.GetOpenEnrolment(item.ID);
+                                        var lyfevnts = objClientMngmt.GetLifeChangeEvents(item.ID).Where(a=>a.IsActive==true).ToList();
+                                        var Item = item.tblCompany_Employee_BasicInfo.Where(a => a.CompanyId == item.ID).OrderByDescending(a => a.ID).FirstOrDefault();
+                                        long eID = 0;
+                                        if (Item != null)
+                                        {
+                                            eID = Item.ID;
+                                        }
+
+                                        <tr>
+                                            <td class="pdL">@item.CCompanyName</td>
+                                            <td style="text-align:center"><a title="Edit" href="@Url.Action("ManageCountEmployees", "Admin", new { @ID = item.ID })">@item.tblCompany_Employee_BasicInfo.Where(a => a.CompanyId == item.ID).Count()</a></td>
+
+                                            <td style="text-align:center"><a title="Edit" href="@Url.Action("ManageOpenEnrollment", "Admin", new { @CID = item.ID })">@details.Count</a></td>
+                                            <td style="text-align:center"><a title="Edit" href="@Url.Action("ManageLifeEvents", "Admin", new { @CID = item.ID })">@lyfevnts.Count</a></td>
+                                            <td style="text-align:center">@(item.IsActive == true ? "Active" : "Inactive")</td>
+                                            <td class="grey" style="text-align:right">
+
+                                             
+                                                @if (eID == 0)
+                                                {
+                                                    <a title="Re-send" class="btn btn-primary btn-xs" href="javascript:void(0)">Re-send</a>
+                                                    <a title="Edit" class="btn btn-primary btn-xs" href="javascript:void(0)">Edit</a>
+                                                    <a title="Access Company" class="btn-warning btn-sm" href="javascript:void(0)">Access Company</a>
+                                                }
+                                                else
+                                                {
+                                                    <a title="Re-send" class="btn btn-primary btn-xs" onclick="return Resendemail(@item.ID)" href="javascript:void(0)">Re-send</a>
+                                                    <a title="Edit" class="btn btn-primary btn-xs" href="@Url.Action("AddCompany", "Admin", new { @ID = item.ID })">Edit</a>
+                                                    <a title="Access Company" class="btn-warning btn-sm" href="@Url.Action("AccessCompany", "Admin", new { @AdminCompanyid = item.ID,@EmpId= eID})">Access Company</a>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div>
+                    <!-- /.box-footer -->
+
+                    <div id='Paging' style="text-align:right">
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                        of @Model.PageCount
+                        @Html.PagedListPager(Model, page => Url.Action("ManageClients", new { page }))
+                    </div>
+                </div>
+            }
+            else
+            {
+                <span>No Companies added</span>
+            }
+
+
+            @{
+                @*if (ViewBag.Total > pagesize.ManageComapanyPageSize)
+                {
+                    <p class="pagingCounter">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                    @Html.PagedListPager(Model, page => Url.Action("ManageClients", new { page, sort = ViewBag.CurrentSort, filter = ViewBag.CurrentFilter, pageSize = ViewBag.PageSize }))
+                }*@
+            }
+
+
+        </div>
+
+
+        <div class="clr">&nbsp;</div>
+
+    </div>
+    <!--Start of Right Part-->
+</section>

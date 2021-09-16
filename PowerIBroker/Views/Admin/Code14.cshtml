@@ -1,0 +1,207 @@
+﻿@model PowerIBrokerDataLayer.EMG_Code14
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Code 14
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin/Dashboard"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active"> Code 14</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> Code 14 Master</h3>
+
+                </div><!-- /.box-header -->
+                <div class="@(TempData["CustomMessageC14"] != null ? TempData["MessageTypeC14"] == "Success" ? "success-msg" : "error-msg" : "")">
+                    @if (TempData["CustomMessageC14"] != null)
+                    {
+                        <i class="fa @(TempData["MessageTypeC14"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+
+                    }
+                    <span>@TempData["CustomMessageC14"]</span>
+
+                </div>
+
+                @using (Html.BeginForm("Code14", "Admin", FormMethod.Post, new { Id = "formId" }))
+                {
+                    @Html.HiddenFor(model => model.ID)
+                    <div class="box-body">
+
+                        <form role="form">
+                            <div class="box-body">
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Enter Code 14</label>
+                                        @*<input type="text" class="form-control" placeholder="Enter Plan Category" maxlength="50">*@
+
+                                        @Html.TextBoxFor(model => model.CodeName, new { @class = "form-control", placeholder = "Code Name", id = "codename", maxlength = "48" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Enter Code Name</label>
+                                        @*<input type="text" class="form-control" placeholder="Enter Plan Category" maxlength="50">*@
+
+                                        @Html.TextAreaFor(model => model.Name, new { @class = "form-control", placeholder = "Name", id = "name" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Enter Description</label>
+                                        @*<input type="text" class="form-control" placeholder="Enter Plan Category" maxlength="50">*@
+
+                                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Description", id = "Description" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3" style="margin-left:30px">
+                                <div class="checkbox">
+                                    @Html.CheckBox("IsActive", new { @class = "checkBx" })
+                                    <label style="margin-left:0px">Active</label>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="button" id="btnSave" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        <br /><br /><br />
+                        <!-- Main content -->
+                        <section class="content">
+                            <!-- Info boxes -->
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+                                    <div class="box">
+                                        <div class="box-header">
+
+                                            <h3 class="box-title">Code 14 master- List</h3>
+                                            <input type="checkbox" id="value" onclick="GetData()" style="float:right;margin-right:140px" />
+                                            <label style="float:right;margin-right:10px">Show Deleted Records</label>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+
+                                            @if (ViewBag.Code14.Count > 0)
+                                            {
+                                                @Html.Partial("_Code14");
+                                            }
+                                            else
+                                            {
+                                                <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                                            }
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box-footer -->
+
+                                </div><!-- /.col -->
+                            </div>
+
+                        </section><!-- /.content -->
+
+
+                    </div><!-- ./box-body -->
+
+                }
+                <!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+
+</section><!-- /.content -->
+@*</div>*@
+@*<script src="~/Scripts/jquery-1.8.2.js"></script>*@
+<script type="text/javascript">
+    $('#btnSave').click(function (e) {
+
+        var isValid = true;
+        if ($.trim($('#codename').val()) == '') {
+            isValid = false;
+            $('#codename').removeClass('custom-input-success').addClass('custom-input-error');
+            $('#codename').keypress(function () {
+                $('#codename').removeClass('custom-input-error').addClass('custom-input-success');
+            });
+
+        }
+        if (isValid == false)
+            e.preventDefault();
+        else
+            $("#formId").submit();
+    });
+
+</script>
+<script>
+
+    function DeleteCode14(id) {
+
+        swal({
+            title: "",
+            text: "Are you sure to delete this Code 14?",
+            //type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "#f27474",
+            confirmButtonText: "Yes",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+function (isConfirm) {
+
+    if (isConfirm) {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/DeleteCode14",
+            data: "{'EnrollId':'" + id + "'}",
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+                location.reload(true);
+            }
+        });
+    }
+})
+
+    }
+
+</script>
+
+<script>
+    function GetData() {
+
+        var value = $('#value').prop('checked');
+        if (value == true) {
+            value = "1";
+        }
+        else {
+            value = "0";
+        }
+        $.ajax({
+            type: 'GET',
+            contentType: false,
+            url: '@Url.Action("GetDeletedCode14", "Admin")',
+            data: { value: value },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('#example1').html('');
+                $('#example1').html(data);
+
+            }
+        });
+    }
+</script>

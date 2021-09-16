@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutFrontend.cshtml";
+}
+<div class="clientsection" id="botm">
+    <div class="dash">
+        <h2>Hi @Session["Username"]</h2>
+        <span>coming soon...</span>
+        <div><a class="signUp" href="@(Url.Content("~/Home/Logout"))">Logout</a></div>
+
+    </div>
+</div>

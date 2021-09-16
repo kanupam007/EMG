@@ -1,0 +1,42 @@
+﻿@if (ViewBag.Clients != null)
+{
+    <table id="tblcompany" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th width="15%">First Name</th>
+                <th width="15%">Last Name</th>
+                <th width="20%">Email</th>
+                <th width="15%">Work Phone</th>
+                <th width="15%">Mobile Phone</th>
+                <th width="15%">Action</th>
+            </tr>
+        </thead>
+        <tbody>    
+            @foreach (var item in ViewBag.Clients)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@PowerIBrokerBusinessLayer.Helper.CurrencyFormat(Convert.ToString(item.WorkPhone), 0, "", "Phone")</td>
+                    <td>@PowerIBrokerBusinessLayer.Helper.CurrencyFormat(Convert.ToString(item.Phone), 0, "", "Phone")</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs editCompany" data-id="@item.ID" data-toggle="modal">Edit</a>
+                        @if(ViewBag.Clients.Count >1)
+                        {
+                        <a href="javascript:void(0)" data-exclude="true" class="btn btn-primary btn-xs empStatus IsActive" data-val="true" data-isactive="0" data-id="@item.ID">Deactivate</a>
+                        }
+                        else
+                        {
+                            <a href="javascript:void(0)" data-exclude="true" class="btn btn-primary btn-xs not-active">Deactivate</a>
+                        }
+
+               
+
+                    </td>
+               </tr>
+            }
+
+        </tbody>
+    </table>
+}

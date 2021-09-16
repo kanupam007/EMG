@@ -1,0 +1,156 @@
+﻿@model PowerIBrokerDataLayer.SystemConfigurationAdmin
+@{
+    ViewBag.Title = "SystemConfigurationAdmin";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+@*<link href="~/AdminContent/customcss/admincustom.css" rel="stylesheet" />*@
+<link href="~/AdminContent/plugins/datatables/jquery.dataTables.css" rel="stylesheet" />
+<script src="~/AdminContent/plugins/datatables/jquery.dataTables.min.js"></script>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        System Configuration Admin
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin/Dashboard"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active"> System Configuration Admin</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> System Configuration Admin</h3>
+
+                </div><!-- /.box-header -->
+                <div class="col-lg-12" style="padding-right:0px;padding-left:0px">
+                    <div class="@(TempData["CustomMessageSCA"] != null ? TempData["MessageTypeSCA"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                        @if (TempData["CustomMessageSCA"] != null)
+                        {
+                            <i class="fa @(TempData["MessageTypeSCA"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+
+                        }
+                        <span>@TempData["CustomMessageSCA"]</span>
+                    </div>
+
+
+
+                </div>
+
+
+
+                @using (Html.BeginForm("SystemConfigurationAdmin", "Admin", FormMethod.Post, new { id="fromSystemConfigAdmin"}))
+                {
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="box-body">
+
+                     
+                            <div class="box-body">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Key Name</label>
+                                        @Html.TextBoxFor(model => model.PropertyName, new { @class = "form-control", placeholder = "Key Name", id = "KeyName", maxlength = "100", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Value</label>
+                                        @Html.TextBoxFor(model => model.Value, new { @class = "form-control", placeholder = "Key Value", id = "KeyValue", maxlength = "100" })
+                                      
+                                    </div>
+                                </div>
+                            </div><!-- /.box-body -->
+
+                            <div class="col-lg-3" style="margin-left:30px">
+                                @*<div class="checkbox">
+
+                                        @if (Model == null)
+                                        {
+                                            @Html.CheckBox("IsActive", new { @class = "checkBx", @checked = "checked" })
+                                        }
+                                        else
+                                        {
+                                            @Html.CheckBox("IsActive", new { @class = "checkBx" })
+                                        }
+
+                                        <label style="margin-left:0px">Is Active?</label>
+                                    </div>*@
+                                @if (Model != null)
+                                {
+                                    <div class="box-footer">
+                                        <button type="button" id="btnSaveSysConfiguration" class="btn btn-primary">Submit</button>
+                                    </div>
+                                }
+
+                            </div>
+
+                    
+                        <br /><br /><br />
+                        <!-- Main content -->
+                        <section class="content">
+                            <!-- Info boxes -->
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+                                    <div class="box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">System Configuartion Admin - List</h3>
+
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+
+                                            @if (ViewBag.SystemConfigurationAdmin.Count > 0)
+                                            {
+                                                @Html.Partial("_SystemConfigurationAdmin");
+                                            }
+                                            else
+                                            {
+                                                <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                                            }
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box-footer -->
+
+                                </div><!-- /.col -->
+                            </div>
+
+                        </section><!-- /.content -->
+
+
+                    </div><!-- ./box-body -->
+
+                }
+                <!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+
+</section><!-- /.content -->
+@*</div>*@
+
+<script>
+    $(document).on('click', '#btnSaveSysConfiguration', function (e) {
+        var isValid = true;
+
+
+        if ($.trim($('#KeyValue').val()) == '') {
+            isValid = false;
+            $('#KeyValue').removeClass('custom-input-success').addClass('custom-input-error');
+            $('#KeyValue').keypress(function () {
+                $('#KeyValue').removeClass('custom-input-error').addClass('custom-input-success');
+            });
+
+        }
+        if (isValid == false)
+            e.preventDefault();
+        else
+            $("#fromSystemConfigAdmin").submit();
+    });
+</script>

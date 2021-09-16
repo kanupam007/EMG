@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<title>Test Database</title>
+@using (Html.BeginForm("Query", "DBTest", FormMethod.Post, new { @Id = "Form1" }))
+{
+    <table>
+        <tr>
+            <td align="left" colspan="2">
+                @*<input type="text" style="width: 650%; height: 300px;" name="txtQuery"/>*@
+                <textarea style="width: 650%; height: 300px;" name="txtQuery" id="txtQuery">@TempData["Query"]</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="FillGrid" name="Command" />
+                <input type="submit" value="Execute" name="Command" />
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            @foreach (System.Data.DataColumn col in Model.Columns)
+                            {
+                                <th>
+                                    @col.Caption
+                            </th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (System.Data.DataRow row in Model.Rows)
+                        {
+                            <tr>
+                                @foreach (var cell in row.ItemArray)
+                                {
+                                    <td>
+                                        @cell.ToString()
+                                </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+}

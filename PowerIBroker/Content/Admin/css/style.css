@@ -1,0 +1,62 @@
+﻿
+@media print{
+body {display:none;}
+}
+
+
+.form-signin {
+ max-width: 330px;
+    margin: 100px auto;
+    min-height: 375px;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom:5px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: 10px;
+  
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  
+}
+
+.custom-input-error{
+         border: 1px solid #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    background-color: #FBE8E8;
+}
+.custom-input-success{
+    border: 1px solid #3c763d;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    background-color: #D6F3D6;
+}
+.validateMsg{
+    font-size: 11px;
+    color: #a94442;
+    position:absolute;
+    width: 275px;
+}
+
+#page-wrapper{
+    min-height:600px;
+}

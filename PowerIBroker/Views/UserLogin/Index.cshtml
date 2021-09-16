@@ -1,0 +1,125 @@
+﻿@model PowerIBroker.Models.UserAuthentication
+@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<script>
+    document.title = '@ViewBag.Title';
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Untitled Document</title>
+    <!--[if IE]>
+    <script src="~/Content/Login/js/html5.js"></script>
+    <script src="~/Content/Login/js/placeholder.js"></script>
+    <![endif]-->
+    <link href="http://www.fundingnest.com/MasterCss/fonts/fonts.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/Login/css/stylesheet.css" type="text/css">
+    <link rel="stylesheet" href="~/Content/Login/css/responsive.css" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+    <style>
+        /*---------added by ikhlaq (14 aug)---------------*/
+
+        .custom-input-error {
+            border: 1px solid #a94442 !important;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+            background-color: #FBE8E8 !important;
+        }
+
+        .custom-input-success {
+            border: 1px solid #3c763d !important;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+            background-color: #D6F3D6 !important;
+        }
+
+        .signInErrorDiv {
+            margin: 10px 0px;
+        }
+
+        .signInError {
+            text-align: center;
+            color: #9E3F38;
+            font-size: 14px;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+<body>
+
+   
+    <div id="loginPopup">
+        <div class="popupBox">
+       
+            @using (Html.BeginForm("Index", "UserLogin", FormMethod.Post))
+            {
+                @Html.HiddenFor(model => model.UserType)
+                @Html.HiddenFor(model => model.CultureName)
+               
+                <div class="popupLogo"><img src="~/Content/Login/images/logo.png" alt=""></div>
+                <div class="loginField">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "loginInput email", placeholder = "Email Address" })
+               
+
+                </div>
+                <div class="loginField">
+                    @Html.PasswordFor(model => model.Password, new { @class = "loginInput password", placeholder = "Password" })
+                  
+
+                </div>
+                <div class="rem">
+
+                   
+                    @Html.CheckBoxFor(model => model.RememberMe)
+                    <label for="RememberMe">Remember Me</label>
+                </div>
+                <div class="fp"><a href="javascript:void(0)">Forgot Password?</a></div>
+                <div class="clr">
+                    <input type="submit" id="btnUserLogin" value="Log In" class="formBtn" />
+                </div>
+                <div class="signInErrorDiv">
+                    <span class="signInError"></span>
+                </div>
+            }
+        </div>
+    </div>
+    <script src="~/Content/Login/js/jquery.js"></script>
+    <script src="~/Content/Login/js/function.js"></script>
+
+    <script>
+      
+        var invalidlogin = '';
+        var UserType = '';
+        $(document).ready(function () {
+       
+            invalidlogin = '@TempData["Message"]';
+            UserType = '@TempData["UserType"]';
+            if (invalidlogin != null && invalidlogin != "" && invalidlogin == "Invalid login credentials, please try again")
+            {
+                $('#loginPopup').fadeIn();
+          
+
+                $(".signInError").text(invalidlogin);
+                $(".showPopup").click();
+                $(".signInErrorDiv").show();
+                $("#UserType").val(UserType)
+
+
+            }
+
+        });
+        $(".showPopup").click(function () {
+            $("#UserType").val($(this).attr("data-value"));
+        })
+
+
+    </script>
+</body>
+</html>

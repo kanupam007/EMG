@@ -1,0 +1,226 @@
+﻿@using PowerIBrokerDataLayer;
+@using PowerIBrokerBusinessLayer
+
+@{
+    ViewBag.Title = "AddBroker1";
+    Layout = "~/Views/Shared/_GeneralAgent.cshtml";
+    PowerIBrokerEntities context = new PowerIBrokerEntities();
+    Comman objComman = new Comman();
+    long broker = ViewBag.ID;
+    var StateData = context.EmployeeStates.OrderBy(x => x.StateName).ToList();
+    var BrokerData = context.tblBrokers.Where(x => x.BrokerId == broker).FirstOrDefault();
+
+
+}
+<script src="/Content/Plugins/SweetAlert/sweetalert.min.js"></script>
+<link href="/Content/Plugins/SweetAlert/sweetalert.css" rel="stylesheet">
+<link href="/AdminContent/customcss/admincustomsweetpopups.css" rel="stylesheet">
+<script src="https://unpkg.com/jquery-input-mask-phone-number@1.0.15/dist/jquery-input-mask-phone-number.js"></script>
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/GeneralAgent">GeneralAgent</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Broker Company</li>
+        </ol>
+        <h6 class="slim-pagetitle">CREATE Broker ADMINISTRATOR</h6>
+    </div><!-- slim-pageheader -->
+    <div class="section-wrapper">
+        <label class="section-title">Broker Administrators</label>
+
+
+        <div class="form-layout">
+            <div class="row mg-b-25">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Firstname: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" name="firstname" maxlength="30" id="txtFirstName">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtFirstName"><li class="parsley-required">This value is required.</li></ul>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Lastname: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" name="lastname" maxlength="30" id="txtLastName">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtLastName"><li class="parsley-required">This value is required.</li></ul>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Administrator Type: <span class="tx-danger">*</span></label>
+                        <select class="form-control" id="AdministratorType">
+                            <option value="">Choose Administrator Type</option>
+                            <option value="0">Broker Administrator</option>
+                            <option value="1">Broker</option>
+                        </select>
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-AdministratorType"><li class="parsley-required">This value is required.</li></ul>
+                </div>
+
+                <!-- col-4 -->
+
+            </div>
+            <div class="row mg-b-25">
+                <!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Email address: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" name="email" maxlength="100" id="txtEmail">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtEmail"><li class="parsley-required">This value is required.</li></ul>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Work Phone: <span class="tx-danger">*</span></label>
+                        <input class="form-control mask" type="text" name="lastname" maxlength="15" onkeypress="return isNumberKey(event);" id="txtWorkPhone">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtWorkPhone"><li class="parsley-required">This value is required.</li></ul>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Mobile: <span class="tx-danger">*</span></label>
+                        <input class="form-control mask" type="text" name="email" maxlength="15" onkeypress="return isNumberKey(event);" id="txtMobile">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtMobile"><li class="parsley-required">This value is required.</li></ul>
+                </div><!-- col-4 -->
+
+            </div>
+            <div class="form-layout-footer bd-t-0">
+                <button class="btn btn-primary bd-0" id="btnsubmit" brokerid="@broker" controllername="GeneralAgent">Save</button>
+                <button class="btn btn-secondary bd-0" onclick="window.location.reload();">Reset</button>
+            </div>
+
+        </div>
+
+    </div>
+    @if (ViewBag.Clients != null && ViewBag.Clients.Count > 0)
+    {
+        <div class="slim-pageheader">
+            <ol class="breadcrumb slim-breadcrumb">
+            </ol>
+            <h6 class="slim-pagetitle">Manage Broker Administrator</h6>
+        </div>
+        <div class="section-wrapper">
+            <label class="section-title"> Broker User Details</label>
+            <input type="text" class="form-control col-lg-4 mg-b-10" style="float:right;" id="txtSearch" placeholder="Search">
+
+            <br />
+            <div class="table-responsive">
+                <table class="table mg-b-0">
+
+                    <tbody>
+                    <thead>
+                        <tr>
+                            <th class="wd-25p">Name</th>
+                            <th class="wd-15p">Email</th>
+                            <th class="wd-15p">Work Phone</th>
+                            <th class="wd-15p">Mobile Phone</th>
+                            @*<th>Status</th>*@
+                            <th class="wd-30p" style="text-align:left;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="SubBrokerData">
+                        @foreach (var item in ViewBag.Clients)
+                        {
+                            <tr>
+                                <td>@item.FirstName @item.LastName</td>
+
+                                <td>@item.Email</td>
+                                <td>@(objComman.AddMasking(item.WorkPhone))</td>
+                                <td>@(objComman.AddMasking(item.Phone))</td>
+                                @*<td>@(item.IsActive ? "Active":"In-Active")</td>*@
+                                <td style="text-align:right;">
+                                    <a href="javascript:void(0)" onclick="EditBroker(@item.Id,'@item.FirstName','@item.LastName','@item.Email','@(objComman.AddMasking(item.WorkPhone))','@(objComman.AddMasking(item.Phone))','@item.AdministratorType')" style="margin-bottom: 2px;" class="btn btn-primary btn-xs editSubBroker">Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a href="javascript:void(0)" status="@item.IsActive.ToString()" style="margin-bottom: 2px;" onclick="BrokerActivateSuspend(this,@item.Id,'GeneralAgent');" class="btn btn-outline-@(item.IsActive ? "danger":"primary")  btn-xs SubBrokerStatus">@(item.IsActive ? "Suspend":"Activate")</a>
+                                    <a href="javascript:void(0)" style="margin-bottom: 2px;" onclick="BrokerDelete(this,@item.Id,'GeneralAgent');" class="btn btn-outline-danger btn-xs SubBrokerDeactivate">Delete&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+        </ol>
+        <h6 class="slim-pagetitle">Manage Broker Addresses</h6>
+    </div>
+    <div class="section-wrapper">
+        <label class="section-title">Broker</label>
+        <div class="form-layout">
+            <div class="row mg-b-25">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Broker Company Name: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" name="firstname" maxlength="30" id="txtBroker" disabled value="@BrokerData.Broker">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtBroker"><li class="parsley-required">This value is required.</li></ul>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Street: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" maxlength="30" id="txtStreet" value="@BrokerData.Street">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtStreet"><li class="parsley-required">This value is required.</li></ul>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">City: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" name="email" maxlength="30" id="txtCity" value="@BrokerData.CityMaster.City">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtCity"><li class="parsley-required">This value is required.</li></ul>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">State: <span class="tx-danger">*</span></label>
+                        <select class="form-control select2-show-search company-information" id="txtState" data-placeholder="Choose State">
+                            <option value="">Select State</option>
+                            @foreach (var item in StateData)
+                            {
+                                <option @(item.StateCode==BrokerData.StateMaster.State?"selected":"") value="@item.StateCode">@item.StateName</option>
+                            }
+                        </select>
+                        @*<input class="form-control" type="text" name="firstname" maxlength="30" id="txtState" value="@BrokerData.StateMaster.State">*@
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtState"><li class="parsley-required">This value is required.</li></ul>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Zip Code: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="text" maxlength="30" id="txtZip" value="@BrokerData.ZipCode">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtZip"><li class="parsley-required">This value is required.</li></ul>
+                </div><!-- col-4 -->
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label class="form-control-label">Work Phone: <span class="tx-danger">*</span></label>
+                        <input class="form-control mask" type="text" name="email" maxlength="30" id="txtBrokerPhone" value="@objComman.AddMasking(BrokerData.WorkPhone)">
+                    </div>
+                    <ul class="parsley-errors-list filled" id="parsley-txtBrokerPhone"><li class="parsley-required">This value is required.</li></ul>
+                </div><!-- col-4 -->
+            </div><!-- row -->
+            <div class="form-layout-footer bd-t-0">
+                <button class="btn btn-primary bd-0" id="btnmanagebroker" brokerid="@Session["BrokerId"]" controllername="GeneralAgent">Update</button>
+                <button class="btn btn-secondary bd-0" onclick="window.location.reload();">Reset</button>
+            </div>
+
+        </div><!-- form-layout -->
+    </div>
+
+
+
+
+</div>
+<script>
+    $(document).ready(function () {
+        $('.mask').usPhoneFormat({
+            format: '(xxx) xxx-xxxx',
+        });
+    });
+</script>
+<script src="~/Content/CustomScript/_AddBroker.js"></script>
+
+
+

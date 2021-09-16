@@ -1,0 +1,213 @@
+﻿@model PowerIBrokerDataLayer.EMG_SubscriptionPlan
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+@*<style>
+    .checkbox label, .radio label {
+        min-height: 20px;
+        padding-left: 30px;
+        margin-bottom: 0;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+    .box-body {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 3px;
+        border-bottom- -left-radius: 3px;
+        padding: 10px;
+        padding-bottom: 0px;
+    }
+
+    .custom-input-error {
+        border: 1px solid #a94442 !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        background-color: #FBE8E8 !important;
+    }
+
+    .custom-input-success {
+        border: 1px solid #3c763d !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        background-color: #D6F3D6 !important;
+    }
+
+    .checkbox label, .radio label {
+        min-height: 20px;
+        padding-left: 2px;
+        margin-bottom: 0;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+    .searchBox.selectPurchage select {
+        height: 30px;
+        width: 100%;
+    }
+
+    .searchBox.selectPurchage {
+        display: inline-block;
+        margin-bottom: 15px;
+        width: 226px;
+    }
+
+    .box {
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+
+    .norecord {
+        display: block;
+        font-size: 20px;
+        padding: 20px 0;
+        text-align: center;
+        text-transform: capitalize;
+    }
+</style>*@
+@*<div class="content-wrapper" style="min-height: 960px;">*@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Purchase Product
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin/Dashboard"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active"> Purchase Product</li>
+    </ol>
+
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+    @using (Html.BeginForm("ManagePurchaseSubscription", "Admin", FormMethod.Get))
+    {
+        <div class="searchBox selectPurchage">
+            @if (ViewBag.Company != null)
+            {
+                @Html.DropDownList("CompanyID", ViewBag.Company as SelectList, "Select Company", new { CompanyID = Request["CompanyID"], onchange = "this.form.submit()" })
+            }
+        </div>
+    }
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row bdrTop">
+                @if (ViewBag.PurchaseSubscription != null)
+                {
+                    if (ViewBag.PurchaseSubscription.Count > 0)
+                    {
+                        var value = 0;
+                        for (int i = 0; i < ViewBag.PurchaseSubscription.Count; i++)
+                        {
+
+                            if (ViewBag.PurchaseSubscription[i].IsConfigure != null)
+                            {
+                                value = 1;
+                            }
+
+                        }
+                        foreach (var options in ViewBag.PurchaseSubscription)
+                        {
+
+                            <div class="col-md-3">
+                                @if (options.IsConfigure == null)
+                                {
+                                    <div class="box box-warning box-solid">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                @options.ProductName
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            </div><!-- /.box-tools -->
+                                        </div><!-- /.box-header -->
+
+                                        <div class="box-body">
+                                            <span>$</span>@options.ProductCost<span>&nbsp; Employee Per Month</span>
+                                        </div>
+                                        @using (Html.BeginForm("AddIsConfigure", "Admin", new { @SubscriptionID = @options.ID, @cID = Request["CompanyID"] }, FormMethod.Post))
+                                        {
+                                            <button style="margin: 20px; margin-left: 1px; margin-left: 80px;" class="formBtn" id="btnUploadCompanyPremium" type="submit">Assign</button>
+                                        }
+                                    </div><!-- /.box -->
+                                }
+                                else if (options.IsConfigure == true)
+                                {
+                                    <div class="box box-warning box-solid" style="background-color:gray">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                @options.ProductName
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            </div><!-- /.box-tools -->
+                                        </div><!-- /.box-header -->
+
+                                        <div class="box-body">
+                                            <span>$</span>@options.ProductCost<span>&nbsp; Employee Per Month</span>
+                                        </div>
+                                        @using (Html.BeginForm("AddIsConfigure", "Admin", new { @SubscriptionID = @options.ID, @cID = Request["CompanyID"] }, FormMethod.Post))
+                                        {
+                                            <button style="margin: 20px; margin-left: 1px; margin-left: 80px;" class="formBtn" id="btnUploadCompanyPremium" type="submit">Assign</button>
+                                        }
+                                    </div><!-- /.box -->
+                                }
+                                else if (options.IsConfigure == false)
+                                {
+                                    <div class="box box-warning box-solid" style="background-color: #e4e4e4">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                @options.ProductName
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            </div><!-- /.box-tools -->
+                                        </div><!-- /.box-header -->
+
+                                        <div class="box-body">
+                                            <span>$</span>@options.ProductCost<span>&nbsp; Employee Per Month</span>
+                                        </div>
+                                        <button disabled="disabled" style="margin: 20px; margin-left: 1px; margin-left: 80px;" class="viewMore viewMore4 transition waveBtn" id="btnUploadCompanyPremium" type="submit">Assigned</button>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="box box-warning box-solid">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">
+                                                @options.ProductName
+                                            </h3>
+                                            <div class="box-tools pull-right">
+                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            </div><!-- /.box-tools -->
+                                        </div><!-- /.box-header -->
+
+                                        <div class="box-body">
+                                            <span>$</span>@options.ProductCost<span>&nbsp; Employee Per Month</span>
+                                        </div>
+                                        @using (Html.BeginForm("AddIsConfigure", "Admin", new { @SubscriptionID = @options.ID, @cID = Request["CompanyID"], @ProductCost=@options.ProductCost }, FormMethod.Post))
+                                        {
+                                            <button disabled="disabled" style="margin: 20px; margin-left: 1px; margin-left: 80px;" class="viewMore viewMore4 transition waveBtn" id="btnUploadCompanyPremium" type="submit">Assign</button>
+                                        }
+                                    </div>
+                                }
+                            </div><!-- /.col -->
+                        }
+                    }
+                    else
+                    {
+                        <span class="norecord">No record found</span>
+                    }
+                }
+
+                <!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+
+</section><!-- /.content -->

@@ -1,0 +1,133 @@
+﻿@model PowerIBrokerDataLayer.EMG_Reason
+@{
+    ViewBag.Title = "Reason";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+@*<link href="~/AdminContent/customcss/admincustom.css" rel="stylesheet" />*@
+<link href="~/AdminContent/plugins/datatables/jquery.dataTables.css" rel="stylesheet" />
+<script src="~/AdminContent/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/Frontend/js/jquery.mask.js"></script>
+<script src="~/AdminContent/customjs/admincustom.js"></script>
+
+@*<div class="content-wrapper" style="min-height: 960px;">*@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Terminate Reason Master
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin/Dashboard"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active">Terminate Reason Master</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Terminate Reason Master</h3>
+
+                </div><!-- /.box-header -->
+                <div class="col-lg-12" style="padding-right:0px;padding-left:0px">
+                    <div class="@(TempData["CustomMessageReason"] != null ? TempData["MessageTypeReason"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                        @if (TempData["CustomMessageReason"] != null)
+                        {
+                            <i class="fa @(TempData["MessageTypeReason"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+
+                        }
+                        <span>@TempData["CustomMessageReason"]</span>
+                    </div>
+
+
+
+                </div>
+
+
+
+                @using (Html.BeginForm("Reason", "Admin", FormMethod.Post, new { Id = "formIdReason" }))
+                {
+                    @Html.HiddenFor(model => model.ReasonId)
+                    <div class="box-body">
+
+                        <form role="form">
+                            <div class="box-body">
+                               
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Reason Name</label>
+                                        @Html.TextBoxFor(model => model.ReasonName, new { @class = "form-control", placeholder = "Reason", id = "ReasonName", maxlength = "100" })
+                                    </div>
+                                </div>
+                            </div><!-- /.box-body -->
+
+                            <div class="col-lg-3" style="margin-left:30px">
+                                <div class="checkbox">
+
+                                    @if (Model == null)
+                                    {
+                                        @Html.CheckBox("IsActive", new { @class = "checkBx", @checked = "checked" })
+                                    }
+                                    else
+                                    {
+                                        @Html.CheckBox("IsActive", new { @class = "checkBx" })
+                                    }
+
+                                    <label style="margin-left:0px">Is Active?</label>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="button" id="btnSaveReason" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        <br /><br /><br />
+                        <!-- Main content -->
+                        <section class="content">
+                            <!-- Info boxes -->
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+                                    <div class="box">
+                                        <div class="box-header">
+
+                                            <h3 class="box-title">Reason Master - List</h3>
+                                            @*<input type="checkbox" id="value" onclick="GetDataPropertyGroupMaster()" style="float:right;" />
+                                            <label style="float:right;margin-right:10px">Show Inactive Records</label>*@
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+
+                                            @if (ViewBag.ReasonMaster.Count > 0)
+                                            {
+                                                @Html.Partial("_Reason");
+                                            }
+                                            else
+                                            {
+                                                <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                                            }
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box-footer -->
+
+                                </div><!-- /.col -->
+                            </div>
+
+                        </section><!-- /.content -->
+
+
+                    </div><!-- ./box-body -->
+
+                }
+                <!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+
+</section><!-- /.content -->
+@*</div>*@

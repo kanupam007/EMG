@@ -1,0 +1,50 @@
+﻿@using PowerIBrokerDataLayer;
+@using PagedList.Mvc;
+@using PowerIBrokerBusinessLayer;
+@using PowerIBroker.Models;
+@model PagedList.IPagedList<VW_Company_Employee>
+@{
+    ManagePageSize pagesize = new ManagePageSize();
+}
+
+
+@if (Model.Count > 0)
+{
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="example1">
+        <tr style="text-align:left">
+            <td width="15%" class="tbleTh" style="font-size: 14px; font-weight: bold; text-align: center">Employee Name</td>
+            <td width="25%" class="tbleTh" style="font-size: 14px; font-weight: bold; text-align: center">Location</td>
+            <td width="25%" class="tbleTh" style="font-size: 14px; font-weight: bold; text-align: center">Department</td>
+            <td width="25%" class="tbleTh" style="font-size: 14px; font-weight: bold; text-align: center">Email</td>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td class="pdL"><a title="Edit" href="@Url.Action("ViewOpenEnrollment", "Admin", new { @EmpID = item.Id })">@item.EmpName</a></td>
+                <td class="pdL">@item.Location</td>
+                <td class="pdL">@item.Department</td>
+                <td class="pdL">@item.Email</td>
+            </tr>
+        }
+
+    </table>
+
+
+}
+else
+{
+    <span>No Companies added</span>
+}
+
+@{
+    if (ViewBag.Total > 2)
+    {
+        <p class="pagingCounter">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+        @*@Html.PagedListPager(Model,, new { onchange = "GetData();" })*@
+    <div id="contentPager">
+        @Html.PagedListPager(Model, page => Url.Action("ManageEmployees"))
+    </div>
+    }
+}

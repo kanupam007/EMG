@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+@using PowerIBrokerBusinessLayer;
+@{
+    CmsManagement obj = new CmsManagement();
+    ViewBag.ContactUsContent = obj.GetContactUsContent();
+    PowerIBrokerDataLayer.ContactUsPageContent ContactUsContent = ViewBag.ContactUsContent;
+
+    Administration Admin = new Administration();
+    ViewBag.IsCpatchaEmployee = Admin.IsCpatcha("CaptchaOnEmployeeLogin");
+
+}
+<html>
+<head>
+    <link rel="shortcut icon" type="image/ico" href="~/Content/Frontend/images/favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>@(ViewBag.MetaTitle == "" || ViewBag.MetaTitle == null ? "EnrollMyGroup" : ViewBag.MetaTitle)</title>
+    @if (!string.IsNullOrEmpty(ViewBag.MetaDescription))
+    {
+        <meta name="description" content="@ViewBag.MetaDescription">
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.MetaKeywords))
+    {
+        <meta name="keywords" content="@ViewBag.MetaKeywords">
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.MetaRobots))
+    {
+        <meta name="robots" content="@ViewBag.MetaRobots">
+    }
+
+
+    <!--css-->
+    <link rel="stylesheet" href="@Url.Content("~/content/frontend/css/fonts.css")" media="all">
+    <link rel="stylesheet" href="@Url.Content("~/content/frontend/css/style.css")" media="all">
+    <link rel="stylesheet" href="@Url.Content("~/content/frontend/css/animate.css")" media="all">
+    <link rel="stylesheet" href="@Url.Content("~/content/frontend/css/responsive.css")" media="all">
+    <!--css-->
+    @*<title>ENROLLMYGROUP</title>*@
+    <script type="text/javascript" src="@Url.Content("~/content/frontend/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Content/Frontend/js/validations.js")"></script>
+    <link href="~/Content/Frontend/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/Frontend/js/jquery.min.js"></script>
+    <script src="~/Content/Frontend/js/toastr.min.js"></script>
+    <link href="~/Content/Frontend/css/toastr.min.css" rel="stylesheet" />
+    <script src="~/Content/Frontend/js/bootstrap.min.js"></script>
+    <script src="~/Content/Frontend/js/FrontendValidate.js"></script>
+    <link href="~/Content/sweetalert-master/dist/sweetalert.css" rel="stylesheet" />
+    <script src="~/Content/sweetalert-master/dist/sweetalert-dev.js"></script>
+    <script src="~/Content/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="mainCon">
+        <!--header-->
+        <div class="headerCon">
+            <div class="logo">
+                <a href="@Url.Content("~/")">
+                    <img src="@Url.Content("~/content/frontend/images/landing-logo.png")">
+                </a>
+            </div>
+            <!--for resonsive menu-->
+
+            <div class="MenuBack"></div>
+            <button data-page-id="home" class="btn-menu normal">
+                <span>Menu</span>
+            </button>
+            <!--for resonsive menu-->
+            <div class="navCon">
+                <img src="@Url.Content("~/content/frontend/images/landing-logo.png")" class="reslogo">
+                <ul>
+                    @*<li class="navActive"><div class="navItem"><a href="#benifts" class="scroll">BENEFITS</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>*@
+                    <li><div class="navItem"><a href="~/#feature">FEATURES</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>
+                    @*<li><div class="navItem"><a href="#pricing" class="scroll">PRICING</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>*@
+                    @*<li><div class="navItem"><a href="#reqDemo" class="scroll">Request Demo</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>*@
+                    <li><div class="navItem"><a  href="@Url.Action("Login", "Home")" class="login">Login</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>
+                    @*<li><a href="@Url.Action("Index", "UserLogin")">Login</a></li>*@
+
+                    <li><div class="navItem"><a id="signUpLink" href="~/#signUp">Schedule Demo</a><div class="backOver"></div></div></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+        <!--header-->
+        @RenderBody()
+
+        <!--topFooter-->
+        <div class="topFooter">
+            <div class="container">
+                <div class="foterNav">
+                    <h2>Overview</h2>
+                    @*<a href="#benifts" class="scroll">Benefits</a>*@
+                    <a href="~/#feature">Features</a>
+                    @*<a href="#pricing" class="scroll">Pricing</a>*@
+                    <a href="@Url.Content("~/AboutUs")" class="">About Us</a>
+                    <a href="@Url.Content("~/FAQs")" class="">FAQ’s</a>
+                    <a href="@Url.Content("~/Contact")" class="">Contact Us</a>
+                    <a href="@Url.Content("~/Security")" class="">Security</a>
+                    <a href="@Url.Content("~/Terms-Conditions")" class="">Terms of Use</a>
+                    <a href="@Url.Content("~/Privacy-Policy")" class="">Privacy Policy</a>
+                </div>
+
+                <script src="~/Content/Frontend/js/helium.mutate.js"></script>
+                <script src="~/Content/Frontend/js/helium.slider.js"></script>
+                <link href="~/Content/Frontend/css/heliumSlider.css" rel="stylesheet" />
+                <div class="footerNews">
+                    <div id="newsContent" class="helium-slider loading">
+
+
+                        <div class="slide-window">
+                            <ul class="slide-holder">
+                                @{
+                                    var latestNewsContent = obj.GetNewsContent(false);
+                                    if (latestNewsContent.Count > 0)
+                                    {
+                                        foreach (var news in latestNewsContent)
+                                        {
+                                            <li>
+                                                <div class="pane">
+                                                    <h2>@news.Title</h2>
+                                                    <p>@news.Description</p>
+                                                    <a target="_blank" class="newsLink" href="@news.Link">@news.Link</a>
+                                                </div>
+                                            </li>
+                                        }
+                                    }
+                                }
+
+
+                            </ul>
+                        </div>
+                        <ul class="slide-nav"></ul>
+                    </div>
+                </div>
+
+                @*<div class="footContactus" id="formEnquiry" style="width:26%">
+                    <img src="~/Content/Frontend/images/ISI.png" width="300px" height="150px" />
+                    <p style="color: black; font-size:12px;text-align:justify">Enroll My Group support our troops, police and fire departments</p>
+                </div>
+                <div class="clearfix">
+                </div>*@
+
+            </div>
+        </div>
+        <!--topFooter-->
+        <!--footer-->
+        <div class="footerCon">
+            <div class="container">
+                <div class="copyRight"> Copyright &copy; @DateTime.Now.Year</div>
+                <div class="socIcons">
+
+                    @{
+                        var socialMediaLinks = obj.GetSocialMediaLink(false);
+                    }
+                    @if (socialMediaLinks.Count > 0)
+                    {
+                        foreach (var link in socialMediaLinks)
+                        {
+                            <a href="@link.Link" class="@(link.Title.ToLower() == "facebook" ? "facebook" : link.Title.ToLower() == "twitter" ? "tw" : link.Title.ToLower() == "linkedin" ? "in" : "tube")"></a>
+                        }
+                    }
+
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+        <!--footer-->
+        <!--LoginPop -->
+        <div class="backbg"></div>
+        @*@using (Html.BeginForm("ValidateCaptcha", "UserLogin"))*@
+        @*@using (Html.BeginForm("Index", "UserLogin", FormMethod.Post, new { id = "Loginformsubmit" }))
+        {
+            <input type="hidden" id="hdnReturnUrl" name="hdnReturnUrl" value="@ViewBag.ReturnUrl" />
+            <div class="loginPop lognp">          
+                <div class="closeCon">
+                    <a href="javascript:void(0)" class="close">X</a>
+                    <img src="@Url.Content("~//content/frontend/images/logo.png")" class="loginLogo" />
+                </div>
+                <div class="loginCon">
+                    <ul>
+                        <li><input type="hidden" value="" name="CultureName" id="CultureName" /></li>
+                        <li><input type="text" placeholder="Email or Phone" value="@(Request.Cookies["UserEmail"] != null ? Request.Cookies["UserEmail"].Value : "")" name="Email" id="LoginEmail" class="inputTxt1"  /></li>
+                        <li>
+                            <input type="password" placeholder="Password" value="@(Request.Cookies["UserPassword"] != null ? Request.Cookies["UserPassword"].Value : "")" name="Password" id="LoginPassword" class="inputTxt1" />
+                        </li>
+                        
+                        <li class="forgotPass"><input style="margin: 1px 0 0;" type="checkbox" name="rememberMe" value="true" id="rememberMe" /><strong>&nbsp; Remember me</strong><a class="showPopup forgpass" href="#forgotPassPopup" data-toggle="modal">Forgot password? </a><div class="clearfix"></div></li>
+                        <li>
+                            @if (ViewBag.IsCpatchaEmployee == true)
+                            {
+                                
+                                 <div class="g-recaptcha" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["recaptchaPublicKey"]"></div>
+
+                                <input type="button" value="Login" class="btn signin" id="btnUserLogin" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Login" class="btn signin" id="btnUserLogin" />
+                            }
+                        </li>
+                       
+                    </ul>
+                    <div class="signInError">@TempData["Message"]</div>
+                </div>
+            </div>
+        }*@
+
+
+
+
+    </div>
+
+    <!--script-->
+    <div class="backbg2"></div>   
+    <div class="forgPopup" id="forgotPassPopup" role="dialog">     
+                <div class="closeCon">
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                    <img src="/content/frontend/images/logo.png" class="loginLogo">
+                </div>
+                <div class="modal-header">
+                    <div class="form-group has-feedback feedbackOuter">
+                        <input type="text" class="inputTxt1" placeholder="Enter Your Email or Phone" autofocus="" id="forgotPassEmail">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <button type="submit" class="btn signin" id="btnFrgtPass">Reset Password</button>
+                </div>        
+    </div>
+
+    <script src="~/Content/Frontend/js/jquery.scrolly.js"></script>
+    <script src="~/Content/Frontend/js/jquery.mask.js"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/content/frontend/js/function.js")"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/html5.js"></script>
+    <script src="js/placeholder.js"></script>
+      <![endif]-->
+    <script src="@Url.Content("~/content/frontend/js/wow.min.js")"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+    <!---- start-smoth-scrolling---->
+    <script type="text/javascript" src="@Url.Content("~/content/frontend/js/easing.js")"></script>
+
+
+    <!---- start-smoth-scrolling---->
+    <!--script-->
+
+</body>
+</html>
+<style>
+    .inputTxt1 {
+        background: #fff none repeat scroll 0 0;
+        border: 1px solid #e4e1e1;
+        color: #a8a8a8;
+        font-family: open_sansregular;
+        font-size: 15px;
+        margin-bottom: 10px;
+        padding: 14px 10px;
+        width: 100%;
+    }
+    .closeCon button.close {
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        background: #000000;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 11px;
+        line-height: 19px;
+        text-align: center;
+        color: #fff;
+        opacity: 0.5;
+        font-weight: 400 !important;
+    }
+    .forgPopup {
+        background: #fff none repeat scroll 0 0;
+        z-index: 5500;
+        border-radius: 3px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        left: 35%;
+        top: 75%;
+        position: fixed;
+        right: 0;
+        width: 430px;
+        height: auto;
+        display: none;
+        transform: translate(-50%, -50%);
+        padding: 0 !important;
+    }
+    .closeCon a.close {
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        background: #000000;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 11px;
+        line-height: 19px;
+        text-align: center;
+        color: #fff;
+        opacity: 0.5;
+        font-weight: 400 !important;
+    }
+    /*.loginCon {
+        box-sizing: border-box;
+        padding: 0 30px 30px 30px;
+    }*/
+    /*.closeCon {
+        box-sizing: border-box;
+        padding: 20px 20px 10px 20px;
+        position: relative;
+    }*/
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125727191-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-125727191-1');
+</script>
+
+<script>
+    // Validate Captcha
+    function onLoginSubmit(token) {
+        $.ajax({
+            type: "POST",
+            url: "/UserLogin/ValidateCaptcha",
+            data: "{response: '" + token + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (captchaResponse) {
+                if (captchaResponse.Success) {
+                    $("#Loginformsubmit").submit();
+                } else {
+                }
+            }
+        });
+    }
+</script>

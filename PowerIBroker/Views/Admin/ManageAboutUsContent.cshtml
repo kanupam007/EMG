@@ -1,0 +1,201 @@
+﻿@model PowerIBrokerDataLayer.AboutUsPageContent
+@{
+    ViewBag.Title = "ManageAboutUsContent";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+@*@{
+        PowerIBrokerDataLayer.AboutUsPageContent aboutUsPageContent = ViewBag.AboutUsContent;
+    }*@
+<script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/adapters/jquery.js")"></script>
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div>
+
+        </div>
+        <div class="col-lg-12">
+            <h2>Manage About Us</h2>
+
+            <div class="@(TempData["CustomMessageMAUC"] != null ? TempData["MessageTypeMAUC"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                @if (TempData["CustomMessageMAUC"] != null)
+                {
+                    <i class="fa @(TempData["MessageTypeMAUC"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                }
+                <span>@TempData["CustomMessageMAUC"]</span>
+            </div>
+
+            @using (Html.BeginForm("ManageAboutUsContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label>Banner Text</label>
+                    @Html.TextBoxFor(model => model.HeaderTitle, new { @class = "form-control", placeholder = "Heading" })
+                </div>
+                <div class="form-group">
+                    <label>Meta Title</label>
+                    @Html.TextBoxFor(model => model.MetaTitle, new { @class = "form-control", rows = "1", placeholder = "Meta Title" })
+
+                </div>
+
+                <div class="form-group">
+                    <label>Meta Keywords</label>
+                    @Html.TextBoxFor(model => model.MetaKeywords, new { @class = "form-control", rows = "3", placeholder = "Meta Keywords" })
+
+                </div>
+                <div class="form-group">
+                    <label>Meta Descriptions</label>
+                    @Html.TextBoxFor(model => model.MetaDescriptions, new { @class = "form-control", rows = "3", placeholder = "Meta Descriptions" })
+                </div>
+                <div class="form-group">
+                    <label>Meta Robots</label>
+                    @Html.TextBoxFor(model => model.MetaKeyPhrase, new { @class = "form-control", rows = "3", placeholder = "Meta Robots" })
+                </div>
+                <div class="form-group">
+                    <label>Heade Banner (min:1300x830)</label>
+                    <input type="file" id="file" name="files" accept="image/*" onchange="showfilepreview(this, 'abtUsHeaderBanner')">
+
+                </div>
+
+                <div class="form-group">
+                    @if (Model.Id > 0 && !string.IsNullOrEmpty(Model.HeaderBanner))
+                    {
+                        <a href="javascript:void(0)" class="BannerImageAboutUs" data-id="@Model.Id" data-image="HeaderBanner" style="float:right;">Delete Image</a>
+                    }
+                </div>
+                <div class="form-group">
+                    <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.HeaderBanner) ? "http://placehold.it/1300x830" : Url.Content("~/Uploads/Admin/AboutUsBanners/Header/" + Model.HeaderBanner) : "http://placehold.it/1300x830")" />
+                </div>
+                @Html.HiddenFor(model => model.HeaderBanner)
+                <div class="form-group">
+                    <label>Header Content</label>
+                    @Html.TextAreaFor(model => model.HeaderContent, new { @class = "form-control ckeditor", rows = "3", placeholder = "Header Content" })
+                    <p class="help-block">Example Description here.</p>
+                </div>
+                @*<div class="form-group">
+                        <label>Middle Content</label>
+                        @Html.TextAreaFor(model => model.MiddleContent, new { @class = "form-control ckeditor", rows = "3", placeholder = "Middle Content" })
+                        <p class="help-block">Example Description here.</p>
+                    </div>*@
+
+                <div class="col-lg-4">
+                    <div>
+                        <h5>
+                            Bottom Left Section (OUR TEAM)
+                        </h5>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        @Html.TextBoxFor(model => model.BottomLeftSectionTitle, new { @class = "form-control", placeholder = "Title" })
+
+                    </div>
+                    <div class="form-group">
+                        <label>Content</label>
+                        @Html.TextAreaFor(model => model.BottomLeftSectionContent, new { @class = "form-control ckeditor", placeholder = "Content" })
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image (min:272x227)</label>
+                        <input type="file" id="abtUsBtmLeftBanner" name="files" accept="image/*" onchange="showfilepreview(this, 'abtUsBtmLeftBanner')">
+
+                    </div>
+                    <div class="form-group">
+                        @if (Model.Id > 0 && !string.IsNullOrEmpty(Model.BottomLeftSectionImage))
+                        {
+                            <a href="javascript:void(0)" class="BannerImageAboutUs" data-id="@Model.Id" data-image="BottomLeftSectionImage" style="float:right;">Delete Image</a>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.BottomLeftSectionImage) ? "http://placehold.it/372x227" : Url.Content("~/Uploads/Admin/AboutUsBanners/BottomLeftSection/" + Model.BottomLeftSectionImage) : "http://placehold.it/1300x830")" />
+                    </div>
+
+                    @Html.HiddenFor(model => model.BottomLeftSectionImage)
+
+                </div>
+                <div class="col-lg-4">
+                    <div>
+                        <h5>
+                            Bottom Middle Section (OUR SERVICES)
+                        </h5>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        @Html.TextBoxFor(model => model.BottomMiddleSectionTitle, new { @class = "form-control", placeholder = "Title" })
+
+                    </div>
+                    <div class="form-group">
+                        <label>Content</label>
+                        @Html.TextAreaFor(model => model.BottomMiddleSectionContent, new { @class = "form-control ckeditor", placeholder = "Content" })
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image (min:372x227)</label>
+                        <input type="file" id="abtUsBtmMiddleBanner" name="files" accept="image/*" onchange="showfilepreview(this, 'abtUsBtmMiddleBanner')">
+
+                    </div>
+                    <div class="form-group">
+                        @if (Model.Id > 0 && !string.IsNullOrEmpty(Model.BottomMiddleSectionImage))
+                        {
+                            <a href="javascript:void(0)" class="BannerImageAboutUs" data-id="@Model.Id" data-image="BottomMiddleSectionImage" style="float:right;">Delete Image</a>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.BottomMiddleSectionImage) ? "http://placehold.it/372x227" : Url.Content("~/Uploads/Admin/AboutUsBanners/BottomMiddleSection/" + Model.BottomMiddleSectionImage) : "http://placehold.it/1300x830")" />
+                    </div>
+
+                    @Html.HiddenFor(model => model.BottomMiddleSectionImage)
+
+                </div>
+                <div class="col-lg-4">
+                    <div>
+                        <h5>
+                            Bottom Right Section (WORK CULTURE)
+                        </h5>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        @Html.TextBoxFor(model => model.BottomRightSectionTitle, new { @class = "form-control", placeholder = "Title" })
+
+                    </div>
+                    <div class="form-group">
+                        <label>Content</label>
+                        @Html.TextAreaFor(model => model.BottomRightSectionContent, new { @class = "form-control ckeditor", placeholder = "Content" })
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Image (min:372x227)</label>
+                        <input type="file" id="abtUsBtmRightBanner" name="files" accept="image/*" onchange="showfilepreview(this, 'abtUsBtmRightBanner')">
+
+                    </div>
+                    <div class="form-group">
+                        @if (Model.Id > 0 && !string.IsNullOrEmpty(Model.BottomRightSectionImage))
+                        {
+                            <a href="javascript:void(0)" class="BannerImageAboutUs" data-id="@Model.Id" data-image="BottomRightSectionImage" style="float:right;">Delete Image</a>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.BottomRightSectionImage) ? "http://placehold.it/372x227" : Url.Content("~/Uploads/Admin/AboutUsBanners/BottomRightSection/" + Model.BottomRightSectionImage) : "http://placehold.it/1300x830")" />
+                    </div>
+
+                    @Html.HiddenFor(model => model.BottomRightSectionImage)
+
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="btnSaveAboutUsPageContent" type="submit" style="margin-left: 15px !important;">
+                        Submit
+                    </button>
+                </div>
+                <br />
+            }
+
+
+        </div>
+
+
+    </div>
+</div>

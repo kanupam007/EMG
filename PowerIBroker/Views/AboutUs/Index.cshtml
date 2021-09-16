@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_LayoutFrontend.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    PowerIBrokerDataLayer.AboutUsPageContent content = ViewBag.AboutUsContent;
+
+}
+
+
+<!--inner pages section-->
+<div class="innerpagesSection">
+    <div class="PageName" style="background-image: url('@Url.Content("/Uploads/Admin/AboutUsBanners/Header/" + content.HeaderBanner + "")">
+        <div class="container">
+            <h1>@content.HeaderTitle</h1>
+        </div>
+    </div>
+    <!--about us-->
+    <!--about company-->
+    <div class="">
+        <div class="container">
+            @Html.Raw(content.HeaderContent)
+        </div>
+    </div>
+    <!--about company-->
+    <!--our mission-->
+    <div class="ourMission">
+        <div class="container">
+            @*<div class="inerMission">
+                    @Html.Raw(content.MiddleContent)
+
+                </div>*@
+            <!--three boxes-->
+            <div class="threeBox">
+                <div class="box1">
+                    <img src="Uploads/Admin/AboutUsBanners/BottomLeftSection/@content.BottomLeftSectionImage">
+                    <h1>@content.BottomLeftSectionTitle</h1>
+                    @Html.Raw(content.BottomLeftSectionContent)
+                </div>
+                <div class="box1">
+                    <img src="Uploads/Admin/AboutUsBanners/BottomMiddleSection/@content.BottomMiddleSectionImage">
+                    <h1>@content.BottomMiddleSectionTitle</h1>
+                    @Html.Raw(content.BottomMiddleSectionContent)
+                </div>
+                <div class="box1 last">
+                    <img src="Uploads/Admin/AboutUsBanners/BottomRightSection/@content.BottomRightSectionImage">
+                    <h1>@content.BottomRightSectionTitle</h1>
+                    @Html.Raw(content.BottomRightSectionContent)
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!--three boxes-->
+        </div>
+    </div>
+    <!--our mission-->
+    <!--about us-->
+
+</div>
+<!--inner pages section-->

@@ -1,0 +1,178 @@
+﻿@{
+    Layout = null;
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<link href="~/Content/Admin/css/style.css" rel="stylesheet" />
+<title>Test Database</title>
+@*<script type="text/jscript">
+  function disableContextMenu()
+  {
+    window.frames["fraDisabled"].document.oncontextmenu = function(){alert("No way!"); return false;};
+    // Or use this
+    // document.getElementById("fraDisabled").contentWindow.document.oncontextmenu = function(){alert("No way!"); return false;};;
+  }
+</script>
+
+
+<iframe id="fraDisabled" width="528" height="473" src="~/Areas/Company/Content/EmployeeForms/fw4.pdf" onload="disableContextMenu();" onMyLoad="disableContextMenu();"></iframe>*@
+<!--Script by -->
+<script type="text/javascript">
+@*<!-- Edit the message as your wish -->*@
+//var msg_box ="Right click disabled in this page"; function dis_rightclickIE(){
+
+//if (navigator.appName == 'Microsoft Internet Explorer' && (event.button == 2 || event.button == 3))
+//alert(msg_box)
+//}
+//function dis_rightclickNS(e){
+//if ((document.layers||document.getElementById&&!document.all) && (e.which==2||e.which==3))
+//{
+//alert(msg_box)
+//return false;
+//}
+//}
+//if (document.layers){
+//document.captureEvents(Event.MOUSEDOWN);
+//document.onmousedown=dis_rightclickNS;
+//}
+//else if (document.all&&!document.getElementById){
+//document.onmousedown=dis_rightclickIE;
+
+//}
+    //document.oncontextmenu=new Function("alert(msg_box);return false")
+
+
+    //$(function () {
+    //    $(this).bind("contextmenu", function (e) {
+    //        e.preventDefault();
+    //    });
+    //});
+
+
+    //$(document).ready(function () {
+    //    $(this).on('contextmenu', function (e) {
+    //        e.preventDefault();
+    //    });
+    //});
+
+    //$(document).ready(function () {
+    //    $('img').bind('contextmenu', function (e) {
+    //        return false;
+    //    });
+    //});
+
+    //$("body").on("contextmenu", function (e) {
+    //    return false;
+    //});
+
+   
+    //$(document).bind("contextmenu", function (e) {
+    //    e.preventDefault()
+    //});
+
+
+    //$('#imgediv').on('contextmenu', 'img', function (e) {
+    //    return false;
+    //});
+   
+
+    $(function () {
+        $(this).bind("contextmenu", function (e) {
+            e.preventDefault();
+        });
+    });
+
+    //$(function () {
+    //    $("#pdf").bind("contextmenu", function (e) {
+    //        e.preventDefault();
+    //    });
+    //});
+</script>
+
+<link href="~/Content/Admin/css/style.css" rel="stylesheet" />
+
+<style>
+    #pdf{
+        position:relative;
+       
+
+    }
+    #pdf:after{
+        position:absolute;
+        content:'';
+        width:calc(50% - 15px);
+        left:0; top:0; bottom:0; right:15px; z-index:999;
+    }
+
+   
+</style>
+
+<div>
+    @*<a href="~/Areas/Company/Content/EmployeeForms/fw4.pdf">~/Areas/Company/Content/EmployeeForms/fw4.pdf</a>*@
+
+    <div id="pdf"  >
+        <object width="50%" type="application/pdf" data="~/Areas/Company/Content/EmployeeForms/fw4.pdf#embedded=true&toolbar=0&navpanes=0" id="pdf_content">
+            @*<p>Insert your error message here, if the PDF cannot be displayed.</p>*@
+        </object>
+    </div>
+
+    @*<embed src="~/Areas/Company/Content/EmployeeForms/fw4.pdf#toolbar=0" width="500" height="375"> 
+    <embed src="files/Brochure.pdf" type="application/pdf" width="100%" height="600px" />*@
+
+    @*<embed src="~/Areas/Company/Content/EmployeeForms/fw4.pdf#toolbar=0&navpanes=0&scrollbar=0" type="application/pdf" width="100%" height="600px" />*@
+
+    @*<embed src=~/Areas/Company/Content/EmployeeForms/fw4.pdf#toolbar=0&navpanes=0&scrollbar=0" width="600" height="500" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">*@
+
+    @*$('#nearestStaticContainer').on('contextmenu', 'img', function(e){
+    return false;
+    });*@
+    <div id="imgediv" style="background-image: url(/cov.png); background-color: #cccccc; width:400px; height:300px;" >
+        @*<img src="https://www.enrollmygroup.com/Uploads/Admin/HomePageBanners/636947316156719791-636941100289761296-landingbanner.jpg" />*@
+
+        @*<img src="~/cov.png" />*@
+        @*<img src="~/cov.png" />*@
+        
+    </div>
+
+ 
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('img').bind('contextmenu', function (e) {
+            return false;
+        });
+    });
+</script>
+
+
+    @using (Html.BeginForm("Index", "DBTest", FormMethod.Post, new { @Id = "Form1" }))
+    {
+        <table>
+            <tr>
+                <td>
+                    User Name
+                </td>
+                <td>
+                    <input type="text" width="250px" name="txtUserName" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Password:
+                </td>
+                <td>
+                    <input type="Password" name="txtPassword" width="250px" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    <input type="submit" value="Login" />
+                </td>
+            </tr>
+        </table>
+    }

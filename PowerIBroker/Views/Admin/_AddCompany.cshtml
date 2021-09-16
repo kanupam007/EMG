@@ -1,0 +1,117 @@
+﻿@model  PowerIBroker.Areas.Broker.Models.Company
+@{
+    int i = 0;
+
+}
+
+@if (Model.Clients != null)
+{
+
+    foreach (var item in Model.Clients)
+    {
+        <div id="dynamicdiv_@i" data-index="@i" class="child_list_index box-body" style="border-bottom: 1px solid #d2d6dd;">
+            <div class="companyDiv">
+
+                @Html.HiddenFor(m => Model.Clients[i].ID, new { @class = "ID" })
+                @if (Model.Clients[i].ID != 0 && i > 0)
+                {
+                    if (Model.Clients[i].IsActive == true)
+                    {
+                        <div><a href="javascript:void(0)" class="btn btn-primary empStatus IsActive" data-val="true" data-isactive="0" data-id="@Model.Clients[i].ID">Deactivate</a></div> <br />
+                    }
+                    else
+                    {
+                        <div><a href="javascript:void(0)" class="btn btn-primary empStatus IsActive" data-val="false" data-isactive="1" data-id="@Model.Clients[i].ID">Deactivate</a></div> <br />
+                    }
+
+                }
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">First Name <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Clients[i].FirstName, new { placeholder = "First Name", @class = "FirstName form-control", @maxlength = 100 })
+                            @* @Html.ValidationMessageFor(m => Model.Clients[i].FirstName)*@
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Last Name <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Clients[i].LastName, new { placeholder = "Last Name", @class = "LastName form-control", @maxlength = 100 })
+                            @*@Html.ValidationMessageFor(m => Model.Clients[i].LastName)*@
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Clients[i].Email, new { placeholder = "Email", @class = "Email form-control emailChk", @maxlength = 100 })
+                            @*@Html.ValidationMessageFor(m => Model.Clients[i].Email)*@
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Administrator Type <span style="color:red;">*</span></label>
+
+                            @Html.DropDownListFor(m => Model.Clients[i].AdministratorType, new List<SelectListItem>{
+                                                       new SelectListItem{ Text="HR Administrator", Value = "0" },                                           
+                                                           new SelectListItem{ Text="HR Specialist", Value = "1" }},
+                                                             new { @class = "form-control", @id = "AdministratorType" })
+
+                            @*<select class="form-control select2" id="AdministratorType" name="AdministratorType">
+                                <option value="0">HR Administrator </option>
+                                <option value="1">HR Specialist</option>                              
+                            </select>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Work Phone <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Clients[i].WorkPhone, new { placeholder = "Work Phone", @class = "WorkPhone form-control phonemask" })
+                            @*@Html.ValidationMessageFor(m => Model.Clients[i].WorkPhone)*@
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile Phone</label>
+
+                            @Html.TextBoxFor(m => Model.Clients[i].Phone, new { placeholder = "Mobile Phone", @class = "Phone form-control phonemask phoneChk" })
+                            @*@Html.ValidationMessageFor(m => Model.Clients[i].Phone)*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div><a href="javascript:void(0)" class="btn btn-primary removeSec" data-index="@i" data-id="@Model.Clients[i].ID"> Remove Admin</a></div> <br />*@
+
+
+            @if ((ViewBag.addmore != 0 && ViewBag.addmore != null && i == 0))
+            {
+                <div><a href="javascript:void(0)" class="btn btn-primary removeSec" data-index="@i" data-id="@Model.Clients[i].ID"> Remove Admin</a></div> <br />
+            }
+            else
+            {
+                if (i > 0)
+                {
+                    <div><a href="javascript:void(0)" class="btn btn-primary removeSec" data-index="@i" data-id="@Model.Clients[i].ID"> Remove Admin</a></div> <br />
+                }
+
+            }
+
+
+
+
+        </div>
+            i++;
+    }
+}
+
+
+<br />
+

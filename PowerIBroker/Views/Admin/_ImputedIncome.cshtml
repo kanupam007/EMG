@@ -1,0 +1,30 @@
+﻿@using PowerIBrokerBusinessLayer
+
+<table id="tblAgeRangeLifeMaster" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th width="20%">Age Range</th>
+            <th width="20%">Monthly Rate Per Thousand</th>
+            <th width="20%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.ImputedIncome != null)
+        {
+
+            foreach (var ImputedIncome in ViewBag.ImputedIncome)
+            {
+                <tr>
+                    <td>@ImputedIncome.AgeStart-@ImputedIncome.AgeEnd </td>
+                    <td> @Helper.CurrencyFormat(@ImputedIncome.EmployeeValue, 1)  </td>
+                    <td>
+                        <a href="@Url.Action("EditImputedIncome", "Admin", new { @id = ImputedIncome.ID })" class="btn btn-primary btn-xs">Edit</a>
+                        <a data-exclude="true" href="javascript:void(0)" onclick="return DeleteImputedIncome(@ImputedIncome.ID);" class="btn btn-primary btn-xs" style="background-color:red;border-color:red;">Delete</a>
+                    </td>
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

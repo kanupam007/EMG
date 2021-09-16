@@ -1,0 +1,141 @@
+﻿@using PowerIBroker.Models;
+@{
+    ViewBag.Title = "Manage Employees";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<link href="~/Content/Admin/css/stylesheet.css" rel="stylesheet" />
+
+<style>
+    .checkWrapper {
+        position: relative;
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 5px 4px 0;
+    }
+
+    input[type='checkbox'] {
+        opacity: 0;
+        height: 16px;
+        width: 16px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        margin: 0;
+    }
+
+        input[type='checkbox'] + .bg {
+            height: 16px;
+            width: 16px;
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            border: 1px solid #898989;
+            background: #fff;
+            border-radius: 2px;
+        }
+
+        input[type='checkbox']:checked + .bg {            
+            background: #6bb8b7 url(/Areas/Employee/Content/images/check_icon.png) no-repeat center;
+            border: 1px solid #6bb8b7;
+        }
+</style>
+<script>
+    document.title = '@ViewBag.Title';
+</script>
+<!--Start of Right Part-->
+<div class="rightpart">
+
+    <div class="compTble-bot">
+        @using (Html.BeginForm("EditPermissions", "Admin", FormMethod.Post, new { Id = "formId" }))
+{
+    <input type="hidden" value="" id="AccessRightIds" name="AccessRightIds" />
+            <div class="searchBox" style="width: 50%; margin-left: 30%;margin-bottom: 30px;">
+                @if (ViewBag.Company != null)
+                {
+                    @Html.DropDownList("CompanyID", ViewBag.Company as SelectList, "Select Company", new { onchange = "GetData()" })
+                }
+                <br />
+                <span id="msgCompany" style="color:#a94442;"></span>
+            </div>
+            <div id="example1">
+                @Html.Partial("_EditPermissions")
+            </div>
+            <div class="box-footer">
+                <button type="button" id="btnSave" class="btn btn-primary">Save</button>
+            </div>
+        }
+
+
+
+    </div>
+</div>
+<script>
+    function GetData() {
+        ;
+        var value = $('#CompanyID').val();
+
+        $.ajax({
+            type: 'GET',
+            contentType: false,
+            url: '@Url.Action("_EditPermissions", "Admin")',
+            data: { CompanyID: value },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('#example1').html('');
+                $('#example1').html(data);
+
+            }
+        });
+    }
+
+    $('#btnSave').click(function (e) {
+        var selectedval = "";
+        var arr = $('input[name="AccessRightID"]:checked');
+        arr.each(function () {
+            ;
+            if (selectedval == "") {
+                selectedval = $(this).val();
+            }
+            else {
+                selectedval = selectedval + "," + $(this).val();
+            }
+          
+        });
+        $("#AccessRightIds").val(selectedval);
+        var isValid = true;
+        if ($('#CompanyID').val() == '') {
+            isValid = false;
+            $('#CompanyID').removeClass('custom-input-success').addClass('custom-input-error');
+            $("#msgCompany").text('Company is required');
+        }
+        else {
+            $('#CompanyID').removeClass('custom-input-error').addClass('custom-input-success');
+            $("#msgCompany").text('');
+        }
+
+
+        $("#CompanyID").change(function () {
+
+            if ($("#CompanyID").val() == "") {
+                isValid = false;
+                $('#CompanyID').removeClass('custom-input-success').addClass('custom-input-error');
+                $("#msgCompany").text('Company is required');
+            }
+            else {
+                $('#CompanyID').removeClass('custom-input-error').addClass('custom-input-success');
+                $("#msgCompany").text('');
+            }
+        });
+        if (isValid == false)
+            e.preventDefault();
+        else
+            $("#formId").submit();
+
+    });
+
+</script>

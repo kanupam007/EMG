@@ -1,0 +1,8 @@
+﻿@model  PowerIBroker.Areas.Broker.Models.CompanyBroker
+<div class="col-lg-6">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Broker Company Name<span style="color:red;"> *</span></label>
+        @Html.DropDownListFor(m => Model.Clients[0].ddlBrokerId, ViewBag.BrokerGet as SelectList, "Select", new { @class = "ddlBroker form-control", @id = "ddlBrokerId" })
+        @*@Html.ValidationMessageFor(m => Model.Clients[0].ddlBrokerId)*@
+    </div>
+</div>

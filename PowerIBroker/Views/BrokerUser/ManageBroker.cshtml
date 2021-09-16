@@ -1,0 +1,77 @@
+﻿@using PowerIBrokerDataLayer;
+@using PowerIBrokerBusinessLayer
+
+@{
+    ViewBag.Title = "AddBroker1";
+    Layout = "~/Views/Shared/_BrokerUser.cshtml";
+    PowerIBrokerEntities context = new PowerIBrokerEntities();
+    Comman objComman = new Comman();
+    long broker = (long)Session["BrokerId"];
+    var BrokerData = context.tblBrokers.Where(x => x.BrokerId == broker).FirstOrDefault();
+}
+<script src="/Content/Plugins/SweetAlert/sweetalert.min.js"></script>
+<link href="/Content/Plugins/SweetAlert/sweetalert.css" rel="stylesheet">
+<link href="/AdminContent/customcss/admincustomsweetpopups.css" rel="stylesheet">
+<script src="https://unpkg.com/jquery-input-mask-phone-number@1.0.15/dist/jquery-input-mask-phone-number.js"></script>
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/BrokerUser">Broker User</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Broker Company</li>
+        </ol>
+        <h6 class="slim-pagetitle">Manage Broker ADMINISTRATOR</h6>
+    </div><!-- slim-pageheader -->
+    
+
+
+
+    
+    @if (ViewBag.Clients != null && ViewBag.Clients.Count > 0)
+    {
+        <div class="section-wrapper">
+            <label class="section-title"> Broker User Details</label>
+            <input type="text" class="form-control col-lg-4 mg-b-10" style="float:right;" id="txtSearch" placeholder="Search">
+
+            <br />
+            <div class="table-responsive">
+                <table class="table mg-b-0">
+
+                    <tbody>
+                    <thead>
+                        <tr>
+                            <th class="wd-15p">First Name</th>
+                            <th class="wd-15p">Last Name</th>
+                            <th class="wd-10p">Email</th>
+                            <th class="wd-15p">Work Phone</th>
+                            <th class="wd-15p">Mobile Phone</th>
+                            @*<th>Status</th>*@
+                            <th class="wd-30p" style="text-align:center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="SubBrokerData">
+                        @foreach (var item in ViewBag.Clients)
+                        {
+                            <tr>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Email</td>
+                                <td>@(objComman.AddMasking(item.WorkPhone))</td>
+                                <td>@(objComman.AddMasking(item.Phone))</td>
+                                @*<td>@(item.IsActive ? "Active":"In-Active")</td>*@
+                                <td>
+                                    <a href="/Broker-Admin/AddBroker/@item.SubBrokerId" style="margin-bottom: 2px;" class="btn btn-primary btn-xs editSubBroker">Edit&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a href="javascript:void(0)" status="@item.IsActive.ToString()" style="margin-bottom: 2px;" onclick="BrokerActivateSuspend(this,@item.SubBrokerId);" class="btn btn-outline-@(item.IsActive ? "danger":"primary")  btn-xs SubBrokerStatus">@(item.IsActive ? "Suspend":"Activate")</a>
+                                    <a href="javascript:void(0)" style="margin-bottom: 2px;" onclick="BrokerDelete(this,@item.SubBrokerId);" class="btn btn-outline-danger btn-xs SubBrokerDeactivate">Delete&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    
+</div>
+
+<script src="~/Content/CustomScript/_AddBroker.js"></script>

@@ -1,0 +1,57 @@
+﻿@using PowerIBrokerBusinessLayer;
+@{
+    List<PowerIBrokerDataLayer.CompanyMaster> obj = ViewBag.CompanyData;
+}
+
+@if (ViewBag.CompanyData.Count == 0)
+{
+    <style>
+        #tblBrokerCompany_info, #tblBrokerCompany_paginate {
+            display: none;
+        }
+    </style>
+}
+<div style="margin-top: 10px;">
+    <fieldset>
+        <legend>Broker Company</legend>
+    </fieldset>
+    <table id="tblBrokerCompany" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th width="30%">Company Name</th>
+                <th width="10%">Employee</th>
+                <th width="10%">OE</th>
+                <th width="15%">LE</th>
+                <th width="10%">Status</th>
+                <th width="20%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in obj)
+            {
+                CompanyManagement objClientMngmt = new CompanyManagement();
+                var details = objClientMngmt.GetOpenEnrolment(item.ID);
+                var lyfevnts = objClientMngmt.GetLifeChangeEvents(item.ID);
+
+                long eID = item.tblCompany_Employee_BasicInfo.Where(a => a.CompanyId == item.ID).OrderByDescending(a => a.ID).FirstOrDefault().ID;
+                <tr>
+                    <td>@item.CCompanyName</td>
+                    <td>@item.tblCompany_Employee_BasicInfo.Where(a => a.CompanyId == item.ID).Count()</td>
+                    <td>@details.Count</td>
+                    <td>@lyfevnts.Count</td>
+                    <td>@(item.IsActive == true ? "Active" : "In-Active")</td>
+                    <td>
+                        <a title="Access Company" class="btn-warning btn-sm" href="@Url.Action("AccessCompany", "Broker", new { @AdminCompanyid = item.ID, @EmpId = eID })">Access Company</a>
+
+
+                    </td>
+
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+</div>

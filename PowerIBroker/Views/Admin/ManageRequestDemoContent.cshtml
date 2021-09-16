@@ -1,0 +1,72 @@
+﻿@model PowerIBrokerDataLayer.RequestDemoContent
+@{
+    ViewBag.Title = "ManageRequestDemoContent";
+   Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div>
+
+        </div>
+        <div class="col-lg-12">
+            <h2>Manage Request Demo</h2>
+
+            <div class="@(TempData["CustomMessageMRDC"] != null ? TempData["MessageTypeMRDC"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                @if (TempData["CustomMessageMRDC"] != null)
+                {
+                    <i class="fa @(TempData["MessageTypeMRDC"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                }
+                <span>@TempData["CustomMessageMRDC"]</span>
+            </div>
+
+            @using (Html.BeginForm("ManageRequestDemoContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label>Title</label>
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Title" })
+                    <p class="help-block">Example Title here.</p>
+                </div>
+                 <div class="form-group">
+                <label>Banner Image (min:1500x591)</label>
+                     <input type="file" id="file" name="files" onchange="showfilepreview(this, 'requestDemoBanner')">
+                    
+                </div>
+                   <div class="form-group">
+                       <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.BackgroundImage) ? "http://placehold.it/1500x591" : Url.Content("~/Uploads/Admin/RequestDemoBackgrounds/" + Model.BackgroundImage) : "http://placehold.it/1500x591")" />
+                    </div>
+                <div class="form-group">
+                    <label>Video (.mp4)</label>
+                    <input type="file" id="video" name="files" onchange="checkVideoFile(this,'mp4')">
+
+                </div>
+                @*<div class="form-group">
+                    <label>Video (.ogv)</label>
+                    <input type="file" name="videos" onchange="checkVideoFile(this,'ogv')">
+
+                </div>*@
+                <div class="form-group">
+                    <label>Description</label>
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "3", placeholder = "Header Text" })
+                    <p class="help-block">optional</p>
+                </div>
+                
+                @*<div class="form-group">
+                    <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.Banner) ? "http://placehold.it/1300x830" : "/Uploads/Admin/HomePageBanners/" + Model.Banner : "http://placehold.it/1300x830")" />
+                </div>*@
+                
+                @Html.HiddenFor(model => model.BackgroundImage)
+                @Html.HiddenFor(model => model.Video)
+               
+                <button class="btn btn-primary btn-lg" id="btnSaveRequestDemoPageContent" type="submit">Submit</button>
+            }
+
+
+        </div>
+
+
+    </div>
+</div>
+

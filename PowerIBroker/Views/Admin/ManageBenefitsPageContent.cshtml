@@ -1,0 +1,171 @@
+﻿@model PowerIBrokerDataLayer.BenefitsPageContent
+
+@{
+    ViewBag.Title = "ManageBenefitsPageContent";
+   Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/ckeditor.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/ckeditor/adapters/jquery.js")"></script>
+<style>
+    .clear{
+        margin:15px;
+    }
+    .txtArea{
+
+    }
+</style>
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div>
+
+        </div>
+        <div class="col-lg-12">
+            <h2>Manage Benefits</h2>
+            <div class="@(TempData["CustomMessageMPBC"] != null ? TempData["MessageTypeMPBC"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                @if (TempData["CustomMessageMPBC"] != null)
+                {
+                    <i class="fa @(TempData["MessageTypeMPBC"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                }
+                <span>@TempData["CustomMessageMPBC"]</span>
+            </div>
+@using (Html.BeginForm("ManageBenefitsPageContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data"}))
+                        {
+            <div class="form-group">
+                <label>Background Image (min:1500x603)</label>
+                <input type="file" id="file" name="file" onchange="showfilepreview(this, 'benefitsBanner')">
+
+            </div>
+            <div class="form-group">
+                <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.BackgroundImage) ? "http://placehold.it/1500x603" : Url.Content("~/Uploads/Admin/BenefitsBackground/" + Model.BackgroundImage) : "http://placehold.it/1500x603")" />
+               
+            </div>
+            <div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#brokerBenefits" aria-controls="home" role="tab" data-toggle="tab">Benefits for Broker</a></li>
+                    <li role="presentation"><a href="#clientBenefits" aria-controls="profile" role="tab" data-toggle="tab">Benefits for Client</a></li>
+                   
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="brokerBenefits">
+                        
+                        <div class="clear"></div>
+                        
+                            <div class="col-lg-6">
+                            <div class="form-group">
+                            <label>Left Content</label>
+
+                                     @Html.TextAreaFor(model => model.LeftContentForBroker, new { @class = "form-control ckeditor", @cols = "30", @rows = "10" })
+                                    <p class="help-block">Left Content here.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Right Content</label>
+                               
+                                @Html.TextAreaFor(model => model.RightContentForBroker, new {  @class = "form-control ckeditor", @cols = "30", @rows = "10" })
+                                <p class="help-block">Right Content here.</p>
+                            </div>
+                                </div>
+                            
+                             @Html.Hidden("BackgroundImage")
+                            <input type="hidden" name="BenefitsFor" value="true">
+                           
+                        
+
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="clientBenefits">
+                        <div class="clear"></div>
+
+                       
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Left Content</label>
+                                 
+                                    @Html.TextAreaFor(model => model.LeftContentForClient, new { @class = "form-control ckeditor", @cols = "30", @rows = "10" })
+                                    <p class="help-block">Left Content here.</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Right Content</label>
+                                   
+                                  
+                                    @Html.TextAreaFor(model => model.RightContentForClient, new { @class = "form-control ckeditor", @cols = "30", @rows = "10" })
+                                    <p class="help-block">Right Content here.</p>
+                                </div>
+                            </div>
+                        @Html.Hidden("BackgroundImage")
+                                               <input type="hidden" name="BenefitsFor" value="false">
+                             
+                        
+
+                    </div>
+                   
+                </div>
+                <div class="form-group">
+                   
+                    <button class="btn btn-primary btn-lg" id="btnSaveBenefitsPageContent" type="submit">Submit</button>
+                </div>
+            </div>
+}
+
+
+
+           
+
+
+        </div>
+
+
+    </div>
+</div>
+@*<script type='text/javascript'>
+    //<![CDATA[
+    $(function () {
+        $('.txtArea').summernote({ height: 300 });
+        var LeftContentForBroker = '@Html.Raw(Model.LeftContentForBroker)';
+        var RightContentForBroker = '@Html.Raw(Model.RightContentForBroker)';
+        var LeftContentForClient = '@Html.Raw(Model.LeftContentForClient)';
+        var RightContentForClient = '@Html.Raw(Model.RightContentForClient)';
+       
+        $("#snleftContentForBroker").next("div.note-editor").children("div.note-editable").html($(LeftContentForBroker));
+        $("#snrightContentForBroker").next("div.note-editor").children("div.note-editable").html($(RightContentForBroker));
+        $("#snleftContentForClient").next("div.note-editor").children("div.note-editable").html($(LeftContentForClient));
+        $("#snrightContentForClient").next("div.note-editor").children("div.note-editable").html($(RightContentForClient));
+
+
+        $(".summernote").code("your text");
+        $('.txtArea').each(function () {
+             
+            $(this).next("div.note-editor").children("div.note-editable").on('paste', function () {
+                
+                var html = $(this).html();
+                $(this).parent("div.note-editor").next("input").val(html);
+                $(this).val($(this).html());
+            })
+            $(this).next("div.note-editor").children("div.note-editable").keydown(function () {
+                
+                var html = $(this).html();
+                $(this).parent("div.note-editor").next("input").val(html);
+                $(this).val($(this).html());
+            });
+
+
+          
+
+
+        });
+    });//]]>
+    
+
+
+</script>*@
+

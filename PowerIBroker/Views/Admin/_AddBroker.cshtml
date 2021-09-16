@@ -1,0 +1,58 @@
+﻿@model  PowerIBroker.Areas.Broker.Models.CompanyBroker
+@{
+    int i = 0;
+}
+@if (Model.Clients != null)
+{
+    foreach (var item in Model.Clients)
+    {
+        <div id="dynamicdiv_@i" data-index="@i" class="child_list_index box-body">
+            <div class="brokerDiv">
+                @Html.HiddenFor(m => Model.Clients[i].BrokerId, new { @class = "ID" })
+                <div class="clearfix">
+                    <div id="DropdownBrokerCompany">
+                        @Html.Action("_DropdownBrokerCompany", "Admin")
+                    </div>
+
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">First Name <span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => Model.Clients[i].FirstName, new { placeholder = "First Name", @class = "BFirstName form-control" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Last Name</label>
+                            @Html.TextBoxFor(m => Model.Clients[i].LastName, new { placeholder = "Last Name", @class = "BLastName form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email <span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => Model.Clients[i].Email, new { placeholder = "Email", @class = "BEmail form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Work Phone</label>
+                            @Html.TextBoxFor(m => Model.Clients[i].WorkPhone, new { placeholder = "Work Phone", @class = "BWorkPhone form-control phonemask" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile Phone</label>
+                            @Html.TextBoxFor(m => Model.Clients[i].Phone, new { placeholder = "Mobile Phone", @class = "BPhone form-control phonemask" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        i++;
+    }
+}

@@ -1,0 +1,61 @@
+﻿body {
+}
+
+.confirm {
+    background-color: #dd4b39 !important;
+    float: left !important;
+}
+
+.cancel {
+    float: right !important;
+}
+
+.sweet-alert {
+    width: 345px !important;
+    margin-left: -157px !important;
+}
+
+    .sweet-alert button.cancel {
+        margin-right: 26px !important;
+    }
+
+    .sweet-alert button {
+        padding: 4px 25px !important;
+        margin: 20px 12px -6px 2px !important;
+    }
+
+    .sweet-alert p {
+        font-size: 14px !important;
+    }
+    #LoadMain {
+        position: fixed;
+        background-color: rgba(0,0,0,.6);
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 5;
+        display: none;
+    }
+
+    .not-active {
+        pointer-events: none;
+        cursor: default;
+        text-decoration: none;
+        color: black;
+        border: 1px solid #c1c1c1;
+        background-color: #eeeeee;
+        color: black;
+    }
+
+    .loader {
+        position: relative;
+    }
+
+    .ajax-loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -32px; /* -1 * image width / 2 */
+        margin-top: -32px; /* -1 * image height / 2 */
+    }

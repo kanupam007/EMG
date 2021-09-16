@@ -1,0 +1,204 @@
+﻿@model PowerIBroker.Models.EnquiryForm
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_LayoutFrontend.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    PowerIBrokerDataLayer.ContactUsPageContent ContactUsContent = ViewBag.ContactUsContent;
+}
+<style>
+    .gm-style-iw div div {
+        padding: 20px 0 40px 20px;
+    }
+
+        .gm-style-iw div div span {
+            margin-top: 20px;
+            position: absolute;
+            font-size: 12px;
+        }
+
+        .gm-style-iw div div strong {
+            font-size: 14px;
+        }
+</style>
+
+@*<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>*@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    // Validate Captcha
+        function onSubmit(token) {
+            $.ajax({
+                type: "POST",
+                url: "/UserLogin/ValidateCaptcha",
+                data: "{response: '" + token + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (captchaResponse) {
+                    if (captchaResponse.Success) {
+                        $("#ContactUsformsubmit").submit();
+                    } else {
+                    }
+                }
+            });
+       }
+</script>
+
+
+@*<script type="text/javascript">
+
+        var geocoder = new google.maps.Geocoder();
+        var address = '@ContactUsContent.Address';
+        var latitude;
+        var longitude;
+        geocoder.geocode({ 'address': address }, function (results, status) {
+
+            if (status == google.maps.GeocoderStatus.OK) {
+                latitude = results[0].geometry.location.lat();
+                longitude = results[0].geometry.location.lng();
+
+            }
+        });
+        function init_map() {
+            var myOptions = {
+                zoom: 8,
+                center: new google.maps.LatLng(latitude, longitude),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+            marker = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(latitude, longitude)
+            });
+            infowindow = new google.maps.InfoWindow({
+                content: '<strong>' + '@ContactUsContent.Address' + '</strong><br><span>' + '@ContactUsContent.Address' + '</span><br> <br>'
+
+            });
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+            });
+            infowindow.open(map, marker);
+        }
+        setTimeout(function () {
+            google.maps.event.addDomListener(window, 'load', init_map);
+        }, 500);
+
+    </script>*@
+
+<!--inner pages section-->
+<div class="innerpagesSection">
+    <div class="PageName" style="background-image: url('@Url.Content("Uploads/Admin/ContactUsBanners/" + ContactUsContent.Banner + "")">
+        <div class="container">
+            <h1>@ContactUsContent.Title</h1>
+        </div>
+    </div>
+    <div class="termCon contactusCon">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <!--map-->
+            @*<div class="mapCon" style='overflow:hidden;height:300px;width:100%;'>
+                    <div id='gmap_canvas' style='height: 300px; width: 100%;'></div>
+                    <style>
+                        #gmap_canvas img {
+                            max-width: none !important;
+                            background: none !important;
+                        }
+                    </style>
+                </div>*@
+            @*<div class="mapCon"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.411829284834!2d-73.984234!3d40.752966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259aa8bb2f78b%3A0x230392161e40d348!2s54+@ContactUsContent.Address%2C+USA!5e0!3m2!1sen!2sin!4v1439812890950" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe></div>*@
+            <!--map-->
+        </div>
+
+        <!--contact form-->
+        <div class="contactForm">
+            <div class="container">
+                <div class="leftTxt">
+                    <div class="contactbx">
+                        <h2 class="phone2">Phone</h2>
+                        <strong><span>Toll Free:</span>@(ContactUsContent.TollFree == null ? "XXX-XXX-XXXX" : ContactUsContent.TollFree)</strong>
+                        <strong><span>Direct:</span> @(ContactUsContent.Direct == null ? "XXX-XXX-XXXX" : ContactUsContent.Direct)</strong>
+                     
+                    </div>
+
+                    <div class="contactbx">
+                        <h2 class="salesHours">Sales Hours(EST)</h2>
+                        <strong>@(ContactUsContent.SalesHoursOpened == null ? "N/A" : ContactUsContent.SalesHoursOpened)</strong>
+                        <strong>Closed - @(ContactUsContent.SalesHoursClosed == null ? "N/A" : ContactUsContent.SalesHoursClosed)</strong>
+                    </div>
+
+                    <div class="contactbx">
+                        <h2 class="address">Address:</h2>
+                        <strong>@(ContactUsContent.Address == null ? "N/A" : ContactUsContent.Address)</strong>
+                    </div>
+
+                    <div class="contactbx mailbx">
+                        <h2 class="emails">Electronic mail</h2>
+                        <strong><a href="mailto:@(ContactUsContent.Email)">@ContactUsContent.Email</a></strong>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="rightForm">
+                    @*<div class="formbox">
+                    
+                        @using (Html.BeginForm("Index", "Contact", FormMethod.Post, new { id = "ContactUsformsubmit" }))
+                        {
+                            <ul>
+
+                                <li>
+                                    @Html.TextBoxFor(model => model.ContactUsName, new { @class = "searchInput", placeholder = "Name" })
+                                </li>
+
+                                <li>
+                                    @Html.TextBoxFor(model => model.ContactUsEmail, new { @class = "searchInput", placeholder = "Email" })
+                                </li>
+                                <li>
+                                    @Html.TextBoxFor(model => model.ContactUsPhone, new { @class = "searchInput", placeholder = "Phone Number" })
+                                </li>
+
+                                <li>
+                                    @Html.TextAreaFor(model => model.Query, new { @class = "searchInput", cols = "10", placeholder = "How can we help?" })
+                                </li>
+                                <li>                               
+
+                                    @if (ViewBag.IsCpatcha == true)
+                                    {                                       
+                                        <div class="g-recaptcha" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["recaptchaPublicKey"]"></div>
+                                        <br />
+                                        <input type="submit" value="submit" class="submitBtn" id="btnContactUs" />
+                                    }
+                                    else
+                                    {
+                                        <input type="submit" value="submit" class="submitBtn" id="btnContactUs" />
+                                    }
+
+
+                                </li>
+
+                            </ul>
+
+                        }
+                    </div>*@
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!--contact form-->
+    </div>
+
+</div>
+<!--inner pages section-->
+<script>
+    $(document).ready(function () {
+
+        if ('@TempData["MessageTypeCont"]' == "error") {
+            swal("Some error occurred while processing the request. Please try again");
+            return false;
+        }
+        if ('@TempData["MessageTypeCont"]' == "success") {
+            swal("Thank you for contacting us. We will contact you soon.");
+            return false;
+        }
+    });
+</script>

@@ -1,0 +1,210 @@
+﻿@model PowerIBrokerDataLayer.EMG_SH16
+@{
+    ViewBag.Title = "SH 16";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+<link href="~/Content/Admin/css/Admin.css" rel="stylesheet" />
+@*<div class="content-wrapper" style="min-height: 960px;">*@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        SH 16
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin/Dashboard"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active">SH 16</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">SH 16 Master</h3>
+
+                </div><!-- /.box-header -->
+                <div class="@(TempData["CustomMessageSH16"] != null ? TempData["MessageTypeSH16"] == "Success" ? "success-msg" : "error-msg" : "")">
+                    @if (TempData["CustomMessageSH16"] != null)
+                    {
+                        <i class="fa @(TempData["MessageTypeSH16"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+
+                    }
+                    <span>@TempData["CustomMessageSH16"]</span>
+
+                </div>
+
+                @using (Html.BeginForm("SH16", "Admin", FormMethod.Post, new { Id = "formId" }))
+                {
+                    @Html.HiddenFor(model => model.ID)
+                    <div class="box-body">
+
+                        <form role="form">
+                            <div class="box-body">
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Enter SH 16</label>
+                                        @*<input type="text" class="form-control" placeholder="Enter Plan Category" maxlength="50">*@
+
+                                        @Html.TextBoxFor(model => model.SHName, new { @class = "form-control", placeholder = "SH 16", id = "SH16", maxlength = "48" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Enter Code Name</label>
+                                        @*<input type="text" class="form-control" placeholder="Enter Plan Category" maxlength="50">*@
+
+                                        @Html.TextAreaFor(model => model.Name, new { @class = "form-control", placeholder = "Name", id = "name" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Enter Description</label>
+                                        @*<input type="text" class="form-control" placeholder="Enter Plan Category" maxlength="50">*@
+
+                                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = "Description", id = "Description" })
+                                    </div>
+                                </div>
+                            </div><!-- /.box-body -->
+
+                            <div class="col-lg-3" style="margin-left:30px">
+                                <div class="checkbox">
+                                    @Html.CheckBox("IsActive", new { @class = "checkBx" })
+                                    <label style="margin-left:0px">Active</label>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="button" id="btnSave" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        <br /><br /><br />
+                        <!-- Main content -->
+                        <section class="content">
+                            <!-- Info boxes -->
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+                                    <div class="box">
+                                        <div class="box-header">
+
+                                            <h3 class="box-title">SH 16 Master- List</h3>
+                                            <input type="checkbox" id="value" onclick="GetData()" style="float:right;margin-right:140px" />
+                                            <label style="float:right;margin-right:10px">Show Deleted Records</label>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+
+                                            @if (ViewBag.SH16.Count > 0)
+                                            {
+                                                @Html.Partial("_SH16");
+                                            }
+                                            else
+                                            {
+                                                <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                                            }
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box-footer -->
+
+                                </div><!-- /.col -->
+                            </div>
+
+                        </section><!-- /.content -->
+
+
+                    </div><!-- ./box-body -->
+
+                }
+                <!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+
+</section><!-- /.content -->
+@*</div>*@
+@*<script src="~/Scripts/jquery-1.8.2.js"></script>*@
+<script type="text/javascript">
+    $('#btnSave').click(function (e) {
+
+        var isValid = true;
+        if ($.trim($('#SH16').val()) == '') {
+            isValid = false;
+            $('#SH16').removeClass('custom-input-success').addClass('custom-input-error');
+            $('#SH16').keypress(function () {
+                $('#SH16').removeClass('custom-input-error').addClass('custom-input-success');
+            });
+
+        }
+        if (isValid == false)
+            e.preventDefault();
+        else
+            $("#formId").submit();
+    });
+
+</script>
+
+<script>
+
+    function DeleteSH16(id) {
+
+        swal({
+            title: "",
+            text: "Are you sure to delete this SH 16?",
+            //type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "#f27474",
+            confirmButtonText: "Yes",
+            cancelButtonText: "Cancel",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        },
+function (isConfirm) {
+    if (isConfirm) {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/DeleteSH16",
+            data: "{'EnrollId':'" + id + "'}",
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+
+                location.reload(true);
+            }
+        });
+    }
+})
+
+    }
+
+</script>
+
+<script>
+    function GetData() {
+
+        var value = $('#value').prop('checked');
+        if (value == true) {
+            value = "1";
+        }
+        else {
+            value = "0";
+        }
+        $.ajax({
+            type: 'GET',
+            contentType: false,
+            url: '@Url.Action("GetDeletedSH16", "Admin")',
+            data: { value: value },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('#example1').html('');
+                $('#example1').html(data);
+
+            }
+        });
+    }
+</script>

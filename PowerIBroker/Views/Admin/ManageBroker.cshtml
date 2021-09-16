@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Manage Broker";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<style>
+    #tblBrokerMaster_length {
+        display: none;
+    }
+</style>
+
+<link href="~/AdminContent/plugins/datatables/jquery.dataTables.css" rel="stylesheet" />
+<script src="~/AdminContent/plugins/datatables/jquery.dataTables.min.js"></script>
+
+
+<section class="content">
+
+
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="box-body">
+           
+                    <div class="box-header">
+                        <a href="@Url.Action("AddBroker","Admin")" style="float:right;" class="btn btn-primary">+ Add Broker</a>
+
+                    </div>
+                    @if (ViewBag.BrokerMaster.Count > 0)
+                    {
+                        <table id="tblBrokerMaster" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th width="20%">Name</th>
+                                    <th width="20%">Email</th>
+                                    <th width="20%">Phone</th>
+                                    <th width="10%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (ViewBag.BrokerMaster != null)
+                            {
+
+                                foreach (var brokerMaster in ViewBag.BrokerMaster)
+                                {
+                                <tr>
+                                    <td>@brokerMaster.FirstName @brokerMaster.LastName</td>
+                                    <td>@brokerMaster.Email</td>
+                                    <td>@brokerMaster.Phone</td>
+                                    <td>
+                                        <a href="@Url.Action("AddBroker", "Admin", new { @ID = @brokerMaster.BrokerId })" class="btn btn-primary btn-xs">Edit</a>
+                                    </td>
+
+                                </tr>
+                                }
+                            }
+
+
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                    }
+           
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $('#tblBrokerMaster').DataTable({
+        columns: [
+        { title: "Name" },
+        { title: "Email" },
+        { title: "Phone" },
+        { title: "Action", "orderable": false },
+        ]
+
+    });
+</script>

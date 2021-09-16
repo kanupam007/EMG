@@ -1,0 +1,85 @@
+﻿@using PowerIBrokerDataLayer
+@using PowerIBrokerBusinessLayer
+@using PowerIBrokerBusinessLayer.Company
+@{
+    PowerIBrokerEntities context = new PowerIBrokerEntities();
+    ViewBag.Title = "ManageClient";
+    Layout = "~/Views/Shared/_BrokerUser.cshtml";
+    long id = (long)Session["BrokerId"];
+    long Sid = (long)Session["SubBrokerId"];
+    var ObjClient = context.CompanyMasters.Where(s => s.BrokerId == id).ToList();
+    CommonMasters cmm = new CommonMasters();
+    OpenEnrollment objopnEroll = new OpenEnrollment();
+    //List<sp_GetMedicalDentalVision1_Result> ObjS = cmm.GetDentalVision1();
+    //List<sp_GetMedicalDentalVision_Result> ObjS = cmm.GetDentalVision();
+    //var dentalmedicaldata = context.vw
+}
+
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/BrokerUser">Broker User</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Registered Companies</li>
+        </ol>
+        <h6 class="slim-pagetitle">Registered Companies</h6>
+    </div><!-- slim-pageheader -->
+
+    <div class="section-wrapper">
+        @*<label class="section-title">Registered Companies</label>*@
+        @*<p class="mg-b-20 mg-sm-b-40">Using the most basic table markup.</p>*@
+
+        <div class="table-responsive">
+            <table class="table mg-b-0 datatable">
+                <thead>
+                    <tr>
+                        <th width="35%"><a href="#">Company</a></th>
+
+                        <th width="10%" style="text-align:center">Employee</th>
+                        <th width="10%" style="text-align:center">Medical</th>
+                        <th width="10%" style="text-align:center">Dental</th>
+                        <th width="10%" style="text-align:center">Vision</th>
+                        <th width="10%" style="text-align:center"><a href="#">Status</a> </th>
+                        <th width="15%" style="text-align:center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ObjClient)
+                    {
+                        if ((context.BrokerUserAssigns).Where(Bu => Bu.SubBrokerId == Sid && Bu.BrokerId == id && Bu.Status.Value && Bu.CompanyId == item.ID).Any())
+                        {
+                            long eID = 0;
+                            var data = context.tblCompany_Employee_BasicInfo.Where(a => a.CompanyId == item.ID).OrderByDescending(a => a.ID).ToList();
+                            if (data != null && data.Count > 0)
+                            {
+                                eID = data.FirstOrDefault().ID;
+                                var plan = objopnEroll.GetHealthCarePlanReport(item.ID, 0, 0, 0, 0);
+                                var medical = plan.Where(x => x.PlanType == "Medical").ToList();
+                                var dental = plan.Where(x => x.PlanType == "Dental").ToList();
+                                var vision = plan.Where(x => x.PlanType == "Vision").ToList();
+                                <tr>
+                                    <td class="pdL">@item.CCompanyName</td>
+                                    <td style="text-align:center"><a title="Edit" href="#">@context.tblCompany_Employee_BasicInfo.Where(x => x.IsActive && x.CompanyId == item.ID && !x.IsTerminate).Count()</a></td>
+                                    <td style="text-align:center"><a title="Edit" href="#">@(medical != null&& medical.Count>0? medical.Count : 0)</a></td>
+                                    <td style="text-align:center"><a title="Edit" href="#">@(dental != null&& dental.Count>0? dental.Count : 0)</a></td>
+                                    <td style="text-align:center"><a title="Edit" href="#">@(vision != null&& vision.Count>0? vision.Count : 0)</a></td>
+                                    <td style="text-align:center">@(item.IsActive?"Active":"In-Active")</td>
+                                    <td class="grey" style="text-align:right">
+                                        <a title="Edit" style="margin-bottom: 2px;" class="btn btn-outline-primary mg-b-10" href="/BrokerUser/CreateCompany/@item.ID">Edit </a>
+                                        <a title="Access Company" style="margin-bottom: 2px;" class="btn btn-primary mg-b-10" href="/BrokerUser/AccessCompany?AdminCompanyid=@item.ID&EmpId=@eID">Access</a>
+
+                                    </td>
+                                </tr>
+
+                            }
+
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div><!-- table-responsive -->
+    </div><!-- section-wrapper -->
+
+
+
+</div>

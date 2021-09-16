@@ -1,0 +1,69 @@
+﻿@using PowerIBrokerBusinessLayer;
+
+@if (ViewBag.Clients.Count == 0)
+{
+    <style>
+        #tblsubbrokeruser_info, #tblsubbrokeruser_paginate {
+            display: none;
+        }
+    </style>
+}
+@if (ViewBag.Clients != null)
+{
+    <table id="tblsubbrokeruser" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th width="15%">First Name</th>
+                <th width="15%">Last Name</th>
+                <th width="15%">Email</th>
+                <th width="10%">Work Phone</th>
+                <th width="10%">Mobile Phone</th>
+                <th width="5%">Status</th>
+                <th width="15%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var item in ViewBag.Clients)
+            {
+                <tr>
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@Helper.CurrencyFormat(Convert.ToString(item.WorkPhone), 0, "", "Phone")</td>
+                    <td>@Helper.CurrencyFormat(Convert.ToString(item.Phone), 0, "", "Phone")</td>
+                    <td>@(item.IsActive == true ? "Active" : "In-Active")</td>
+                    @*<td><a href="javascript:void(0)" data-id="@item.SubBrokerId" data-status="@item.IsActive" class="SubBrokerStatus">@(item.IsActive == true ? "Active" : "In-Active")</a></td>*@
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs editSubBroker" data-id="@item.SubBrokerId" data-toggle="modal">Edit</a>
+                        <a href="javascript:void(0)" data-id="@item.SubBrokerId" data-status="@item.IsActive" data-brokerid="@item.BrokerId" class="@(item.IsActive == true ? "btn btn-danger btn-xs SubBrokerStatus" : "btn btn-primary btn-xs SubBrokerStatus")">@(item.IsActive == true ? "Suspend" : "Activate")</a>
+                        <a href="javascript:void(0)" data-id="@item.SubBrokerId" class="btn btn-danger btn-xs SubBrokerDeactivate">Delete</a>
+
+
+
+                    </td>
+
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+}
+
+<script>
+    $('#tblsubbrokeruser').DataTable({
+        columns: [
+        { title: "First Name" },
+        { title: "Last Name" },
+        { title: "Email" },
+       { title: "Work Phone" },
+        { title: "Mobile Phone" },
+           { title: "Status" },
+        { title: "Action", "orderable": false },
+        ]
+
+    });
+</script>

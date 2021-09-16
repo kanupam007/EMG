@@ -1,0 +1,44 @@
+﻿@using PowerIBrokerBusinessLayer;
+@{
+
+}
+<div style="margin-top: 10px;">
+    <fieldset>
+        <legend>Employee List</legend>
+    </fieldset>
+
+    <table id="tblBrokerCompanyEmployee" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td><input type="checkbox" id="select_all"></td>
+                <th width="30%">Employee Name</th>
+                <th width="10%">Location</th>
+                <th width="10%">Department</th>
+                <th width="15%">Email</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in ViewBag.Employee)
+            {
+
+            <tr>
+                <td class="pdL"> <input type="checkbox" name="empChk" value="@item.Id" class="checkbox" /></td>
+                <td>@item.EmpName</td>
+                <td>@item.Location</td>
+                <td>@item.Department</td>
+                <td>@item.Email</td>
+            </tr>
+            }
+
+        </tbody>
+
+    </table>
+    @if (ViewBag.Employee.Count > 0)
+    {
+        <button type="button" class="btn btn-primary" onclick="SendMailonCompanyEmployees()">Send Mail</button>
+    }
+
+</div>
+

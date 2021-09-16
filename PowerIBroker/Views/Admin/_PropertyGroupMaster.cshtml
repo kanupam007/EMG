@@ -1,0 +1,39 @@
+﻿<table id="tblProperyGroupMaster" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <td width="25%">Plan Category Name</td>
+                <td width="25%">Property Group</td>
+                <td width="15%">Sequence</td>
+                <td width="15%" style="font:bold;">Status</td>             
+                <th width="20%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.PropertyGroupMaster != null)
+            {
+
+                foreach (var propertyGroupMaster in ViewBag.PropertyGroupMaster)
+                {
+                    <tr>
+                        <td>@propertyGroupMaster.EMG_PlanCategory.PlanCategory</td>
+                        <td>@propertyGroupMaster.PropertyGroupName</td>
+                        <td>@propertyGroupMaster.SortOrder</td>
+                        <td>
+                            @(propertyGroupMaster.IsActive == true ? "Active" : "Inactive")
+
+                        </td>
+                        <td>
+                            <a href="@Url.Action("EditPropertyGroupMaster", "Admin", new { @id = propertyGroupMaster.GroupId })" class="btn btn-primary btn-xs">Edit</a>
+                              <a data-exclude="true" href="javascript:void(0)" onclick="return DeletePropertyGroupMaster(@propertyGroupMaster.GroupId);" class="btn btn-primary btn-xs" style="background-color:red;border-color:red;display:none;">Inactive</a>
+                         
+
+
+                        </td>
+
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+

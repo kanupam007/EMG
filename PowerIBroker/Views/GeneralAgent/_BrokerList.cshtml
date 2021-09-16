@@ -1,0 +1,49 @@
+﻿@using PowerIBrokerDataLayer
+@using PowerIBrokerBusinessLayer
+@using PowerIBroker.Areas.Broker.Models
+@{ 
+    CommonMasters cmm = new CommonMasters();
+    Comman objComman = new Comman();
+    int broker = Request.QueryString["broker"]==null?0:Convert.ToInt32(Request.QueryString["broker"]);
+    int ID = Request.QueryString["ID"] == null ? 0 : Convert.ToInt32(Request.QueryString["ID"]);
+    List<BrokerUserAssignModel> ObjS = cmm.GetGenAgentMasterCompany(0, broker, ID);
+}
+
+<table class="table mg-b-0" id="datatable">
+    <thead>
+        <tr>
+            <th class="wd-15p">First name</th>
+            <th class="wd-15p">Last name</th>
+            <th class="wd-20p">Email</th>
+            <th class="wd-20p">Work-Phone</th>
+            <th class="wd-15p">Mobile</th>
+            <th class="wd-15p" style="text-align:center;">Allow-Access</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ObjS)
+        {
+            <tr>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.Email</td>
+                <td>@(objComman.AddMasking(item.WorkPhone))</td>
+                <td>@(objComman.AddMasking(item.Phone))</td>
+                <td style="text-align:center;"><input name="allow-access" @(item.AllowLogin ? "checked" : "") value="@item.SubBrokerId" type="checkbox"></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    'use strict';
+    
+    $('#datatable').DataTable({
+        responsive: true,
+        bLengthChange: false,
+        language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page'
+        }
+    });
+</script>

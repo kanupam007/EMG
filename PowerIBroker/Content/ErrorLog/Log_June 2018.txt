@@ -1,0 +1,304 @@
+-------------------START-------------6/4/2018 11:38:37 AM
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : Cannot perform runtime binding on a null reference
+-------------------END-------------6/4/2018 11:38:37 AM
+
+-------------------START-------------6/4/2018 4:34:44 PM
+
+Controller Name : Employee Controller
+Function in which error found :  GetEmployeeList
+Process Type : 
+Error Message : An error occurred while reading from the store provider's data reader. See the inner exception for details.
+-------------------END-------------6/4/2018 4:34:44 PM
+
+-------------------START-------------6/6/2018 2:29:10 PM
+
+Controller Name : OpenEnrollment Controller
+Function in which error found :  AddBeneficiary
+Process Type : 
+Error Message : The data reader is incompatible with the specified 'PowerIBrokerModel.psp_GetOpenEnrollmentCategory_Result'. A member of the type, 'OpenEnrollID', does not have a corresponding column in the data reader with the same name.
+-------------------END-------------6/6/2018 2:29:10 PM
+
+-------------------START-------------6/6/2018 2:29:32 PM
+
+Controller Name : OpenEnrollment Controller
+Function in which error found :  AddBeneficiary
+Process Type : 
+Error Message : The data reader is incompatible with the specified 'PowerIBrokerModel.psp_GetOpenEnrollmentCategory_Result'. A member of the type, 'OpenEnrollID', does not have a corresponding column in the data reader with the same name.
+-------------------END-------------6/6/2018 2:29:32 PM
+
+-------------------START-------------6/12/2018 12:08:06 PM
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : The underlying provider failed on Open.
+-------------------END-------------6/12/2018 12:08:06 PM
+
+-------------------START-------------6/20/2018 9:51:35 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult EmployeeDetail()
+Process Type : ActionResult=[HttpGet]
+Error Message : The 'Salary' property on 'VW_Company_Employee_Employment_and_Compensation' could not be set to a 'Int64' value. You must set this property to a non-null value of type 'Decimal'. 
+-------------------END-------------6/20/2018 9:51:35 AM
+
+-------------------START-------------6/20/2018 9:52:51 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult EmployeeDetail()
+Process Type : ActionResult=[HttpGet]
+Error Message : The 'Salary' property on 'VW_Company_Employee_Employment_and_Compensation' could not be set to a 'Int64' value. You must set this property to a non-null value of type 'Decimal'. 
+-------------------END-------------6/20/2018 9:52:51 AM
+
+-------------------START-------------6/20/2018 9:59:06 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult EmployeeDetail()
+Process Type : ActionResult=[HttpGet]
+Error Message : The 'Salary' property on 'VW_Company_Employee_Employment_and_Compensation' could not be set to a 'Int64' value. You must set this property to a non-null value of type 'Decimal'. 
+-------------------END-------------6/20/2018 9:59:06 AM
+
+-------------------START-------------6/26/2018 10:29:02 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult EmployeeDetail()
+Process Type : ActionResult=[HttpGet]
+Error Message : The best overloaded method match for 'PowerIBrokerBusinessLayer.Helper.formatPhoneNumber(string, string)' has some invalid arguments
+-------------------END-------------6/26/2018 10:29:02 AM
+
+-------------------START-------------6/26/2018 10:32:24 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult EmployeeDetail()
+Process Type : ActionResult=[HttpGet]
+Error Message : The best overloaded method match for 'PowerIBrokerBusinessLayer.Helper.formatPhoneNumber(string, string)' has some invalid arguments
+-------------------END-------------6/26/2018 10:32:24 AM
+
+-------------------START-------------6/26/2018 10:33:15 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult EmployeeDetail()
+Process Type : ActionResult=[HttpGet]
+Error Message : The best overloaded method match for 'PowerIBrokerBusinessLayer.Helper.formatPhoneNumber(string, string)' has some invalid arguments
+-------------------END-------------6/26/2018 10:33:15 AM
+
+-------------------START-------------6/26/2018 10:33:29 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult EmployeeDetail()
+Process Type : ActionResult=[HttpGet]
+Error Message : The best overloaded method match for 'PowerIBrokerBusinessLayer.Helper.formatPhoneNumber(string, string)' has some invalid arguments
+-------------------END-------------6/26/2018 10:33:29 AM
+
+-------------------START-------------6/26/2018 3:49:03 PM
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : Cannot perform runtime binding on a null reference
+-------------------END-------------6/26/2018 3:49:03 PM
+
+-------------------START-------------6/26/2018 4:55:12 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 4:55:12 PM
+
+-------------------START-------------6/26/2018 5:23:39 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:23:39 PM
+
+-------------------START-------------6/26/2018 5:26:07 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:26:07 PM
+
+-------------------START-------------6/26/2018 5:29:17 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:29:17 PM
+
+-------------------START-------------6/26/2018 5:30:53 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:30:53 PM
+
+-------------------START-------------6/26/2018 5:31:21 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:31:21 PM
+
+-------------------START-------------6/26/2018 5:31:22 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:31:22 PM
+
+-------------------START-------------6/26/2018 5:31:26 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:31:26 PM
+
+-------------------START-------------6/26/2018 5:31:57 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:31:57 PM
+
+-------------------START-------------6/26/2018 5:32:49 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:32:49 PM
+
+-------------------START-------------6/26/2018 5:33:07 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:33:07 PM
+
+-------------------START-------------6/26/2018 5:33:15 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:33:15 PM
+
+-------------------START-------------6/26/2018 5:34:02 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:34:02 PM
+
+-------------------START-------------6/26/2018 5:34:58 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:34:58 PM
+
+-------------------START-------------6/26/2018 5:35:58 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:35:58 PM
+
+-------------------START-------------6/26/2018 5:36:21 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:36:21 PM
+
+-------------------START-------------6/26/2018 5:36:33 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:36:33 PM
+
+-------------------START-------------6/26/2018 5:36:34 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:36:34 PM
+
+-------------------START-------------6/26/2018 5:36:53 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:36:53 PM
+
+-------------------START-------------6/26/2018 5:37:46 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:37:46 PM
+
+-------------------START-------------6/26/2018 5:37:51 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:37:51 PM
+
+-------------------START-------------6/26/2018 5:38:49 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:38:49 PM
+
+-------------------START-------------6/26/2018 5:39:23 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------6/26/2018 5:39:23 PM
+
+-------------------START-------------6/26/2018 5:51:54 PM
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : Cannot perform runtime binding on a null reference
+-------------------END-------------6/26/2018 5:51:54 PM
+
+-------------------START-------------6/26/2018 6:13:16 PM
+
+Controller Name : CompanyProfile Controller
+Function in which error found : DeleteLocation
+Process Type : Ajex Calling
+Error Message : Input string was not in a correct format.
+-------------------END-------------6/26/2018 6:13:16 PM
+

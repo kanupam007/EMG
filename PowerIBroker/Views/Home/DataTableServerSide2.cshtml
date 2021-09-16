@@ -1,0 +1,197 @@
+﻿
+
+@{
+    ViewBag.Title = "DataTableServerSide2";
+    Layout =null;
+}
+
+<h2>DataTableServerSide</h2>
+
+
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css" />
+
+<script type="text/javascript" src="https://cdn.datatables.net/r/bs-3.3.5/jqc-1.11.3,dt-1.10.8/datatables.min.js"></script>
+
+
+
+<script>
+
+
+        $.fn.dataTable.pipeline = function (opts) {
+            
+            // Configuration options
+            var conf = $.extend({
+
+                url: '/DataTable3',      // script url
+                data: null,   // function or object with parameters to send to the server
+                // matching how `ajax.data` works in DataTables
+                method: 'POST' // Ajax HTTP method
+            }, opts);
+
+            // Private variables for storing the cache
+            var cacheLower = -1;
+            var cacheUpper = null;
+            var cacheLastRequest = null;
+            var cacheLastJson = null;
+
+            return function (request, drawCallback, settings) {
+                
+                var ajax = false;
+                var requestStart = request.start;
+                var drawStart = request.start;
+                var requestLength = request.length;
+                var requestEnd = requestStart + requestLength;
+
+                if (settings.clearCache) {
+                    // API requested that the cache be cleared
+                    ajax = true;
+                    settings.clearCache = false;
+                }
+                else if (cacheLower < 0 || requestStart < cacheLower || requestEnd > cacheUpper) {
+                    // outside cached data - need to make a request
+                    ajax = true;
+                }
+                else if (JSON.stringify(request.order) !== JSON.stringify(cacheLastRequest.order) ||
+                          JSON.stringify(request.columns) !== JSON.stringify(cacheLastRequest.columns) ||
+                          JSON.stringify(request.search) !== JSON.stringify(cacheLastRequest.search)
+                ) {
+                    // properties changed (ordering, columns, searching)
+                    ajax = true;
+                }
+
+                // Store the request for checking next time around
+                cacheLastRequest = $.extend(true, {}, request);
+                ajax = true;
+                if (ajax) {
+                    // Need data from the server
+                    if (requestStart < cacheLower) {
+                        requestStart = requestStart - (requestLength * (conf.pages - 1));
+
+                        if (requestStart < 0) {
+                            requestStart = 0;
+                        }
+                    }
+
+                    cacheLower = requestStart;
+                    cacheUpper = requestStart + (requestLength * conf.pages);
+
+                    request.start = requestStart;
+                    request.length = requestLength * conf.pages;
+
+                    // Provide the same `data` options as DataTables.
+                    if ($.isFunction(conf.data)) {
+                        // As a function it is executed with the data object as an arg
+                        // for manipulation. If an object is returned, it is used as the
+                        // data object to submit
+                        var d = conf.data(request);
+                        if (d) {
+                            $.extend(request, d);
+                        }
+                    }
+                    else if ($.isPlainObject(conf.data)) {
+                        // As an object, the data given extends the default
+                        $.extend(request, conf.data);
+                    }
+
+                    settings.jqXHR = $.ajax({
+                        "type": conf.method,
+                        "url": conf.url,
+                        "contentType": "application/json; charset=utf-8",
+                        "data": "{'request':'" + JSON.stringify(request) + "','ddl':'" + settings._iDisplayLength + "','pageno':'" + settings._iDisplayStart + "'}",
+                        "async": false,
+                        "dataType": "json",
+                        "cache": false,
+                        "success": function (json) {
+                            
+
+                            cacheLastJson = $.extend(true, {}, json);
+
+                            if (cacheLower != drawStart) {
+                                json.data.splice(0, drawStart - cacheLower);
+                            }
+                            json.data.splice(requestLength, json.data.length);
+
+                            drawCallback(json);
+                        },
+                        "error": function (err) {
+                            
+                        }, "failure": function (err) {
+                            
+                        }
+                    });
+                }
+                else {
+                    json = $.extend(true, {}, cacheLastJson);
+                    json.draw = request.draw; // Update the echo for each response
+                    json.data.splice(0, requestStart - cacheLower);
+                    json.data.splice(requestLength, json.data.length);
+
+                    drawCallback(json);
+                }
+            }
+        };
+
+
+
+        $(document).ready(function () {
+
+    $('#example').dataTable({
+        "processing": true,
+        "serverSide": true,
+                "ajax": $.fn.dataTable.pipeline({
+                    url: '/home/DataTable3',
+
+                }),
+                "aoColumns": [
+
+                         { "mData": "first_name" },
+                  { "mData": "last_name" },
+                  { "mData": "position" },
+                  { "mData": "salary" },
+                  { "mData": "start_date" },
+                    { "mData": "office" }
+
+                ],
+                aoColumnDefs: [{
+                    "aTargets": [5],    //Edit column
+                    "mData": "Id",  //Get value from RoleId column, I assumed you used "RoleId" as the name for RoleId in your JSON, in my case, I didn't assigned any name in code behind so i used "mData": "0"
+                    "mRender": function (data, type, full) {
+                        //
+                        return '<a href=' +
+                             '@Url.Action("Edit", "Default1")?RoleId=' + full.Id +
+                             '>Edit</a>';
+                    }
+                }, {
+                    "bSortable": false,
+                    "aTargets": ["no-sort"]
+                }]
+
+            });
+
+
+        });
+
+</script>
+<div class="rightpart">
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Position</th>
+                <th>Office</th>
+
+                <th>Start date</th>
+                <th class="no-sort">Salary</th>
+            </tr>
+        </thead>
+
+    </table>
+</div>
+<script>
+    $('#example')
+		.removeClass('display')
+		.addClass('table table-striped table-bordered');
+</script>

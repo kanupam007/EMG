@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "NotFound";
+    Layout = null;
+    var returnUrl = ViewBag.ReturnUrl;
+}
+
+<style>
+    body {
+        font-family: 'open_sansregular';
+        background: #F3F3F3;
+        color: rgb(86, 180, 137);
+        margin: 10% 25%;
+    }
+
+    .goBack {
+        background: rgb(86, 180, 137);
+        border-radius: 3px;
+        color: #fff;
+        display: block;
+        font-family: open_sansbold;
+        font-size: 19px;
+        margin: 40px auto auto;
+        padding: 18px 0;
+        width: 200px;
+        text-decoration: none;
+    }
+
+        .goBack:hover {
+            background: #444;
+        }
+</style>
+<center>
+    <div>
+        <span style="font-size: 10em;">
+            404
+        </span>
+        <span style="font-size: 3em;display: block;">
+            Sorry, the requested page not found
+        </span>
+
+        <a class="goBack" href="@returnUrl" onclick="goBack();">Go back</a>
+
+    </div>
+</center>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

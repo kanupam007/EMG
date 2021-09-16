@@ -1,0 +1,36 @@
+﻿<table id="example1" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th width="70%">Category Name</th>
+            <th width="10%">Status</th>
+            @*<th width="20%">Action</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.PlanCategory != null)
+        {
+
+            foreach (var plancat in ViewBag.PlanCategory)
+            {
+                <tr>
+                    <td>@plancat.PlanCategory</td>
+                    <td>
+                        @(plancat.IsActive == true ? "Active" : "Inactive")
+
+                    </td>
+                    @*<td>
+                        @if (plancat.IsDeleted != true)
+                        {
+                            <a href="@Url.Action("EditPlanCategory", "Admin", new { @id = plancat.ID })" class="btn btn-primary btn-xs">Edit</a>
+                            <a data-exclude="true" href="javascript:void(0)" onclick="return DeletePlanCategory(@plancat.ID);" class="btn btn-primary btn-xs" style="background-color:red;border-color:red"> Delete</a>
+                        }
+                    </td>*@
+
+                </tr>
+            }
+        }
+
+
+
+    </tbody>
+</table>

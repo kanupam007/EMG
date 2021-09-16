@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "SubscriptionPlan";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/Super-Admin">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Manage EMG Product
+            </li>
+        </ol>
+        <h6 class="slim-pagetitle">
+            EMG Product
+        </h6>
+    </div><!-- slim-pageheader -->
+    <div class="row row-sm mg-t-20">
+
+
+        <div class="col-lg-12" style="padding-top: 3%;">
+            <div class="section-wrapper">
+                <label class="section-title"> Broker Company</label>
+                <div class="form-layout form-layout-4">
+                    <div class="row">
+                        <label class="col-sm-4 form-control-label">Company <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <select class="form-control select2" data-placeholder="Choose one" data-parsley-class-handler="#slWrapper2" data-parsley-errors-container="#slErrorContainer2">
+                                <option value="">Select</option>
+                                <option selected value="2">OneDigital - New York</option>
+                                <option value="3">Arthur J. Gallagher &amp; Co - New York</option>
+                                <option value="4">Arthur J. Gallagher &amp; Co - New England</option>
+                                <option value="5">J5 Consulting</option>
+                                <option value="6">MINDIT Systems</option>
+                            </select>
+                        </div>
+                    </div><!-- row -->
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">EMG Product: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <select class="form-control select2" data-placeholder="Choose one" data-parsley-class-handler="#slWrapper2" data-parsley-errors-container="#slErrorContainer2">
+                                <option value="">Select</option>
+                                <option selected value="2">OneDigital - New York</option>
+                                <option value="3">Arthur J. Gallagher &amp; Co - New York</option>
+                                <option value="4">Arthur J. Gallagher &amp; Co - New England</option>
+                                <option value="5">J5 Consulting</option>
+                                <option value="6">MINDIT Systems</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Cost Per Month: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" placeholder="Cost Per Month: ">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="checkbox" checked=""><span>Active</span>
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <button class="btn btn-primary btn-xs editSubBroker">Save</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+                <div class="table-responsive">
+
+
+                    <br />
+                    <table class="table mg-b-0">
+
+                        <tbody>
+                        <thead>
+                            <tr>
+                                <th width="20%">Company Name</th>
+                                <th width="20%">EMG Product</th>
+                                <th width="20%">Cost Per Month</th>
+
+                                <th width="20%">Status</th>
+                                <th width="20%">Action</th>
+                            </tr>
+                        </thead>
+
+
+
+
+
+
+
+                        <tbody>
+                            <tr>
+                                <td>Demogo Co</td>
+                                <td>
+
+
+                                    Competitive Health Concierge Care
+                                </td>
+                                <td>25</td>
+
+                                <td>
+                                    Active
+
+                                </td>
+                                <td>
+                                    <a href="#" style="margin-bottom: 2px;" class="btn btn-primary btn-xs">Edit&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a data-exclude="true" href="javascript:void(0)" class="btn btn-primary btn-xs" style="background-color: red; border-color: red; margin-bottom: 2px;"> Delete</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Demogo Co</td>
+                                <td>
+
+
+                                    Competitive Health Concierge Care
+                                </td>
+                                <td>25</td>
+
+                                <td>
+                                    Active
+
+                                </td>
+                                <td>
+                                    <a href="#" style="margin-bottom: 2px;" class="btn btn-primary btn-xs">Edit&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a data-exclude="true" href="javascript:void(0)" class="btn btn-primary btn-xs" style="background-color: red; border-color: red; margin-bottom: 2px;"> Delete</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>i2Systems</td>
+                                <td>
+
+
+                                    Competitive Health Concierge Care
+                                </td>
+                                <td>25</td>
+
+                                <td>
+                                    Inactive
+
+                                </td>
+                                <td>
+                                    <a href="#" style="margin-bottom: 2px;" class="btn btn-primary btn-xs">Edit&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a data-exclude="true" href="javascript:void(0)" class="btn btn-primary btn-xs" style="background-color: red; border-color: red; margin-bottom: 2px;"> Delete</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Demogo Co</td>
+                                <td>
+
+
+                                    EMG Test
+                                </td>
+                                <td>10</td>
+
+                                <td>
+                                    Active
+
+                                </td>
+                                <td>
+                                    <a href="#" style="margin-bottom: 2px;" class="btn btn-primary btn-xs">Edit&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <a data-exclude="true" href="javascript:void(0)" class="btn btn-primary btn-xs" style="background-color: red; border-color: red; margin-bottom: 2px;"> Delete</a>
+                                </td>
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- section-wrapper -->
+        </div><!-- col-6 -->
+    </div>
+
+
+
+
+</div>
+

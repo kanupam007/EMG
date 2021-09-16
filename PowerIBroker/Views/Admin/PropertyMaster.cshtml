@@ -1,0 +1,214 @@
+﻿
+@model PowerIBrokerDataLayer.EMG_PropertyMaster
+@{
+    ViewBag.Title = "PropertyMaster";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+
+@*<link href="~/AdminContent/customcss/admincustom.css" rel="stylesheet" />*@
+<link href="~/AdminContent/plugins/datatables/jquery.dataTables.css" rel="stylesheet" />
+<script src="~/AdminContent/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content/Frontend/js/jquery.mask.js"></script>
+<script src="~/AdminContent/customjs/admincustom.js"></script>
+@*<div class="content-wrapper" style="min-height: 960px;">*@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Property Master
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin/Dashboard"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active">Property Master</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Property Master</h3>
+
+                </div><!-- /.box-header -->
+                <div class="col-lg-12" style="padding-right:0px;padding-left:0px">
+                    <div class="@(TempData["CustomMessage"] != null ? TempData["MessageType"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                        @if (TempData["CustomMessage"] != null)
+                        {
+                            <i class="fa @(TempData["MessageType"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+
+                        }
+                        <span>@TempData["CustomMessage"]</span>
+                    </div>
+
+
+
+                </div>
+
+
+
+                @using (Html.BeginForm("PropertyMaster", "Admin", FormMethod.Post, new { Id = "formIdPropertyMaster" }))
+                {
+                    @Html.HiddenFor(model => model.PropertyId)
+                    <div class="box-body">
+
+                        <form role="form">
+                            <div class="box-body">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Plan Category Name</label>
+                                        @Html.DropDownListFor(m => m.PlanCategoryId, ViewBag.PlanCategory as SelectList, "Select", new { @class = "form-control", @id = "ddlPlanCategoryId" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Property Group Name</label>
+                                        @Html.DropDownListFor(m => m.GroupId, ViewBag.PropertyGroupMaster as SelectList, "Select", new { @class = "form-control", @id = "ddlGroupId" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Property Name</label>                              
+
+                                        @Html.TextBoxFor(model => model.PropertyName, new { @class = "form-control", placeholder = "PropertyName", id = "PropertyName", maxlength = "100" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Display Name</label>
+                                        @Html.TextBoxFor(model => model.DisplayName, new { @class = "form-control", placeholder = "Display Name", id = "DisplayName", maxlength = "100" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Sequence</label>
+                                        @Html.TextBoxFor(model => model.SortOrder, new { @class = "form-control", placeholder = "Sequence", id = "SortOrder", maxlength = "10", onkeypress = "return isNumber(event)" })
+                                    </div>
+                                </div>
+                            </div><!-- /.box-body -->
+
+                            <div class="col-lg-3" style="margin-left:30px">
+                                <div class="checkbox">
+                                    @*@Html.CheckBox("IsActive", new { @class = "checkBx" })*@
+                                    @if (Model.PropertyId == 0)
+                                    {
+                                        @Html.CheckBox("IsActive", new { @class = "checkBx", @checked = "checked" })
+                                    }
+                                    else
+                                    {
+                                        @Html.CheckBox("IsActive", new { @class = "checkBx" })
+                                    }
+
+                                    <label style="margin-left:0px">Is Active?</label>
+                                </div>
+
+                                <div class="box-footer">
+                                    <button type="button" id="btnSavePropertyMaster" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        <br /><br /><br />
+                        <!-- Main content -->
+                        <section class="content">
+                            <!-- Info boxes -->
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+                                    <div class="box">
+                                        <div class="box-header">
+
+                                            <h3 class="box-title">Property Master - List</h3>
+                                            <input type="checkbox" id="value" onclick="GetDataPropertyMaster()" style="float:right;" />
+                                            <label style="float:right;margin-right:10px">Show Inactive Records</label>
+
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+
+                                            @if (ViewBag.PropertyMaster.Count > 0)
+                                            {
+                                                @Html.Partial("_PropertyMaster");
+                                            }
+                                            else
+                                            {
+                                                <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                                            }
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box-footer -->
+
+                                </div><!-- /.col -->
+                            </div>
+
+                        </section><!-- /.content -->
+
+
+                    </div><!-- ./box-body -->
+
+                }
+                <!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+
+</section>
+<!-- /.content -->
+<script>
+    $("#ddlPlanCategoryId").change(function () {  
+        var PlanCategoryId = $("#ddlPlanCategoryId").val();
+        if (PlanCategoryId!=0)
+        {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/GetPropertyGroupName",
+                data: "{'PlanCategoryId':'" + PlanCategoryId + "'}",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+            
+                    if (response.length > 0) {
+                        $('#ddlGroupId').empty();
+                        response.forEach(function (Data) {                      
+
+                            $('#ddlGroupId').append($('<option>', {
+                                value: Data.GroupId,
+                                text: Data.PropertyGroupName
+                            }))
+
+                        });
+                    }
+                    else {
+                        $('#ddlGroupId').empty();
+                        $('#ddlGroupId').append($('<option>', {
+                            value: '',
+                            text: "select"
+                        }))
+                    }
+
+
+
+                }
+            });
+        }
+      
+ 
+
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+

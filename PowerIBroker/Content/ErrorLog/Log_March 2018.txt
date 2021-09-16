@@ -1,0 +1,24 @@
+-------------------START-------------3/30/2018 11:30:03 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult AddEmployee()
+Process Type : ActionResult=[HttpPost]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------3/30/2018 11:30:03 AM
+
+-------------------START-------------3/30/2018 11:45:27 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult AddEmployee()
+Process Type : ActionResult=[HttpPost]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------3/30/2018 11:45:27 AM
+
+-------------------START-------------3/30/2018 1:35:06 PM
+
+Controller Name : CompanyProfile Controller
+Function in which error found : DeleteLocation
+Process Type : Ajex Calling
+Error Message : Input string was not in a correct format.
+-------------------END-------------3/30/2018 1:35:06 PM
+

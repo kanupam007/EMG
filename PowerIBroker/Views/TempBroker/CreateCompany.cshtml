@@ -1,0 +1,453 @@
+﻿@using PowerIBrokerDataLayer
+@using PowerIBrokerBusinessLayer
+@using PowerIBroker.Areas.Broker.Models
+@{
+    PowerIBrokerEntities context = new PowerIBrokerEntities();
+    CommonMasters cmm = new CommonMasters();
+    Comman objComman = new Comman();
+    ViewBag.Title = "CreateCompany";
+    Layout = "~/Views/Shared/_Broker.cshtml";
+    vw_GetCBroker Obj = null;
+    List<CompanyClient> ObjA = null;
+    List<BrokerUserAssignModel> ObjS = null;
+    long broker = (long)Session["BrokerId"];
+    var StateData = context.EmployeeStates.OrderBy(x => x.StateName).ToList();
+    var BrokerData = context.tblBrokers.Where(x => x.BrokerId == broker).FirstOrDefault();
+    if (ViewBag.ID != null)
+    {
+        long ID = Convert.ToInt64(ViewBag.ID);
+        Obj = context.vw_GetCBroker.Where(x => x.CompanyId == ID).FirstOrDefault();
+        ObjA = (from a in context.tblCompany_Employee_BasicInfo.Where(a => a.RoleID == 1 && a.CompanyId == ID)
+                select new CompanyClient
+                {
+                    ID = a.ID,
+                    FirstName = a.FirstName,
+                    LastName = a.LastName,
+                    Email = a.Email,
+                    AdministratorType = a.AdministratorType,
+                    Phone = a.tblCompany_Employee_PersonalInfo.Where(q => q.EmployeeID == a.ID).FirstOrDefault().Phone,
+                    WorkPhone = a.tblCompany_Employee_PersonalInfo.Where(q => q.EmployeeID == a.ID).FirstOrDefault().WorkPhone,
+                    IsActive = a.IsActive
+                }).ToList();
+        ObjS = cmm.GetBrokerUserMasterCompany(0, Convert.ToInt32(broker), Convert.ToInt32(ID));
+    }
+
+}
+<script src="https://unpkg.com/jquery-input-mask-phone-number@1.0.15/dist/jquery-input-mask-phone-number.js"></script>
+<style>
+    .slim-pageheader {
+        padding-top: 30px;
+    }
+
+    .btnclient {
+        display: none;
+    }
+</style>
+<div class="container">
+    <div class="slim-pageheader" style="padding-top: 25px !important;">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/Broker-Admin">Broker</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create Client</li>
+        </ol>
+        <h6 class="slim-pagetitle">Create Client</h6>
+    </div><!-- slim-pageheader -->
+
+
+
+    <div class="row row-sm">
+        <div class="col-lg-6">
+            <div class="section-wrapper">
+                <label class="section-title margin-titile"> Company</label>
+
+
+                <div class="form-layout form-layout-4">
+                    <div class="row mg-t-19">
+                        <label class="col-sm-4 form-control-label">Broker Number: </label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" id="txtCustomerNumber" value="@(Obj!=null?Obj.CustomerCode:"")" maxlength="15">
+                            <ul class="parsley-errors-list filled" id="parsley-txtCustomerNumber"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div><!-- row -->
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Company Name: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" id="txtCompanyName" value="@(Obj!=null?Obj.CCompanyName:"")" maxlength="50">
+                            <ul class="parsley-errors-list filled" id="parsley-txtCompanyName"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div>
+
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Street: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <textarea rows="2" class="form-control" id="txtStreetName">@(Obj!=null?Obj.CStreetName:"")</textarea>
+                            <ul class="parsley-errors-list filled" id="parsley-txtStreetName"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">City: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" id="txtCityName" maxlength="30" value="@(Obj!=null&&context.CityMasters.Where(x=>x.ID==Obj.CCity).Count()>0?context.CityMasters.Where(x=>x.ID==Obj.CCity).FirstOrDefault().City:"")">
+                            <ul class="parsley-errors-list filled" id="parsley-txtCityName"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">State: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <select class="form-control select2-show-search company-information" valuedata="@(Obj!=null&&context.StateMasters.Where(x=>x.ID==Obj.CState).Count()>0?context.StateMasters.Where(x=>x.ID==Obj.CState).FirstOrDefault().State:"")" id="txtStateName" data-placeholder="Choose State">
+                                <option value="">Select State</option>
+                                @foreach (var item in StateData)
+                                {
+                                    <option value="@item.StateCode">@item.StateName</option>
+                                }
+                            </select>
+
+                            @*<input type="text" class="form-control" id="txtStateName" maxlength="30" value="@(Obj!=null&&context.StateMasters.Where(x=>x.ID==Obj.CState).Count()>0?context.StateMasters.Where(x=>x.ID==Obj.CState).FirstOrDefault().State:"")">*@
+                            <ul class="parsley-errors-list filled" id="parsley-txtStateName"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div>
+
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Zip Code: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" id="txtZipCode" onkeypress="return isNumberKey(event);" onchange="validateZipCode($(this).attr('id'));" maxlength="5" value="@(Obj!=null?Obj.CZipCode:"")">
+                            <ul class="parsley-errors-list filled" id="parsley-txtZipCode"><li class="parsley-required">This value is required.</li></ul>
+                            <ul class="parsley-errors-list filled" id="parsley-Zip-txtZipCode"><li class="parsley-required">Zip code is not valid.</li></ul>
+                        </div>
+                    </div>
+                    
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Work Phone: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control mask" id="txtWorkPhone" maxlength="15" onkeypress="return isNumberKey(event);" value="@(Obj!=null?objComman.AddMasking(Obj.CContact) :"")">
+                            <ul class="parsley-errors-list filled" id="parsley-txtWorkPhone"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Url:</label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" id="txtUrl" value="@(Obj!=null?Obj.Url:"")">
+                        </div>
+                    </div>
+
+                </div>
+            </div><!-- section-wrapper -->
+        </div><!-- col-6 -->
+        <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+            <div class="section-wrapper">
+                <label class="section-title">Customer Billing</label>
+
+
+                <div class="form-layout form-layout-4">
+                    <div class="row">
+                        <div class="col-lg-5 col-sm-5">
+                            <label class="rdiobox">
+                                <input name="rdio" class="billing" type="radio" onclick="SameAsCompany();">
+                                <span>Same as Company</span>
+                            </label>
+                        </div><!-- col-3 -->
+                        <div class="col-lg-5 col-sm-5">
+                            <label class="rdiobox">
+                                <input name="rdio" class="billing" type="radio" onclick="SameAsBroker();">
+                                <span>Same as Broker</span>
+                            </label>
+                        </div><!-- col-3 -->
+                        <div class="col-lg-2 col-sm-2">
+                            <button class="btn btn-oblong reset-btn btn-primary mg-b-10" onclick="BillingReset();">Reset</button>
+                        </div><!-- col-3 -->
+                    </div>
+                    <div class="row mg-t-5">
+                        <label class="col-sm-4 form-control-label">Name: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" id="txtBName" maxlength="50" value="@(Obj!=null?Obj.CompanyName:"")" onkeypress="">
+                            <ul class="parsley-errors-list filled" id="parsley-txtBName"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div><!-- row -->
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Attention: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" id="txtBAttention" maxlength="50" value="@(Obj!=null?Obj.Attention:"")">
+                            <ul class="parsley-errors-list filled" id="parsley-txtBAttention"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div>
+
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Street: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <textarea rows="2" class="form-control" id="txtBStreet" maxlength="30">@(Obj!=null?Obj.StreetName:"")</textarea>
+                            <ul class="parsley-errors-list filled" id="parsley-txtBStreet"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">City: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" id="txtBCity" maxlength="30" value="@(Obj!=null&&context.CityMasters.Where(x=>x.ID==Obj.City).Count()>0?context.CityMasters.Where(x=>x.ID==Obj.City).FirstOrDefault().City:"")">
+                            <ul class="parsley-errors-list filled" id="parsley-txtBCity"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">State: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <select class="form-control select2-show-search company-information" valuedata="@(Obj!=null&&context.StateMasters.Where(x=>x.ID==Obj.State).Count()>0?context.StateMasters.Where(x=>x.ID==Obj.State).FirstOrDefault().State:"")" id="txtBState" data-placeholder="Choose State">
+                                <option value="">Select State</option>
+                                @foreach (var item in StateData)
+                                {
+                                    <option value="@item.StateCode">@item.StateName</option>
+                                }
+                            </select>
+                            @*<input type="text" class="form-control" id="txtBState" maxlength="30" value="@(Obj!=null&&context.StateMasters.Where(x=>x.ID==Obj.State).Count()>0?context.StateMasters.Where(x=>x.ID==Obj.State).FirstOrDefault().State:"")">*@
+                            <ul class="parsley-errors-list filled" id="parsley-txtBState"><li class="parsley-required">This value is required.</li></ul>
+                        </div>
+                    </div>
+
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Zip Code: <span class="tx-danger">*</span></label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control" onkeypress="return isNumberKey(event);" onchange="validateZipCode($(this).attr('id'));" id="txtBZip" maxlength="5" value="@(Obj!=null?Obj.ZipCode:"")">
+                            <ul class="parsley-errors-list filled" id="parsley-txtBZip"><li class="parsley-required">This value is required.</li></ul>
+                            <ul class="parsley-errors-list filled" id="parsley-Zip-txtBZip"><li class="parsley-required">Zip code is not valid.</li></ul>
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Billing Phone:</label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control mask" id="txtBBillingPhone" maxlength="15" onkeypress="return isNumberKey(event);" value="@(Obj!=null?objComman.AddMasking(Obj.Phone):"")">
+                        </div>
+                    </div>
+                    <div class="row mg-t-20">
+                        <label class="col-sm-4 form-control-label">Fax: </label>
+                        <div class="col-sm-8 mg-t-10 mg-sm-t-0">
+                            <input type="text" class="form-control mask" id="txtBFax" maxlength="15" value="@(Obj!=null?objComman.AddMasking(Obj.Fax):"")">
+                        </div>
+                    </div>
+
+                </div><!-- form-layout -->
+            </div>
+            <!-- section-wrapper -->
+        </div><!-- col-6 -->
+    </div><!-- row -->
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+        </ol>
+        <h6 class="slim-pagetitle">Create Client ADMINISTRATOR</h6>
+    </div>
+    <div class="section-wrapper">
+        <div id="MainAdmin">
+            <div id="ClientAdmin1">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label class="section-title">Client Administrators</label>
+                    </div>
+                    <div class="col-lg-6" style="text-align:right;">
+                        <div class="demo-btn-list">
+                            <a style="cursor:pointer;" class="btn btn-primary btn-icon rounded-circle" title="Add Administrator" count="1" onclick="AddCompany(this);" id="IconPlus"><div><i class="fa fa-plus"></i></div></a>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-layout">
+                    <div class="row mg-b-25">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label">Firstname: <span class="tx-danger">*</span></label>
+                                <input class="form-control" type="text" name="firstname" id="txtAdFirstName1" maxlength="20" onkeypress="">
+                                <ul class="parsley-errors-list filled" id="parsley-txtAdFirstName1"><li class="parsley-required">This value is required.</li></ul>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label">Lastname: <span class="tx-danger">*</span></label>
+                                <input class="form-control" type="text" name="lastname" id="txtAdLastName1" onkeypress="">
+                                <ul class="parsley-errors-list filled" id="parsley-txtAdLastName1"><li class="parsley-required">This value is required.</li></ul>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label">Administrator Type: <span class="tx-danger">*</span></label>
+                                <select class="form-control administrator" id="ddlAdAdministratorType1">
+                                    <option value="">Choose Administrator Type</option>
+                                    <option value="0">HR Administrator</option>
+                                    <option value="1">HR Specialist</option>
+                                </select>
+                                <ul class="parsley-errors-list filled" id="parsley-ddlAdAdministratorType1"><li class="parsley-required">This value is required.</li></ul>
+                            </div>
+                        </div>
+
+                        <!-- col-4 -->
+
+                    </div>
+                    <div class="row mg-b-25">
+                        <!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label">Email address: <span class="tx-danger">*</span></label>
+                                <input class="form-control" type="text" name="email" id="txtAdEmail1">
+                                <ul class="parsley-errors-list filled" id="parsley-txtAdEmail1"><li class="parsley-required">This value is required.</li></ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label">Work Phone: <span class="tx-danger">*</span></label>
+                                <input class="form-control mask" type="text" name="lastname" id="txtAdWorkPhone1" onkeypress="return isNumberKey(event);" maxlength="15" >
+                                <ul class="parsley-errors-list filled" id="parsley-txtAdWorkPhone1"><li class="parsley-required">This value is required.</li></ul>
+                            </div>
+                        </div><!-- col-4 -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label class="form-control-label">Mobile: <span class="tx-danger">*</span></label>
+                                <input class="form-control mask" type="text" name="email" id="txtAdMobile1" maxlength="15" onkeypress="return isNumberKey(event);">
+                                <ul class="parsley-errors-list filled" id="parsley-txtAdMobile1"><li class="parsley-required">This value is required.</li></ul>
+                            </div>
+                        </div><!-- col-4 -->
+
+                    </div>
+                    <button class="btn btn-primary bd-0 btnclient" id="btnclientsubmit" url="/Broker-Admin/UpdateClient">Update</button>
+                    <button class="btn btn-secondary bd-0 btnclient" onclick="ResetClient();">Cancel</button>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    @if (ObjA != null && ObjA.Count > 0)
+    {
+        <div class="row row-sm">
+
+
+            <div class="col-lg-12" style="padding-top: 1%;">
+                <div class="section-wrapper">
+                    <label class="section-title"> Client ADMINISTRATOR</label>
+                    <div class="table-responsive">
+                        @if (ObjA != null && ObjA.Count > 0)
+                        {
+                            <table  class="table mg-b-0 datatable">
+                                <thead>
+                                    <tr>
+                                        <th class="wd-20p">Name</th>
+                                        @*<th class="wd-15p">Last name</th>*@
+                                        <th class="wd-10p">Administrator</th>
+                                        <th class="wd-15p">Email</th>
+                                        <th class="wd-15p">Work Phone</th>
+                                        <th class="wd-15p">Mobile</th>
+                                        <th class="wd-20p">Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ObjA)
+                                    {
+                                        <tr>
+
+                                            <td>@item.FirstName @item.LastName</td>
+                                           
+                                            <td>@(item.AdministratorType>0? "HR Specialist" : item.AdministratorType==0?  "HR Administrator": "-------------------------")</td>
+                                            <td>@item.Email</td>
+                                            <td>@(!string.IsNullOrEmpty(item.WorkPhone)? objComman.AddMasking(item.WorkPhone) : "-------------------------" )</td>
+                                            <td>@(!string.IsNullOrEmpty(item.Phone) ? objComman.AddMasking(item.Phone) : "-------------------------" )</td>
+                                            <td class="grey">
+                                                <a title="Edit" onclick="EditClient('@item.FirstName', '@item.LastName', '@item.Email', '@item.AdministratorType', '@(objComman.AddMasking(item.Phone))', '@(objComman.AddMasking(item.WorkPhone))',@item.ID);" style="margin-bottom: 2px;" class="btn btn-outline-primary mg-b-10">Edit </a>
+                                                <a title="Access Company" style="margin-bottom: 2px;" class="btn btn-outline-primary mg-b-10" href="#">Deactivate</a>
+
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        }
+
+                    </div>
+                </div><!-- section-wrapper -->
+            </div><!-- col-6 -->
+        </div>
+    }
+    @if (ObjS != null && ObjS.Count > 0)
+    {
+        <div class="slim-pageheader">
+            <ol class="breadcrumb slim-breadcrumb">
+            </ol>
+            <h6 class="slim-pagetitle">Assign BROKER  Administrators</h6>
+        </div>
+        <div class="row row-sm">
+
+
+            <div class="col-lg-12">
+                <div class="section-wrapper">
+                    <label class="section-title"> BROKER  Administrators</label>
+
+                    <div class="table-responsive">
+                        <table  class="table mg-b-0 datatable">
+                            <thead>
+                                <tr>
+                                    <th class="wd-15p">First name</th>
+                                    <th class="wd-15p">Last name</th>
+                                    <th class="wd-20p">Email</th>
+                                    <th class="wd-20p">Work-Phone</th>
+                                    <th class="wd-15p">Mobile</th>
+                                    <th class="wd-15p" style="text-align:center;">Allow-Access</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ObjS)
+                                {
+                                    <tr>
+                                        <td>@item.FirstName</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.Email</td>
+                                        <td>@(objComman.AddMasking(item.WorkPhone))</td>
+                                        <td>@(objComman.AddMasking(item.Phone))</td>
+                                        <td style="text-align:center;"><input name="allow-access" @(item.AllowLogin ? "checked" : "") value="@item.SubBrokerId" type="checkbox"></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div><!-- section-wrapper -->
+            </div><!-- col-6 -->
+        </div>
+    }
+
+
+    <!-- row -->
+    <div class="form-layout form-layout-3">
+        <!-- row -->
+        <div class="form-layout-footer bd pd-20 bd-t-0">
+            <button class="btn btn-primary bd-0" id="btnsubmit" cid="@(Obj!=null?Obj.CompanyId:0)" bid="@(Obj!=null?Obj.BillingId:0)" url="/Broker-Admin/AddCompanyNew" redirecturl="/Broker-Admin/ManageClient" brokerid="@Session["BrokerId"]">@(Obj!=null?"Update":"Save")</button>
+            <button class="btn btn-secondary bd-0" onclick="">Cancel</button>
+        </div><!-- form-group -->
+    </div>
+</div>
+
+<script src="~/Content/CustomScript/_CreateCompany.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.mask').usPhoneFormat({
+            format: '(xxx) xxx-xxxx',
+        });
+
+        /*$('#yourphone2').usPhoneFormat();*/
+    });
+
+    function SameAsBroker() {
+        $('#txtBName').val('@BrokerData.Broker');
+        $('#txtBStreet').val('@BrokerData.Street');
+        $('#txtBState').val('@BrokerData.StateMaster.State');
+        $('#txtBCity').val('@BrokerData.CityMaster.City');
+        $('#txtBZip').val('@BrokerData.ZipCode');
+        $('#txtBBillingPhone').val('@objComman.AddMasking(BrokerData.Phone)');
+
+    }
+    //setTimeout(function ()
+    //{
+    //    $('#txtStateName').val($('#txtStateName').attr('valuedata'));
+    //    $('#txtBState').val($('#txtBState').attr('valuedata'));
+    //}, 500);
+    $('#txtStateName').val($('#txtStateName').attr('valuedata'));
+    $('#txtBState').val($('#txtBState').attr('valuedata'));
+</script>

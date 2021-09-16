@@ -1,0 +1,77 @@
+﻿@using PowerIBrokerBusinessLayer;
+
+@if (ViewBag.Clients.Count == 0)
+{
+    <style>
+        #tblsubbrokeruserCompany_info, #tblsubbrokeruserCompany_paginate {
+            display: none;
+        }
+    </style>
+}
+@if (ViewBag.Clients != null)
+{
+    <table id="tblsubbrokeruserCompany" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th width="15%">First Name</th>
+                <th width="15%">Last Name</th>
+                <th width="20%">Email</th>
+                <th width="15%">Work Phone</th>
+                <th width="15%">Mobile Phone</th>             
+                <th width="15%">Allow Login</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+
+            @foreach (var item in ViewBag.Clients)
+            {
+                <tr>
+
+                    @*<td>@item.BrokerName</td>*@
+                    <td>@item.FirstName</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Email</td>
+                    <td>@Helper.CurrencyFormat(Convert.ToString(item.WorkPhone), 0, "", "Phone")</td>
+                    <td>@Helper.CurrencyFormat(Convert.ToString(item.Phone), 0, "", "Phone")</td>
+                    @*<td>@Helper.CurrencyFormat(Convert.ToString(item.WorkPhone), 0, "", "Phone")</td>*@
+                    @*<td>@(item.IsActive == true ? "Active" : "In-Active")</td>*@
+                    @*<td><input type="checkbox" data-id="@item.SubBrokerId" /></td>*@
+                    <td>
+                        @if (item.AllowLogin == true)
+                        {
+                            <input type="checkbox" name="subbrokerChk" value="@item.SubBrokerId" checked="checked" class="checkbox" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="subbrokerChk" value="@item.SubBrokerId" class="checkbox" />
+                        }
+                    </td>
+
+
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+}
+
+<script>
+    $('#tblsubbrokeruserCompany').DataTable({
+        columns: [
+
+         { title: "First Name" },
+        { title: "Last Name" },
+        { title: "Email" },
+       { title: "Work Phone" },
+        { title: "Mobile Phone" },
+           //{ title: "Status" },
+              { title: "Allow Login", "orderable": false },
+        //{ title: "Action", "orderable": false },
+        ]
+
+    });
+</script>

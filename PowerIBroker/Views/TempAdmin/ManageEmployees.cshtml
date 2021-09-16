@@ -1,0 +1,149 @@
+﻿@using PowerIBrokerBusinessLayer;
+@{
+    ViewBag.Title = "ManageEmployees";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    CommonMasters cmm = new CommonMasters();
+    List<BrokerEmployee> Obj = cmm.GetGeneralAgentEmployeeCompany();
+}
+
+
+<div class="container">
+    <div class="manager-header">
+        <div class="slim-pageheader">
+            <ol class="breadcrumb slim-breadcrumb">
+                <li class="breadcrumb-item"><a href="/Broker-Admin">Broker</a></li>
+
+                <li class="breadcrumb-item active" aria-current="page">
+                    Employees
+                </li>
+            </ol>
+            <h6 class="slim-pagetitle">
+                Employees
+            </h6>
+        </div><!-- slim-pageheader -->
+        @*<a id="contactNavicon" href="" class="contact-navicon"><i class="icon ion-navicon-round"></i></a>*@
+    </div><!-- manager-header -->
+    <span class="advance-search-btn collapsed" data-toggle="collapse" data-target="#divAdvanceSearchFilter" aria-expanded="false">Advance Search<span style="float:right"><i class="fa fa-angle-down"></i></span></span>
+    <div class="mobilefilter collapse" id="divAdvanceSearchFilter">
+        <label class="section-label-sm mg-t-25">SEARCH BY NAME, PHONE OR EMAIL</label>
+        <nav class="nav">
+            <input type="text" style="width:90%;" placeholder="Search by Name,Contact or Email" class="form-control" />
+
+
+        </nav>
+
+        <label class="section-label-sm mg-t-25">Company</label>
+        <nav class="nav">
+            <select class="form-control select2-show-search" data-placeholder="All Company">
+                <option label="Choose one"></option>
+                <option value="All Employee">All Company</option>
+                <option value="Employee1">Company1</option>
+                <option value="Employee2">Company2</option>
+                <option value="Opera">Company3</option>
+                <option value="Internet Explorer">Company4</option>
+            </select>
+
+        </nav>
+        <label class="section-label-sm mg-t-25">Division</label>
+        <nav class="nav">
+            <select class="form-control select2-show-search" data-placeholder="All Division">
+                <option label="Choose one"></option>
+                <option value="All Employee">All Division</option>
+                <option value="Employee1">Division1</option>
+                <option value="Employee2">Division2</option>
+                <option value="Opera">Division3</option>
+                <option value="Internet Explorer">Division4</option>
+            </select>
+
+        </nav>
+        <label class="section-label-sm mg-t-25">Location</label>
+        <nav class="nav">
+            <select class="form-control select2-show-search" data-placeholder="All Location">
+                <option label="Choose one"></option>
+                <option value="All Employee">All Location</option>
+                <option value="Employee1">Location1</option>
+                <option value="Employee2">Location2</option>
+                <option value="Opera">Location3</option>
+                <option value="Internet Explorer">Location4</option>
+            </select>
+
+        </nav>
+
+        <label class="section-label-sm mg-t-25">Job Position</label>
+        <nav class="nav">
+            <select class="form-control select2-show-search" data-placeholder="All Job Position">
+                <option label="Choose one"></option>
+                <option value="All Employee">All Job Position</option>
+                <option value="Employee1">Position1</option>
+                <option value="Employee2">Position2</option>
+                <option value="Opera">Position3</option>
+                <option value="Internet Explorer">Position4</option>
+            </select>
+
+        </nav>
+    </div>
+    <div class="manager-wrapper">
+        <div class="manager-right">
+            <div class="row row-sm" id="EmployeeData">
+
+            </div><!-- row -->
+
+            <a href="" id="txtmsg" class="btn btn-light btn-block mg-t-50">Please select a company to display a list of employees</a>
+
+        </div><!-- manager-right -->
+        <div class="manager-left">
+            <label class="section-label-sm mg-t-25">SEARCH BY NAME, PHONE OR EMAIL</label>
+            <nav class="nav">
+                <input type="text" placeholder="Search by Name, Phone or Email" id="" class="form-control txtSearch" />
+
+
+            </nav>
+
+            <label class="section-label-sm mg-t-25">Company</label>
+            <nav class="nav">
+                <select class="form-control select2-show-search company-information" data-placeholder="Choose One Company">
+                </select>
+
+            </nav>
+            <label class="section-label-sm mg-t-25">Division</label>
+            <nav class="nav">
+                <select class="form-control select2-show-search division-information" data-placeholder="Choose One Division">
+                </select>
+
+            </nav>
+            <label class="section-label-sm mg-t-25">Location</label>
+            <nav class="nav">
+                <select class="form-control select2-show-search location-information" data-placeholder="Choose One Location">
+                </select>
+
+            </nav>
+
+            <label class="section-label-sm mg-t-25">Job Position</label>
+            <nav class="nav">
+                <select class="form-control select2-show-search position-information" data-placeholder="Choose One Job Position">
+                </select>
+
+            </nav>
+        </div><!-- manager-left -->
+    </div><!-- manager-wrapper -->
+
+</div>
+<script>
+    var EmployeeData =@Html.Raw(Json.Encode(Obj));
+
+</script>
+<script src="~/Content/CustomScript/BrokerEmployee.js"></script>
+<script>
+
+    $(document).ready(function () {
+        'use strict';
+        $('.select2-show-search').select2({
+
+            minimumResultsForSearch: ''
+        });
+        setTimeout(function () { $('.select2-show-search').val('0') }, 200);
+    });
+    //$(function () {
+
+    //});
+</script>

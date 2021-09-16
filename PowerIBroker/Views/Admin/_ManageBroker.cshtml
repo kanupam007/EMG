@@ -1,0 +1,69 @@
+﻿@using PowerIBrokerBusinessLayer;
+
+@if (ViewBag.BrokerMaster.Count == 0)
+{
+    <style>
+        #tblBrokerMaster_info, #tblBrokerMaster_paginate {
+            display: none;
+        }
+    </style>
+}
+<div style="margin-top: 10px;">
+    <fieldset>
+        <legend>&nbsp;&nbsp;Broker Company Details</legend>
+        <table id="tblBrokerMaster" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th width="25%">Broker Company Name</th>
+                    <th width="20%">Street Name</th>
+                    <th width="10%">City</th>
+                    <th width="15%">Work Phone</th>
+                    <th width="10%">Status</th>
+                    <th width="20%">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.BrokerMaster != null)
+                {
+
+                    foreach (var brokerMaster in ViewBag.BrokerMaster)
+                    {
+                        <tr>
+                            <td>@brokerMaster.Broker</td>
+                            <td>@brokerMaster.Street</td>
+                            <td>@brokerMaster.CityMaster.City</td>
+                            <td>@Helper.CurrencyFormat(Convert.ToString(brokerMaster.WorkPhone), 0, "", "Phone")</td>                          
+                            <td>@(brokerMaster.IsActive == true ? "Active" : "In-Active")</td>
+                            <td>
+                                <a href="javascript:void(0)" class="btn btn-primary btn-xs editBroker" data-id="@brokerMaster.BrokerId" data-toggle="modal">Edit</a>
+                                <a href="javascript:void(0)" data-id="@brokerMaster.BrokerId" data-status="@brokerMaster.IsActive" class="@(brokerMaster.IsActive == true ? "btn btn-danger btn-xs BrokerStatus" : "btn btn-primary btn-xs BrokerStatus")">@(brokerMaster.IsActive == true ? "Suspend" : "Activate")</a>
+                                <a href="javascript:void(0)" data-id="@brokerMaster.BrokerId" class="btn btn-danger btn-xs BrokerDeactivate">Delete</a>
+
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+
+
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+<script>
+    $('#tblBrokerMaster').DataTable({
+        columns: [
+        { title: "Broker Company Name" },
+        { title: "Street" },
+        { title: "City" },
+        { title: "Work Phone" },
+        //{ title: "Name" },
+        //{ title: "Email" },
+        //{ title: "Mobile Phone" },
+         { title: "Status" },
+        { title: "Action", "orderable": false },
+        ]
+
+    });
+</script>

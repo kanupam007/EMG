@@ -1,0 +1,113 @@
+﻿@model PowerIBrokerDataLayer.FeaturesPageContent
+@{
+    ViewBag.Title = "ManageFeatureContents";
+   Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+@{
+    List<PowerIBrokerDataLayer.FeaturesPageContent> featureContents = ViewBag.FeatureContents;
+}
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div>
+
+        </div>
+        <div class="col-lg-12">
+            <h2>Manage Features</h2>
+
+            <div class="@(TempData["CustomMessageMFC"] != null ? TempData["MessageTypeMFC"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                @if (TempData["CustomMessageMFC"] != null)
+                {
+                    <i class="fa @(TempData["MessageTypeMFC"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                }
+                <span>@TempData["CustomMessageMFC"]</span>
+            </div>
+
+            @using (Html.BeginForm("ManageFeatureContents", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label>Title</label>
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Title" })
+                    <p class="help-block">Example Title here.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Icon (min:70x70)</label>
+                    <input type="file" id="file" name="file" onchange="showfilepreview(this, 'featuresBanner')">
+
+                </div>
+                <div class="form-group">
+                    <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.Image) ? "http://placehold.it/70x70" : Url.Content("~/Uploads/Admin/HomePageFeatureIcons/" + Model.Image) : "http://placehold.it/70x70")" />
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "3", placeholder = "Description" })
+                    <p class="help-block">Example Description here.</p>
+                </div>
+                <div class="form-group">
+                    <label>Banner Link</label>
+                    @Html.TextBoxFor(model => model.Link, new { @class = "form-control", placeholder = "Banner Link" })
+                    <p class="help-block">Example link here. (optional)</p>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" @(Model != null ? Model.IsActive == true ? "checked" : "" : "") value="true" name="IsActive" />
+                    <label>Status</label>
+                </div>
+                @Html.HiddenFor(model => model.Image)
+                <input type="hidden" value="@ViewBag.ActionType" name="actionType" />
+
+            <button class="btn btn-primary btn-lg" id="btnSaveFeaturesContent" type="submit">@(ViewBag.ActionType == "save" ? "Add" : "Update") Content</button>
+            }
+            @if (featureContents.Count > 0)
+            {
+                <div class="col-lg-12">
+                    <h3>Added Feature Contents</h3>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                   
+                                    <th width="10%">Title</th>
+                                    <th width="10%">Icon</th>
+                                    <th width="33%">Description</th>
+                                    <th width="33%">Link</th>
+                                    <th width="4%">Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var content in featureContents)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span>@content.Title</span>
+                                        </td>
+                                        <td>
+                                            <img src="@Url.Content("~/Uploads/Admin/HomePageFeatureIcons/"+content.Image)" />
+                                        </td>
+                                        <td>
+                                            <span>@content.Description</span>
+                                        </td>
+                                        <td>
+                                            <span>@content.Link</span>
+                                        </td>
+                                        <td>
+                                            <span>@(content.IsActive == true ? "Active" : "Inactive")</span>
+                                        </td>
+                                        <td class="text-center">
+
+                                            @Html.ActionLink("Edit", "ManageFeatureContents", new { Id = content.Id })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+    </div>
+</div>

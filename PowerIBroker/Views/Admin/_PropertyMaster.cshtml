@@ -1,0 +1,43 @@
+﻿<table id="tblProperyMaster" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th width="15%">Plan Category Name</th>
+            <th width="15%">Property Group Name</th>
+            <th width="15%">Property Name</th>
+            <th width="15%">Display Name</th>
+            <th width="5%">Sequence</th>
+            <th width="5%">Status</th>
+            <th width="10%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.PropertyMaster != null)
+        {
+
+            foreach (var propertyMaster in ViewBag.PropertyMaster)
+            {
+                <tr>
+                   <td>@propertyMaster.EMG_PropertyGroupMaster.EMG_PlanCategory.PlanCategory</td>
+                   <td>@propertyMaster.EMG_PropertyGroupMaster.PropertyGroupName</td>                   
+                    <td>@propertyMaster.PropertyName</td>
+                    <td>@propertyMaster.DisplayName</td>
+                    <td>@propertyMaster.SortOrder</td>
+                    <td>
+                        @(propertyMaster.IsActive == true ? "Active" : "Inactive")
+
+                    </td>
+                    <td>
+                        <a href="@Url.Action("EditPropertyMaster", "Admin", new { @id = propertyMaster.PropertyId })" class="btn btn-primary btn-xs">Edit</a>
+                        @*<a data-exclude="true" href="javascript:void(0)" onclick="return DeletePropertyMaster(@propertyMaster.PropertyId);" class="btn btn-primary btn-xs" style="background-color:red;border-color:red">Inactive</a>*@
+
+
+                    </td>
+
+                </tr>
+            }
+        }
+
+
+    </tbody>
+</table>
+

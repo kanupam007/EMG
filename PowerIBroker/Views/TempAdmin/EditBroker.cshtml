@@ -1,0 +1,57 @@
+﻿@using PowerIBrokerDataLayer
+@using PowerIBrokerBusinessLayer
+@{
+    PowerIBrokerEntities context = new PowerIBrokerEntities();
+    Comman objComman = new Comman();
+    ViewBag.Title = "EditBroker";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    var StateData = context.EmployeeStates.ToList();
+    var ObjClient = context.GeneralAgentCompanies.ToList();
+}
+
+
+
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/Super-Admin">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Company General Agent</li>
+        </ol>
+        <h6 class="slim-pagetitle">Edit Company General Agent</h6>
+    </div>
+
+    <div class="section-wrapper">
+        <div class="table-responsive">
+            <table class="table mg-b-0 datatable">
+                <thead>
+                    <tr>
+                        <th width="30%"><a href="#">Name</a></th>
+                        <th width="15%" style="text-align:center">City</th>
+                        <th width="10%" style="text-align:center">State</th>
+                        <th width="10%" style="text-align:center">Work Phone</th>
+                        <th width="15%" style="text-align:center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ObjClient)
+                    {
+
+                        <tr>
+                            <td class="pdL">@item.GeneralAgent</td>
+                            <td style="text-align:center"><a title="Edit" href="#">@(context.CityMasters.Where(x=>x.ID==item.City).Count()>0?context.CityMasters.Where(x=>x.ID==item.City).FirstOrDefault().City:"")</a></td>
+                            <td style="text-align:center"><a title="Edit" href="#">@(StateData.Where(x=>x.StateCode==Convert.ToString(item.StateMaster.State)).Count()>0? StateData.Where(x => x.StateCode == Convert.ToString(item.StateMaster.State)).FirstOrDefault().StateName: "------------")</a></td>
+                            <td style="text-align:center"><a title="Edit" href="#">@(!string.IsNullOrEmpty(item.Phone)? objComman.AddMasking(item.Phone) : !string.IsNullOrEmpty(item.WorkPhone) ? objComman.AddMasking(item.WorkPhone):"------------")</a></td>
+                            <td class="grey" style="text-align:center">
+                                <a title="Edit" style="margin-bottom: 2px;" class="btn btn-outline-primary mg-b-10" href="/Super-Admin/ManageBroker/@item.GeneralAgentId">Edit </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+</div>
+

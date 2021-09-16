@@ -1,0 +1,87 @@
+﻿@using PowerIBrokerBusinessLayer
+@{
+    ViewBag.Title = "DemoRequest";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    UserManagement um = new UserManagement();
+    var contactUsEnquiries = um.GetCompanyDemos();
+}
+
+<div class="container">
+    <div class="slim-pageheader">
+        <ol class="breadcrumb slim-breadcrumb">
+            <li class="breadcrumb-item"><a href="/Super-Admin">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Manage Demo Request</li>
+        </ol>
+        <h6 class="slim-pagetitle">Manage Demo Request</h6>
+    </div>
+
+
+
+    <div class="row row-sm mg-t-20">
+        <div class="col-lg-12">
+            <div class="section-wrapper">
+                <label class="section-title"> Manage Demo Request</label>
+                <div class="table-responsive">
+                    <table  class="table display responsive nowrap">
+                        <thead>
+                            <tr>
+                                <th class="wd-15p" width="15%">Company Name</th>
+                                <th class="wd-15p" width="15%">Client Name</th>
+                                <th class="wd-20p" width="15%">Contact</th>
+                                <th class="wd-20p" width="15%">Email</th>
+                                <th class="wd-15p" width="10%">Status</th>
+                                <th class="wd-10p" width="10%">Completed Date</th>
+                                @*<th class="wd-25p" width="10%">Created Date</th>*@
+                                <th class="wd-25p" width="10%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var content in contactUsEnquiries)
+                            {
+                                <tr>
+                                    <td width="15%">
+                                        <span>@content.CCompanyName</span>
+                                    </td>
+                                    <td width="15%">
+                                        <span>@content.CName</span>
+                                    </td>
+                                    <td width="15%">
+                                        <span>@content.CContact</span>
+                                    </td>
+                                    <td width="15%">
+                                        <span>@content.CEmail</span>
+                                    </td>
+                                    <td width="10%">
+                                        <span>@(content.Status == "C" ? "Completed" : "Pending")</span>
+                                    </td>
+                                    <td width="10%">
+                                        <span> @content.DemoCompletedDate</span>
+                                    </td>
+                                    @*<td width="10%">
+                                        <span>@content.CreatedOn</span>
+                                    </td>*@
+
+                                    <td align="right" width="10%">
+                                        @if (content.Status != "C")
+                                        {
+                                            <a title="Mark Complete" onclick="return confirm('Are you sure to give the company demo ?');" href="@Url.Content("~/Admin/UpdateCompanyDemoStatus?ID=" + content.ID+"&flag=0")" class="btn btn-primary btn-xs">Done</a>
+                                        }
+
+                                        
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- section-wrapper -->
+        </div><!-- col-6 -->
+    </div>
+
+
+
+
+</div>

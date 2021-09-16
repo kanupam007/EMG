@@ -1,0 +1,121 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>EnrollMyGroup</title>
+    <link rel="shortcut icon" type="image/ico" href="~/Content/Frontend/images/favicon.ico">
+    <link href="/Content/assets/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/Content/assets/lib/Ionicons/css/ionicons.css" rel="stylesheet">
+    <link href="/Content/assets/lib/jqvmap/css/jqvmap.min.css" rel="stylesheet">
+    <link href="/Content/assets/lib/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="/Content/assets/lib/chartist/css/chartist.css" rel="stylesheet">
+    <link href="/Content/assets/lib/rickshaw/css/rickshaw.min.css" rel="stylesheet">
+    <link href="/Content/assets/lib/select2/css/select2.min.css" rel="stylesheet">
+    <link href="~/Content/assets/css/slim.css" rel="stylesheet" />
+    <link href="~/Content/assets/js/Alert/stylesheets/jquery.Alert.css" rel="stylesheet" />
+    <link href="~/Content/assets/js/sweetalert.css" rel="stylesheet" />
+    <script src="/Content/assets/lib/jquery/js/jquery.js"></script>
+    <script src="/Content/assets/js/sweetalert.js"></script>
+    <script src="/Content/assets/js/Alert/javascripts/jquery.Message.js"></script>
+    <script src="/Content/assets/js/Alert/javascripts/sample.js"></script>
+    <script src="/Content/assets/js/common.js"></script>
+    <style>
+        .signInError {
+            text-align: left;
+            color: red;
+            font-size: 14px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signin-wrapper">
+        <div class="signin-box">
+            <h2 class="slim-logo"><a href="/">EM&M</a></h2>
+            <h2 class="signin-title-primary">Welcome Admin!</h2>
+            <h3 class="signin-title-secondary">Sign in to continue.</h3>
+            @using (Html.BeginForm("Index", "Admin", FormMethod.Post, new { @class = "form-signin", @id = "AdminLoginformsubmit" }))
+            {
+                <div class="form-group">
+                    <input type="text" class="form-control inputTxt1" placeholder="Email or Phone" name="EmailOrUserName" id="LoginEmail">
+                    <ul class="parsley-errors-list filled" id="parsley-LoginEmail"><li class="parsley-required">Email or Phone is required.</li></ul>
+                </div>
+
+                <div class="form-group mg-b-50">
+                    <input type="password" class="form-control" placeholder="Password" name="Password" id="LoginPassword">
+                    <ul class="parsley-errors-list filled" id="parsley-LoginPassword"><li class="parsley-required">Password is required.</li></ul>
+                </div>
+                
+
+
+
+
+                <button class="btn btn-lg btn-primary btn-block" id="btnAdminLogin" type="submit">Sign in</button>
+
+
+                <div class="topMargin">
+
+                    <div class="@(TempData["CustomMessageAL"] != null ? TempData["MessageTypeAL"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                        @if (TempData["CustomMessageAL"] != null)
+                        {
+                            <i class="fa @(TempData["MessageTypeAL"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                        }
+                        <span>@TempData["CustomMessageAL"]</span>
+                    </div>
+                </div>
+            }
+           
+        </div>
+
+    </div>
+    <script src="/Content/assets/lib/popper.js/js/popper.js"></script>
+    <script src="/Content/assets/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="/Content/assets/lib/jquery.cookie/js/jquery.cookie.js"></script>
+    <script src="/Content/assets/lib/select2/js/select2.full.min.js"></script>
+    <script src="/Content/assets/lib/moment/js/moment.js"></script>
+    <script src="/Content/assets/lib/d3/js/d3.js"></script>
+    <script src="/Content/assets/lib/rickshaw/js/rickshaw.min.js"></script>
+    <script src="/Content/assets/lib/gmaps/js/gmaps.js"></script>
+    <script src="/Content/assets/lib/peity/js/jquery.peity.js"></script>
+    <script src="/Content/assets/js/slim.js"></script>
+    <script src="/Content/assets/js/ResizeSensor.js"></script>
+    <script src="/Content/assets/js/widgets.js"></script>
+    <script>
+        function ValidateSigninUser() {
+            var valid = true;
+            $('.filled').hide();
+            $('.form-control').removeClass('parsley-error');
+            if ($("#LoginEmail").val() == "") {
+                valid = false;
+                FocusErrors('LoginEmail');
+            }
+            if ($("#LoginPassword").val() == "") {
+                valid = false;
+                FocusErrors('LoginPassword');
+            }
+            return valid;
+        }
+        function FocusErrors(Id) {
+            $("#" + Id).val('');
+            $("#" + Id).focus();
+            $("#" + Id).addClass('parsley-error');
+            $('#parsley-' + Id).show();
+        }
+        $(document).on('click', '#btnUserLogin', function () {
+            if (ValidateSigninUser()) {
+                $(this).prop('disabled', true);
+                var temptext = $(this).text();
+                $(this).text('Processing...');
+                $("#Loginformsubmit").submit();
+            }
+        })
+
+    </script>
+</body>
+</html>

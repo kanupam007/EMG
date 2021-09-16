@@ -1,0 +1,87 @@
+﻿@model PowerIBrokerDataLayer.PricingPageContent
+
+@{
+    ViewBag.Title = "ManagePricingPageContent";
+   Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+@*<script src="http://mjolnic.com/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"></script>
+<link href="http://mjolnic.com/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+<script>
+    $(document).ready(function () {
+       
+            $('#colorPicker').colorpicker();
+        
+    });
+</script>*@
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div>
+
+        </div>
+        <div class="col-lg-12">
+            <h2>Manage Pricing Page</h2>
+
+            <div class="@(TempData["CustomMessageMPPC"] != null ? TempData["MessageTypeMPPC"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                @if (TempData["CustomMessageMPPC"] != null)
+                {
+                    <i class="fa @(TempData["MessageTypeMPPC"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                }
+                <span>@TempData["CustomMessageMPPC"]</span>
+            </div>
+
+            @using (Html.BeginForm("ManagePricingPageContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label>Title</label>
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control", placeholder = "Heading" })
+                    <p class="help-block">Example Title here.</p>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = "3", placeholder = "Description" })
+                    <p class="help-block">Example Description here.</p>
+                </div>
+                <div class="col-lg-6">
+                            <div class="form-group">
+                            <label>Left Content</label>
+                                @Html.TextAreaFor(model => model.LeftContent, new { @class = "form-control", rows = "3", placeholder = "Description" })
+                                <p class="help-block">Left Content here.</p>
+                                </div>
+                </div>
+                 <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Right Content</label>
+                                @Html.TextAreaFor(model => model.RightContent, new { @class = "form-control", rows = "3", placeholder = "Description" })
+                                <p class="help-block">Right Content here.</p>
+                            </div>
+                 </div>
+                @*<div class="form-group">
+                    <div id="colorPicker" class="input-group demo2">
+                        <input type="text" value="" class="form-control" />
+                        <span class="input-group-addon"><i></i></span>
+                    </div>
+                   
+                </div>*@
+                @*<div class="form-group">
+                        <label>Banner Image (min:1300x830)</label>
+                        <input type="file" id="file" name="file" onchange="showfilepreview(this, 'homepageBanner')">
+
+                    </div>
+                    <div class="form-group">
+                        <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.BackgroundImage) ? "http://placehold.it/1300x830" : "/Uploads/Admin/HomePageBanners/" + Model.Banner : "http://placehold.it/1300x830")" />
+                    </div>
+
+                    @Html.HiddenFor(model => model.Banner)
+                *@
+    <button class="btn btn-primary btn-lg" id="btnSavePricingPageContent" type="submit">Submit</button>
+            }
+
+
+        </div>
+
+
+    </div>
+</div>

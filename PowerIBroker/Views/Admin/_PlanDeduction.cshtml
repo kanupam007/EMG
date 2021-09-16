@@ -1,0 +1,34 @@
+﻿
+<table id="example1" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th width="70%">Plan Deduction</th>
+            <th width="10%">Status</th>
+            <th width="20%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.PlanDeduction != null)
+        {
+            foreach (var options in ViewBag.PlanDeduction)
+            {
+                <tr>
+                    <td>@options.PlanDeduction</td>
+                    <td>
+                        @(options.IsActive == true ? "Active" : "Inactive")
+                    </td>
+                    <td>
+                        @if (options.IsDeleted != true)
+                        {
+                            <a href="@Url.Action("EditPlanDeduction", "Admin", new { @id = options.ID })" class="btn btn-primary btn-xs">Edit</a>
+                            <a data-exclude="true" href="javascript:void(0)" onclick="return DeletePlanDeduction(@options.ID);" class="btn btn-primary btn-xs" style="background-color:red;border-color:red"> Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+
+
+
+    </tbody>
+</table>

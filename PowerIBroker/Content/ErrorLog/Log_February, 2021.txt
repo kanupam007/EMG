@@ -1,0 +1,72 @@
+-------------------START-------------2021-02-24 11:58:15
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : Cannot perform runtime binding on a null reference
+-------------------END-------------2021-02-24 11:58:15
+
+-------------------START-------------2021-02-24 12:00:55
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : Cannot perform runtime binding on a null reference
+-------------------END-------------2021-02-24 12:00:55
+
+-------------------START-------------2021-02-24 12:18:10
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : Cannot perform runtime binding on a null reference
+-------------------END-------------2021-02-24 12:18:10
+
+-------------------START-------------2021-02-24 12:18:51
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : Cannot perform runtime binding on a null reference
+-------------------END-------------2021-02-24 12:18:51
+
+-------------------START-------------2021-02-24 12:22:28
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : Cannot perform runtime binding on a null reference
+-------------------END-------------2021-02-24 12:22:28
+
+-------------------START-------------2021-02-24 12:23:53
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : 'PowerIBrokerDataLayer.ACA_Information' does not contain a definition for 'Count'
+-------------------END-------------2021-02-24 12:23:53
+
+-------------------START-------------2021-02-24 16:31:20
+
+Controller Name : ACA Controller
+Function in which error found : ActionResult ACA1095()
+Process Type : ActionResult=[HttpGet]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------2021-02-24 16:31:20
+
+-------------------START-------------26-02-2021 18:10:27
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------26-02-2021 18:10:27
+
+-------------------START-------------26-02-2021 18:10:48
+
+Controller Name : BasicInfo Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : String was not recognized as a valid DateTime.
+-------------------END-------------26-02-2021 18:10:48
+

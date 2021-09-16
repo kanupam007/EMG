@@ -1,0 +1,121 @@
+﻿@using PagedList;
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+<link href="~/Content/Frontend/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Content/Frontend/js/bootstrap.min.js"></script>
+
+@*<link href="~/Content/Admin/css/stylesheet.css" rel="stylesheet" />*@
+<style>
+    .custom-input-error {
+        border: 1px solid #a94442 !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        background-color: #FBE8E8 !important;
+    }
+
+    .custom-input-success {
+        border: 1px solid #3c763d !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        background-color: #D6F3D6 !important;
+    }
+
+    ul.pagination li {
+        float: left;
+        margin: 10px;
+        border: 1px solid #61bbb6;
+        padding: 2px;
+    }
+
+    .benifitLeft {
+        width: 49%;
+        float: left;
+    }
+
+    .benifitRight {
+        width: 49%;
+        float: right !important;
+        text-align: right;
+        position: relative;
+    }
+
+    .margin {
+        position: absolute;
+        right: 0px;
+        top: 27px;
+    }
+</style>
+
+
+<section class="content">
+    <div>
+        <h3 class="box-title">
+            SQL Report
+        </h3>
+        <div class="compTble-bot">
+            <div style="margin-bottom:50px;width:100%">
+                @using (Html.BeginForm("ReportBySql", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "forminline" }))
+        {
+            <div class="">
+                <textarea style="width: 100%; height: 300px;" class="form-control input-sm" name="txtQuery" id="txtQuery">@TempData["Query"]</textarea>
+                <div class="clr" style="padding-top:15px;">
+                    <input type="submit" class="btn btn-primary addBtns" id="SubmitSqlQuery" value="Submit" name="Command" />
+                    <input type="submit" class="btn btn-primary addBtns" id="ExportSqlQuery" value="Export" name="Command" />
+                </div>
+            </div>
+        }
+            </div>
+
+            <div style="margin-bottom:20px;width:50%">
+                <div class="@(TempData["CustomMessagesql"] != null ? TempData["MessageTypesql"] =="Success"?"alert alert-success" : "alert alert-danger":"")">
+                    @if (TempData["CustomMessagesql"] != null)
+            {
+                <i class="fa @(TempData["MessageTypesql"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                }
+                    <span>@TempData["CustomMessagesql"]</span>
+                </div>
+            </div>
+            @if (Model != null)
+            {
+                <div class="col-lg-12">
+                    <div class="box">
+                        <div class="box-body" style="overflow: auto">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr class="hd">
+                                        @foreach (System.Data.DataColumn col in Model.Columns)
+                                        {
+                                    <td>
+                                        @col.Caption
+                                    </td>
+                                        }
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (System.Data.DataRow row in Model.Rows)
+                                    {
+                                <tr>
+                                    @foreach (var cell in row.ItemArray)
+                                            {
+                                        <td>
+                                            @cell.ToString()
+                                        </td>
+                                            }
+                                </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+
+</section>

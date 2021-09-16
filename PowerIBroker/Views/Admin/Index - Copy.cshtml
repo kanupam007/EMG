@@ -1,0 +1,151 @@
+﻿@using PowerIBrokerBusinessLayer;
+@model PowerIBroker.Models.AdminLogin
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+
+    Administration Admin = new Administration();
+    ViewBag.IsCpatchaAdmin = Admin.IsCpatcha("CaptchaOnAdminLogin");
+}
+<link rel="shortcut icon" type="image/ico" href="~/Content/Frontend/images/favicon.ico">
+<!-- Bootstrap Core CSS -->
+<link href="@Url.Content("~/content/admin/css/bootstrap.min.css")" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="@Url.Content("~/content/admin/css/sb-admin.css")" rel="stylesheet">
+
+<!-- Custom Fonts -->
+
+<link href="@Url.Content("~/content/admin/font-awesome/css/font-awesome.min.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Content/Admin/css/style.css")" rel="stylesheet" />
+<!-- jQuery -->
+<script src="@Url.Content("~/content/admin/js/jquery.js")"></script>
+<script src="@Url.Content("~/Content/Admin/js/validations.js")"></script>
+@*<script src="~/Content/Frontend/js/FrontendValidate.js"></script>*@
+@*<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">*@
+<link href="~/Content/Frontend/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Content/Frontend/js/bootstrap.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        @*@using (Html.BeginForm("Index", "Admin", FormMethod.Post, new { id = "AdminLoginformsubmit" }, new { @class = "form-signin" }))*@
+
+        @using (Html.BeginForm("Index", "Admin", FormMethod.Post,  new { @class = "form-signin", @id = "AdminLoginformsubmit" }))
+        {
+            <input type="hidden" value="" name="CultureName" id="CultureName" />
+            <div class="logo" style="text-align: center;">
+                <a href="/">
+                    <img src="@Url.Content("~/content/frontend/images/logo.png")">
+                </a><h3 class="form-signin-heading">Admin Login</h3>
+            </div>
+            <label for="inputEmail" class="sr-only">Email address</label>
+
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Email / Username" id="LoginEmail" name="EmailOrUserName" autofocus="" />
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback">
+                <input type="password" id="LoginPassword" name="Password" class="form-control" placeholder="Password" />
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            //deee
+           
+
+
+
+            <div class="fp"><a class="showPopup" href="#forgotPassPopup" data-toggle="modal">I forgot my password</a></div><br />
+            if(ViewBag.IsCpatchaAdmin == true)
+                {
+                @*<button class="g-recaptcha" id="CaptchaAdminLogin" hidden="true" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["recaptchaPublicKey"]" data-callback='onAdminLoginSubmit'></button>*@
+              <div class="g-recaptcha" data-sitekey="@System.Configuration.ConfigurationManager.AppSettings["recaptchaPublicKey"]"></div>
+            <br />
+                <button class="btn btn-lg btn-primary btn-block" id="btnAdminLogin" type="button">Sign in</button>
+            }
+            else
+            {
+                <button class="btn btn-lg btn-primary btn-block" id="btnAdminLogin" type="submit">Sign in</button>
+            }
+
+
+            <div class="topMargin">
+
+                <div class="@(TempData["CustomMessageAL"] != null ? TempData["MessageTypeAL"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                    @if (TempData["CustomMessageAL"] != null)
+                    {
+                        <i class="fa @(TempData["MessageTypeAL"] == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                    }
+                    <span>@TempData["CustomMessageAL"]</span>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="forgotPassPopup" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <a href="/">
+                    <img src="@Url.Content("~/content/frontend/images/logo.png")">
+                </a>
+            </div>
+
+            <h2 class="modal-title" style="text-align:center">Reset Your Password</h2>
+
+
+
+            <div class="modal-header" style="padding:30px">
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control" placeholder="Enter Your Email" autofocus="" id="forgotPassEmail" />
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+            </div>
+
+
+            <div class="modal-footer" style="text-align: Left;">
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" id="btnFrgtPass">Send</button>
+
+                </div><!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div><!-- /.col -->
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Validate Captcha
+    function onAdminLoginSubmit(token) {
+        $.ajax({
+            type: "POST",
+            url: "/UserLogin/ValidateCaptcha",
+            data: "{response: '" + token + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (captchaResponse) {
+                if (captchaResponse.Success) {
+                    $("#AdminLoginformsubmit").submit();
+                } else {
+                }
+            }
+        });
+    }
+</script>
+
+

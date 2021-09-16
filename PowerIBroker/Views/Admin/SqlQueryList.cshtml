@@ -1,0 +1,1076 @@
+﻿@using PagedList;
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<style>
+    .table td {
+        text-align: left !important;
+    }
+</style>
+
+<section class="content">
+    <h3 class="box-title">
+        SQL Queries
+    </h3>
+    <div class="col-lg-12">
+        <div class="box">
+            <div class="box-body" style="overflow: auto">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="hd">
+                            <td width="5%"><b>S.No</b></td>
+                            <td width="10%"><b>Report Name</b></td>
+                            <td width="15%"><b>Description </b></td>
+                            <td width="60%"><b> SQL Query</b></td>
+                            <td width="5%">Remarks</td>
+                            <td width="5%">Updated On</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td> Beneficiary Reports</td>
+                            <td>
+                                The data provides the Beneficiary details for the Employee in that Company. The Data contails Beneficiary Name, SSN, Plan Name,Allocation  etc. so the Admin will have the Beneficiery details for each employee within that perticular company.
+                            </td>
+                            <td>
+                                select
+                                CName as [Company Name],
+                                [tblCompany-Employee-EmploymentInfo].SSN,
+                                DBO.GetFullName([tblCompany-Employee-BasicInfo].ID) As [Employee Name],
+                                case when IsBeneficiary=1 then EMG_Beneficiary.FirstName else  [tblCompany-Employee-DependentInfo].FirstName end
+                                as [Beneficary Name],
+                                EMG_OpenEnrollment.Description as [Enroll Name],
+                                EMG_PlanCategory.PlanCategory as [Category],
+                                EMG_InsurancePlans.PlanName as [Plan Name],
+                                Allocation
+                                from EMG_PlanBeneficiary
+                                left join EMG_Beneficiary on EMG_PlanBeneficiary.DependentId=EMG_Beneficiary.ID and IsBeneficiary=1
+                                left join [tblCompany-Employee-DependentInfo] on EMG_PlanBeneficiary.DependentId=[tblCompany-Employee-DependentInfo].ID and IsBeneficiary=0
+                                inner join [tblCompany-Employee-BasicInfo] on [tblCompany-Employee-BasicInfo].ID=EMG_PlanBeneficiary.EmployeeId
+                                inner join CompanyMaster on CompanyMaster.ID=[tblCompany-Employee-BasicInfo].CompanyId
+                                inner join [tblEmployee-Benefits] on [tblEmployee-Benefits].PlanCategoryID=EMG_PlanBeneficiary.CatId and [tblEmployee-Benefits].EmployeeID=EMG_PlanBeneficiary.EmployeeId and [tblEmployee-Benefits].EnrollID=EMG_PlanBeneficiary.OpenEnrollId
+                                inner join EMG_InsurancePlans on EMG_InsurancePlans.ID=[tblEmployee-Benefits].PlanID
+                                inner join EMG_PlanCategory on EMG_PlanCategory.ID=EMG_InsurancePlans.PlanCategoryID
+                                inner join EMG_OpenEnrollment on EMG_OpenEnrollment.ID =[tblEmployee-Benefits].EnrollID
+                                inner join [tblCompany-Employee-EmploymentInfo] on [tblCompany-Employee-EmploymentInfo].EmployeeID= [tblCompany-Employee-BasicInfo].ID
+                                where  EMG_PlanBeneficiary.IsActive=1 and CompanyMaster.ID=2 and EMG_PlanBeneficiary.OpenEnrollId=25
+                                order by [tblCompany-Employee-BasicInfo].ID
+
+                            </td>
+                            <td></td>
+                            <td>29 Jan 2019 </td>
+
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Benefite Waiver</td>
+                            <td> This Data provide the details of Waiver Benefits. This provide the List employee who has waived any Plan in the Enolment in that Perticular Company </td>
+                            <td>
+                                SELECT
+                                [tblEmployee-Benefits].EmployeeID,
+                                [tblEmployee-Benefits].WaiveOptionID,
+                                case when EMG_Finalsubmission.Isactive=1 then 'Completed' else 'InProgress' end as Completed,
+                                [tblCompany-Employee-EmploymentInfo].SSN,
+                                [tblCompany-Employee-BasicInfo].FirstName,
+                                [tblCompany-Employee-BasicInfo].LastName,
+                                EMG_OpenEnrollment.Description,
+                                EMG_Finalsubmission.CreatedDate,
+
+                                EMG_PlanCategory.PlanCategory,
+                                EMG_InsurancePlans.PlanName
+                                -- dbo.GetPlanCategorySortOrder([tblEmployee-Benefits].PlanCategoryId) + 0 AS SortOrder,
+                                --
+                                ,EMG_OpenEnrollment.MonthlyBasisID
+
+
+                                From  	 [tblEmployee-Benefits]
+                                INNER join [tblCompany-Employee-BasicInfo] with(nolock) on [tblCompany-Employee-BasicInfo].ID=[tblEmployee-Benefits].EmployeeID
+                                INNER join [tblCompany-Employee-EmploymentInfo] with(nolock) on [tblCompany-Employee-EmploymentInfo].EmployeeID=[tblCompany-Employee-BasicInfo].ID
+                                INNER Join EMG_PlanCategory with(nolock) on EMG_PlanCategory.ID=[tblEmployee-Benefits].PlanCategoryID
+                                INNER JOIN EMG_InsurancePlans with(nolock) on EMG_InsurancePlans.PlanCategoryID=[tblEmployee-Benefits].PlanCategoryID And EMG_InsurancePlans.CompanyID=2
+                                INNER JOIN EMG_OpenEnrollment with(nolock) ON EMG_OpenEnrollment.ID = [tblEmployee-Benefits].EnrollID AND [tblEmployee-Benefits].Type = 'OE'
+                                INNER JOIN CompanyMaster with(nolock) on CompanyMaster.ID=[tblCompany-Employee-BasicInfo].CompanyID
+                                INNER JOIN EMG_Finalsubmission with(nolock) on EMG_Finalsubmission.EmpID=[tblEmployee-Benefits].EmployeeID and EMG_Finalsubmission.EnrollD=[tblEmployee-Benefits].EnrollID
+                                WHERE [tblEmployee-Benefits].EmployeeID in (Select ID from [tblCompany-Employee-BasicInfo] where companyID=2)
+                                AND [tblEmployee-Benefits].IsActive = 0
+                                AND [tblEmployee-Benefits].EnrollID = 25
+                                AND [tblEmployee-Benefits]. WaiveOptionID=1
+                                AND [tblEmployee-Benefits].Type = 'OE'
+                                AND CompanyMaster.ID=2
+                                AND EMG_InsurancePlans.IsActive=1
+
+
+
+
+                            </td>
+                            <td></td>
+                            <td>29 Jan 2019 </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>3</td>
+                            <td>  Enrollment Data</td>
+                            <td> This Data provide the Overall Plan select by the Employee in the Perticular OE. The Dependent, Plan Value , Cost , Coverage all such details are shown in the data </td>
+                            <td>
+                                Declare 	&#64;CompanyId bigint
+                                set &#64;CompanyId =3
+                                Select  T3.Id As EmployeeID, case when t2.Isactive=1 then 'Completed' else 'InProgress' end as Completed ,t8.SSN As SSN ,T3.FirstName ,T3.LastName,T1.DateCreated As CreatedDate,
+                                T1.PlanID ,T1.EnrollID,T1.PlanCategoryID, t5.PlanCategory ,t5.SortOrder,T1.ChildCost ,T1.SelectedRange,T1.SpouseSelectedRange,T7.Name,T1.CoverageID, case when t8.MonthlyBasisID=1 then 'Weekly' When t8.MonthlyBasisID=2 THEN 'Bi-Weekly' When t8.MonthlyBasisID=3 THEN 'Bi-Monthly'  else 'Monthly' end as MonthlyBasisID ,T9.FirstName
+                                --,case when t8.MonthlyBasisID=1 then t4.WeeklyCost When t8.MonthlyBasisID=2 THEN t4.BiWeekly When t8.MonthlyBasisID=3 THEN t4.SemiMonthlyCost  else t4.MonthlyCost end as CostPayPerPeriod
+                                , Case WHEN t1.DependentId >0 Then 'Yes' else 'No' end As DependentAdd,
+                                --New field Name
+                                Case WHEN t1.WaiveOptionID >0 Then 'Yes' else 'No' end As Waive,
+                                t1.WaiveReason,
+                                t6.PlanName,
+                                T4.CoverageOption as Tier,
+                                t9.SSN as CoveredDependentSocialSecurity,
+                                t1.EffectiveDate,
+                                t1.TerminateDate,
+                                case when t8.MonthlyBasisID=1 then t4.WeeklyCost When t8.MonthlyBasisID=2 THEN t4.BiWeekly When t8.MonthlyBasisID=3 THEN t4.SemiMonthlyCost  else t4.MonthlyCost end as EEPerPayPeriodPremium,
+                                t1.ERCost as ERPerPayPeriodPremium
+
+                                --,t1.FSA_TSA_Other_EECost,
+                                --t1.FSA_TSA_Other_ERCost,
+                                --t1.FSA_TSA_Other_EECostChild,
+                                --t1.FSA_TSA_Other_ERCostChild,
+                                --t1.Total_FaceValue
+                                From [tblEmployee-Benefits] t1
+                                Inner Join EMG_FinalSubmission t2 on t1.EnrollID=t2.EnrollD and t1.EmployeeID=t2.EmpID and T2.IsActive=1
+                                inner Join [tblCompany-Employee-BasicInfo] T3 On t1.EmployeeID=t3.Id
+                                inner Join EMG_EmployeeCoverage T4 On t1.CoverageID =t4.Id
+                                Left Join EMG_PlanCategory t5 On t1.PlanCategoryID =t5.Id
+                                Left Join EMG_InsurancePlans t6 On t1.PlanID =t6.Id
+                                Left Join EMG_PlanProvider t7 On t6.PlanProviderID =t7.Id
+                                Left Join [tblCompany-Employee-EmploymentInfo] t8 On t1.EmployeeID =t8.EmployeeID
+                                Left Join [tblCompany-Employee-DependentInfo] t9 On t1.DependentID =t9.ID
+                                Where t1.EmployeeID IN (Select ID from [tblCompany-Employee-BasicInfo] Where CompanyId=&#64;CompanyId)
+
+                            </td>
+                            <td></td>
+                            <td>29 Jan 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>4</td>
+                            <td>  Human Resource</td>
+                            <td> This Query will povide the complete data of the Employee such as First Name, Last Name, Address City, State, Country, Email, DOB etc. Though this query we can fetch the data on the basis of Department, Salary, Department and also by Date.Theough this query we can create muliple report depending on Department, salary , Dob , and so on.  </td>
+                            <td>
+                                Select T1.ID,ISNULL(T1.CompanyId,'') CompanyId,ISNULL(T1.FirstName,'') FirstName, ISNULL(T1.LastName,'') LastName,
+                                ISNULL(T2.PreferredName,'') PreferredName, ISNULL(T2.[Address],'') Address, ISNULL(dbo.GetCity(T2.City),'') City,
+                                ISNULL(dbo.GetState(T2.[State]),'') [State], ISNULL(dbo.GetCountry(T2.Country),'') Country,
+                                ISNULL(T2.Zip,'') Zip,ISNULL(T2.Phone,'') Phone,ISNULL(T2.WorkPhone,'') WorkPhone,ISNULL(T2.WorkEmail,'') WorkEmail,ISNULL(T1.Email,'') Email,
+                                ISNULL(convert(NVARCHAR, T2.DOB, 101),'') DOB,ISNULL(T2.Gender,'')Gender,ISNULL(T2.EmergancyContactName,'') EmergancyContactName,
+                                ISNULL(T2.RelationWithContact,'') RelationWithContact,ISNULL(T2.EmergancyPhone,'')EmergancyPhone,T2.EmployeeImage,
+                                T1.IsAdmin,ISNULL(T2.DigiSignImage,'') as DigiSignImage,ISNULL(T1.Title,'') Title,T3.Salary,T1.DepartmentID,T1.IsArchive,T1.UpdatedOn,T3.StartDate
+                                from [dbo].[tblCompany-Employee-BasicInfo] T1
+                                left Join [dbo].[tblCompany-Employee-PersonalInfo] T2
+                                on T1.ID=T2.EmployeeID
+                                left Join [dbo].[tblCompany-Employee-EmploymentInfo] T3
+                                on T3.EmployeeID=T2.EmployeeID
+
+                            </td>
+                            <td></td>
+                            <td>29 Jan 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>5</td>
+                            <td>  Benefits</td>
+                            <td> This Query will provide the complete data of the Benefits selected by the Employee of any Perticular Company. We can create multiple Records on the basis of such data like Medical  Cost, Vission Cost and Life Cost etc.  </td>
+                            <td>
+                                select DISTINCT [tblEmployee-Benefits].PlanCategoryID,emp.ID,emp.FirstName,emp.LastName,CONVERT(int,ROUND(DATEDIFF(hour,emp.DOB,GETDATE())/8766.0,0)) as Age,
+                                case when emp.Gender=2 then 'Female' else 'Male' end as Gender,
+                                emp.Zip,
+                                emp.SSN,
+                                convert(decimal(10, 2), (EMG_CoverageOptions.TotalRate * EMG_CoverageOptions.EmpContibution)/100) as EmployerCost,
+                                convert(decimal(10, 2),EMG_CoverageOptions.TotalRate - (EMG_CoverageOptions.TotalRate * EMG_CoverageOptions.EmpContibution)/100) as EmployeeCost,
+                                case when [tblEmployee-Benefits].IsActive =1 then 'Un-Waived' else 'Waived' end as IsActive,
+                                case when [tblEmployee-Benefits].PlanCategoryID in (1,2,3) then EMG_CoverageOptions.CoverageOption else EMG_EmployeeCoverage.CoverageOption end as CoverageOption,
+                                EMG_InsurancePlans.PlanName,
+                                [tblEmployee-Benefits].SelectedRange,
+                                emp.Salary,
+                                ISNULL(
+                                case when EMG_OpenEnrollment.MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when EMG_OpenEnrollment.MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when EMG_OpenEnrollment.MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 )as MonthlyCost,
+                                case when EMG_InsurancePlans.Rate is null then 0 else cast(EMG_InsurancePlans.Rate as  decimal(16,2)) end as Rate
+                                from [tblEmployee-Benefits]
+                                join [VW_Company_Employee_PersonalInfo_OpenEnrollReport] emp on emp.ID=[tblEmployee-Benefits].EmployeeID
+                                left join EMG_CoverageOptions on EMG_CoverageOptions.ID=[tblEmployee-Benefits].CoverageID
+                                left join EMG_EmployeeCoverage on EMG_EmployeeCoverage.ID=[tblEmployee-Benefits].CoverageID
+                                join EMG_InsurancePlans on EMG_InsurancePlans.ID=[tblEmployee-Benefits].PlanID
+                                join EMG_OpenEnrollment on EMG_OpenEnrollment.ID =[tblEmployee-Benefits].EnrollID
+                                where EnrollID=&#64;OpenEnrollID and EMG_OpenEnrollment.IsAutoEnroll=0
+
+
+
+                            </td>
+                            <td></td>
+                            <td>29 Jan 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>6</td>
+                            <td>HeadCount</td>
+                            <td>Plan Category</td>
+                            <td>
+                                declare &#64;CompanyId bigint=2
+                                SELECT DISTINCT
+                                [tblCompany-Employee-BasicInfo].ID,
+                                [tblCompany-Employee-EmploymentInfo].SSN,
+                                [tblCompany-Employee-BasicInfo].LastName,
+                                [tblCompany-Employee-BasicInfo].FirstName,
+                                case when isnull([tblCompany-Employee-BasicInfo].NameTitle,'')='0' then '' else [tblCompany-Employee-BasicInfo].NameTitle end  Suffix,
+                                EmployeeState.StateName as [WorkLocation],
+                                EMG_Division.DivisionName as Division,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].EmployeeType,'')=1 then 'Full Time' else 'Part Time' end  [EmployeeType],
+                                EMG_PlanCategory.PlanCategory,
+                                EMG_InsurancePlans.PlanName,
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [tblEmployee-Benefits].EffectiveDate,
+                                case when [tblEmployee-Benefits].IsActive =1 then 'No ' else 'Yes' end as [WaivedStatus],
+                                EMG_EmployeeCoverage.CoverageOption as Tierd,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].MonthlyBasisID,'')=1 then 'Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 2 then 'Bi-Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 3 then 'Bi-Monthly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 4 then 'Monthly' else 'Others' end  Payroll,
+
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As EmployeeCost,
+                                [tblEmployee-Benefits].ERCost As EmployerCost,
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 )+[tblEmployee-Benefits].ERCost As TotalCost
+                                FROM  [tblEmployee-Benefits]
+                                LEFT JOIN [tblCompany-Employee-BasicInfo]  On [tblCompany-Employee-BasicInfo].Id =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-PersonalInfo]  On [tblCompany-Employee-PersonalInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-EmploymentInfo]  On [tblCompany-Employee-EmploymentInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                left JOIN CompanyMaster with (nolock) on CompanyMaster.ID=[tblCompany-Employee-BasicInfo].CompanyId
+                                LEFT JOIN EmployeeState with(nolock) on EmployeeState.Id=[tblCompany-Employee-BasicInfo].WorkLocationID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[tblEmployee-Benefits].PlanID
+                                left join EMG_Division with(nolock) on EMG_Division.ID=[tblCompany-Employee-EmploymentInfo].DivisionID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=EMG_InsurancePlans.PlanCategoryID
+                                LEFT JOIN EMG_EmployeeCoverage on EMG_EmployeeCoverage.InsurancePlanID=[tblEmployee-Benefits].PlanID and [tblEmployee-Benefits].EnrollID=EMG_EmployeeCoverage.OpenEnrollID and [tblEmployee-Benefits].EmployeeId=EMG_EmployeeCoverage.EmployeeId
+                                where (CompanyMaster.Id=&#64;CompanyId and [tblCompany-Employee-BasicInfo].IsActive=1 and [tblCompany-Employee-BasicInfo].IsTerminate=0 and ([tblCompany-Employee-BasicInfo].IsArchive=0 OR [tblCompany-Employee-BasicInfo].IsArchive is null))
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>7</td>
+                            <td>Salary</td>
+                            <td>Plan Category</td>
+                            <td>
+                                declare &#64;CompanyId bigint=2
+                                select
+                                BasicInfo.ID as [EmployeeId],
+                                EmploymentInfo.SSN,
+                                isnull(BasicInfo.LastName,'') LastName,
+                                isnull(BasicInfo.FirstName,'') FirstName,
+                                case when isnull(BasicInfo.NameTitle,'')='0' then '' else BasicInfo.NameTitle end  Suffix,
+                                EmployeeState.StateName as [WorkLocation],
+                                EMG_Division.DivisionName as Division,
+                                DeptartmentMaster.DeptName [Department],
+                                EmploymentInfo.StartDate as [DateOfHire],
+                                case when isnull(EmploymentInfo.EmployeeType,'')=1 then 'Full Time' else 'Part Time' end  [EmployeeType],
+                                case when isnull(EmploymentInfo.MonthlyBasisID,'')=1 then 'Weekly'when EmploymentInfo.MonthlyBasisID = 2 then 'Bi-Weekly'when EmploymentInfo.MonthlyBasisID = 3 then 'Bi-Monthly'when EmploymentInfo.MonthlyBasisID = 4 then 'Monthly' else 'Others' end  Payroll,
+                                EmploymentInfo.Salary,
+                                EmploymentInfo.Bonus,
+                                EmploymentInfo.Commisiion AS Commission,
+                                EmploymentInfo.Salary+EmploymentInfo.Bonus+EmploymentInfo.Commisiion as TotalSalary
+                                from [dbo].[tblCompany-Employee-BasicInfo] BasicInfo
+                                left join [dbo].[tblCompany-Employee-PersonalInfo] PersonalInfo with(nolock) on BasicInfo.id=PersonalInfo.EmployeeID
+                                left join [dbo].[tblCompany-Employee-EmploymentInfo] EmploymentInfo with(nolock) on EmploymentInfo.employeeid=PersonalInfo.EmployeeID
+                                left join [dbo].[tblCompany-Department-Master] DeptartmentMaster with (nolock) on DeptartmentMaster.DeptID=BasicInfo.DepartmentID
+                                left join CompanyMaster with (nolock) on CompanyMaster.ID=BasicInfo.CompanyId
+                                left join EmployeeState with(nolock) on EmployeeState.Id=BasicInfo.WorkLocationID
+                                left join EMG_Division with(nolock) on EMG_Division.ID=EmploymentInfo.DivisionID
+                                where (CompanyMaster.Id=&#64;CompanyId and BasicInfo.IsActive=1 and BasicInfo.IsTerminate=0 and (BasicInfo.IsArchive=0 OR BasicInfo.IsArchive is null))
+                                order by BasicInfo.LastName,BasicInfo.FirstName,BasicInfo.NameTitle
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>8</td>
+                            <td>Employee by Department</td>
+                            <td>Plan Category</td>
+                            <td>
+                                declare &#64;CompanyId bigint=2
+                                select	BasicInfo.ID as [EmployeeId],
+                                EmploymentInfo.SSN,
+                                isnull(BasicInfo.LastName,'') LastName,
+                                isnull(BasicInfo.FirstName,'') FirstName,
+                                isnull(BasicInfo.MiddleName,'') MiddleName,
+                                case when isnull(BasicInfo.NameTitle,'')='0' then '' else BasicInfo.NameTitle end  Suffix,
+                                isnull(PersonalInfo.[Address],'') [Address],
+                                isnull(dbo.getcity(PersonalInfo.City),'') City,
+                                isnull(dbo.getstate(PersonalInfo.[State]),'') [State],
+                                isnull(PersonalInfo.Zip,'') Zip,
+                                isnull(PersonalInfo.WorkPhone,'') Workphone,
+                                isnull(PersonalInfo.Phone,'') Phone,
+                                isnull(PersonalInfo.WorkEmail,'') Workemail,
+                                EmployeeState.StateName as [WorkLocation],
+                                EMG_Division.DivisionName as Division,
+                                DeptartmentMaster.DeptName [Department],
+                                isnull(BasicInfo.Title,'') Title,
+                                EmploymentInfo.StartDate as [DateOfHire],
+                                case when isnull(EmploymentInfo.EmployeeType,'')=1 then 'Full Time' else 'Part Time' end  [EmployeeType],
+                                case when isnull(EmploymentInfo.MonthlyBasisID,'')=1 then 'Weekly'when EmploymentInfo.MonthlyBasisID = 2 then 'Bi-Weekly'when EmploymentInfo.MonthlyBasisID = 3 then 'Bi-Monthly'when EmploymentInfo.MonthlyBasisID = 4 then 'Monthly' else 'Others' end  Payroll
+
+                                from [dbo].[tblCompany-Employee-BasicInfo] BasicInfo
+                                left join [dbo].[tblCompany-Employee-PersonalInfo] PersonalInfo with(nolock) on BasicInfo.id=PersonalInfo.EmployeeID
+                                left join [dbo].[tblCompany-Employee-EmploymentInfo] EmploymentInfo with(nolock) on EmploymentInfo.employeeid=PersonalInfo.EmployeeID
+                                left join [dbo].[tblCompany-Department-Master] DeptartmentMaster with (nolock) on DeptartmentMaster.DeptID=BasicInfo.DepartmentID
+                                left join CompanyMaster with (nolock) on CompanyMaster.ID=BasicInfo.CompanyId
+                                left join EmployeeState with(nolock) on EmployeeState.Id=BasicInfo.WorkLocationID
+                                left join EMG_Division with(nolock) on EMG_Division.ID=EmploymentInfo.DivisionID
+                                where (CompanyMaster.Id=&#64;CompanyId and BasicInfo.IsActive=1 and BasicInfo.IsTerminate=0 and (BasicInfo.IsArchive=0 OR BasicInfo.IsArchive is null))		order by 	BasicInfo.LastName,BasicInfo.FirstName,BasicInfo.NameTitle	asc
+
+
+
+
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>9</td>
+                            <td>Turnover</td>
+                            <td>Plan Category</td>
+                            <td>
+                                declare &#64;CompanyId bigint=2
+                                select	BasicInfo.ID as [EmployeeId],
+                                EmploymentInfo.SSN,
+                                isnull(BasicInfo.LastName,'') LastName,
+                                isnull(BasicInfo.FirstName,'') FirstName,
+                                isnull(BasicInfo.MiddleName,'') MiddleName,
+                                case when isnull(BasicInfo.NameTitle,'')='0' then '' else BasicInfo.NameTitle end  Suffix,
+                                isnull(PersonalInfo.[Address],'') [Address],
+                                isnull(dbo.getcity(PersonalInfo.City),'') City,
+                                isnull(dbo.getstate(PersonalInfo.[State]),'') [State],
+                                isnull(PersonalInfo.Zip,'') Zip,
+                                isnull(convert(nvarchar, PersonalInfo.DOB, 101),'') DOB,
+                                convert(int,round(datediff(hour,PersonalInfo.DOB,getdate())/8766.0,0)) as [Age],--age
+                                case when isnull(PersonalInfo.Gender,'')=1 then 'Male' else 'Female' end  Gender,
+                                EmployeeState.StateName as [WorkLocation],
+                                EMG_Division.DivisionName as Division,
+                                DeptartmentMaster.DeptName [Department],
+                                isnull(BasicInfo.Title,'') Title,
+                                isnull(EmploymentInfo.StartDate ,'') [DateOfHire],
+                                isnull(BasicInfo.TerminateDate,'') DateofArchive,
+                                isnull(BasicInfo.TerminateDate,'') DateOfTermination,
+                                EmployeeStatus =(Case when BasicInfo.IsTerminate=1 then 'Terminated' when BasicInfo.IsArchive=1 then 'Archived' else 'New Hire' end	),
+                                case when isnull(EmploymentInfo.EmployeeType,'')=1 then 'Full Time' else 'Part Time' end  [EmployeeType],
+                                EmploymentInfo.Salary
+                                from [dbo].[tblCompany-Employee-BasicInfo] BasicInfo
+                                left join [dbo].[tblCompany-Employee-PersonalInfo] PersonalInfo with(nolock) on BasicInfo.id=PersonalInfo.EmployeeID
+                                left join [dbo].[tblCompany-Employee-EmploymentInfo] EmploymentInfo with(nolock) on EmploymentInfo.employeeid=PersonalInfo.EmployeeID
+                                left join [dbo].[tblCompany-Department-Master] DeptartmentMaster with (nolock) on DeptartmentMaster.DeptID=BasicInfo.DepartmentID
+                                left join CompanyMaster with (nolock) on CompanyMaster.ID=BasicInfo.CompanyId
+                                left join EmployeeState with(nolock) on EmployeeState.Id=BasicInfo.WorkLocationID
+                                left join EMG_Division with(nolock) on EMG_Division.ID=EmploymentInfo.DivisionID
+                                where CompanyMaster.Id=&#64;CompanyId 		order by 	BasicInfo.LastName,BasicInfo.FirstName,BasicInfo.NameTitle	asc
+
+
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>10</td>
+                            <td>Benefit Census</td>
+                            <td>Plan Category</td>
+                            <td>
+                                declare &#64;CompanyId bigint=2
+                                SELECT DISTINCT
+                                [tblCompany-Employee-EmploymentInfo].SSN,
+                                '' DependentSSN,
+                                [tblCompany-Employee-BasicInfo].LastName,
+                                [tblCompany-Employee-BasicInfo].FirstName,
+                                case when isnull([tblCompany-Employee-BasicInfo].NameTitle,'')='0' then '' else [tblCompany-Employee-BasicInfo].NameTitle end  Suffix,
+                                '' Dependenttype,
+                                case when [tblCompany-Employee-PersonalInfo].Gender=2 then 'Female' else 'Male' end as Gender,
+                                isnull(convert(nvarchar, [tblCompany-Employee-PersonalInfo].DOB, 101),'') DOB,
+                                CONVERT(int,ROUND(DATEDIFF(hour,[tblCompany-Employee-PersonalInfo].DOB,GETDATE())/8766.0,0)) as Age,
+                                EmployeeState.StateName as [WorkLocation],
+                                EMG_PlanCategory.PlanCategory,
+                                EMG_InsurancePlans.PlanName,
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [tblEmployee-Benefits].EffectiveDate,
+                                [tblEmployee-Benefits].TerminateDate,
+                                [tblEmployee-Benefits].SelectedRange As CoverageAmounts,
+                                EMG_EmployeeCoverage.CoverageOption As CoverageOption,
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As EmployeeCost,
+                                [tblEmployee-Benefits].ERCost As EmployerCost,
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 )+[tblEmployee-Benefits].ERCost As TotalCost
+                                FROM  [tblEmployee-Benefits]
+                                LEFT JOIN [tblCompany-Employee-BasicInfo]  On [tblCompany-Employee-BasicInfo].Id =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-PersonalInfo]  On [tblCompany-Employee-PersonalInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-EmploymentInfo]  On [tblCompany-Employee-EmploymentInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                left JOIN CompanyMaster with (nolock) on CompanyMaster.ID=[tblCompany-Employee-BasicInfo].CompanyId
+                                LEFT JOIN EmployeeState with(nolock) on EmployeeState.Id=[tblCompany-Employee-BasicInfo].WorkLocationID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[tblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=EMG_InsurancePlans.PlanCategoryID
+                                INNER JOIN EMG_EmployeeCoverage on EMG_EmployeeCoverage.InsurancePlanID=[tblEmployee-Benefits].PlanID and [tblEmployee-Benefits].EnrollID=EMG_EmployeeCoverage.OpenEnrollID and [tblEmployee-Benefits].EmployeeId=EMG_EmployeeCoverage.EmployeeId
+                                where (CompanyMaster.Id=&#64;CompanyId and [tblCompany-Employee-BasicInfo].IsActive=1 and [tblCompany-Employee-BasicInfo].IsTerminate=0 and ([tblCompany-Employee-BasicInfo].IsArchive=0 OR [tblCompany-Employee-BasicInfo].IsArchive is null))
+
+
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>11</td>
+                            <td>Benefits Cost</td>
+                            <td>Plan Category</td>
+                            <td>
+                                declare &#64;CompanyId bigint=2
+                                SELECT DISTINCT
+                                [tblCompany-Employee-BasicInfo].ID,
+                                [tblCompany-Employee-EmploymentInfo].SSN,
+                                [tblCompany-Employee-BasicInfo].LastName,
+                                [tblCompany-Employee-BasicInfo].FirstName,
+                                case when isnull([tblCompany-Employee-BasicInfo].NameTitle,'')='0' then '' else [tblCompany-Employee-BasicInfo].NameTitle end  Suffix,
+                                EmployeeState.StateName as [WorkLocation],
+                                EMG_Division.DivisionName as Division,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].EmployeeType,'')=1 then 'Full Time' else 'Part Time' end  [EmployeeType],
+                                EMG_PlanCategory.PlanCategory,
+                                EMG_InsurancePlans.PlanName,
+                                [tblEmployee-Benefits].EffectiveDate,
+                                [tblEmployee-Benefits].SelectedRange As CoverageAmounts,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].MonthlyBasisID,'')=1 then 'Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 2 then 'Bi-Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 3 then 'Bi-Monthly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 4 then 'Monthly' else 'Others' end  Payroll,
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As EmployeeCost,
+                                [tblEmployee-Benefits].ERCost As EmployerCost,
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 )+[tblEmployee-Benefits].ERCost As TotalCost,
+                                '' PayrollDeductionCode
+                                FROM  [tblEmployee-Benefits]
+                                LEFT JOIN [tblCompany-Employee-BasicInfo]  On [tblCompany-Employee-BasicInfo].Id =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-PersonalInfo]  On [tblCompany-Employee-PersonalInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-EmploymentInfo]  On [tblCompany-Employee-EmploymentInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                left JOIN CompanyMaster with (nolock) on CompanyMaster.ID=[tblCompany-Employee-BasicInfo].CompanyId
+                                LEFT JOIN EmployeeState with(nolock) on EmployeeState.Id=[tblCompany-Employee-BasicInfo].WorkLocationID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[tblEmployee-Benefits].PlanID
+                                left join EMG_Division with(nolock) on EMG_Division.ID=[tblCompany-Employee-EmploymentInfo].DivisionID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=EMG_InsurancePlans.PlanCategoryID
+                                INNER JOIN EMG_EmployeeCoverage on EMG_EmployeeCoverage.InsurancePlanID=[tblEmployee-Benefits].PlanID and [tblEmployee-Benefits].EnrollID=EMG_EmployeeCoverage.OpenEnrollID and [tblEmployee-Benefits].EmployeeId=EMG_EmployeeCoverage.EmployeeId
+                                where (CompanyMaster.Id= &#64;CompanyId and [tblCompany-Employee-BasicInfo].IsActive=1 and [tblCompany-Employee-BasicInfo].IsTerminate=0 and ([tblCompany-Employee-BasicInfo].IsArchive=0 OR [tblCompany-Employee-BasicInfo].IsArchive is null))
+
+
+
+
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>11</td>
+                            <td>	Healthcare Cost</td>
+                            <td>Close Category</td>
+                            <td>
+                                declare &#64;CompanyId bigint=2
+                                SELECT DISTINCT
+                                [tblCompany-Employee-BasicInfo].ID,
+                                [tblCompany-Employee-EmploymentInfo].SSN,
+                                [tblCompany-Employee-BasicInfo].LastName,
+                                [tblCompany-Employee-BasicInfo].FirstName,
+                                case when isnull([tblCompany-Employee-BasicInfo].NameTitle,'')='0' then '' else [tblCompany-Employee-BasicInfo].NameTitle end  Suffix,
+                                EmployeeState.StateName as [WorkLocation],
+                                EMG_Division.DivisionName as Division,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].EmployeeType,'')=1 then 'Full Time' else 'Part Time' end  [EmployeeType],
+                                EMG_PlanCategory.PlanCategory,
+                                EMG_InsurancePlans.PlanName,
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [tblEmployee-Benefits].EffectiveDate,
+                                case when [tblEmployee-Benefits].IsActive =1 then 'No ' else 'Yes' end as [WaivedStatus],
+                                --'' As Tierd,
+                                EMG_EmployeeCoverage.CoverageOption as Tierd,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].MonthlyBasisID,'')=1 then 'Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 2 then 'Bi-Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 3 then 'Bi-Monthly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 4 then 'Monthly' else 'Others' end  Payroll,
+
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As EmployeeCost,
+                                [tblEmployee-Benefits].ERCost As EmployerCost,
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 )+[tblEmployee-Benefits].ERCost As TotalCost
+                                FROM  [tblEmployee-Benefits]
+                                LEFT JOIN [tblCompany-Employee-BasicInfo]  On [tblCompany-Employee-BasicInfo].Id =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-PersonalInfo]  On [tblCompany-Employee-PersonalInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-EmploymentInfo]  On [tblCompany-Employee-EmploymentInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                left JOIN CompanyMaster with (nolock) on CompanyMaster.ID=[tblCompany-Employee-BasicInfo].CompanyId
+                                LEFT JOIN EmployeeState with(nolock) on EmployeeState.Id=[tblCompany-Employee-BasicInfo].WorkLocationID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[tblEmployee-Benefits].PlanID
+                                left join EMG_Division with(nolock) on EMG_Division.ID=[tblCompany-Employee-EmploymentInfo].DivisionID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=EMG_InsurancePlans.PlanCategoryID
+                                LEFT JOIN EMG_EmployeeCoverage on EMG_EmployeeCoverage.InsurancePlanID=[tblEmployee-Benefits].PlanID and [tblEmployee-Benefits].EnrollID=EMG_EmployeeCoverage.OpenEnrollID and [tblEmployee-Benefits].EmployeeId=EMG_EmployeeCoverage.EmployeeId
+                                where (CompanyMaster.Id= &#64;CompanyId and [tblCompany-Employee-BasicInfo].IsActive=1 and [tblCompany-Employee-BasicInfo].IsTerminate=0 and ([tblCompany-Employee-BasicInfo].IsArchive=0 OR [tblCompany-Employee-BasicInfo].IsArchive is null))
+
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>12</td>
+                            <td>		HSA Deduction</td>
+                            <td>Close Category</td>
+                            <td>
+                                declare &#64;CompanyId bigint=2
+                                SELECT DISTINCT
+                                [tblCompany-Employee-BasicInfo].ID,
+                                [tblCompany-Employee-EmploymentInfo].SSN,
+                                [tblCompany-Employee-BasicInfo].LastName,
+                                [tblCompany-Employee-BasicInfo].FirstName,
+                                case when isnull([tblCompany-Employee-BasicInfo].NameTitle,'')='0' then '' else [tblCompany-Employee-BasicInfo].NameTitle end  Suffix,
+                                [tblCompany-Employee-PersonalInfo].Address,
+                                isnull(dbo.getcity([tblCompany-Employee-PersonalInfo].City),'') City,
+                                isnull(dbo.getstate([tblCompany-Employee-PersonalInfo].[State]),'') [State],
+                                [tblCompany-Employee-PersonalInfo].Zip,
+                                EmployeeState.StateName as [WorkLocation],
+                                EMG_Division.DivisionName as Division,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].EmployeeType,'')=1 then 'Full Time' else 'Part Time' end  [EmployeeType],
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [tblEmployee-Benefits].EffectiveDate,
+                                case when [tblEmployee-Benefits].IsActive =1 then 'No' else 'Yes' end as [WaivedStatus],
+                                '' As EmployeeAnnualAmount,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].MonthlyBasisID,'')=1 then 'Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 2 then 'Bi-Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 3 then 'Bi-Monthly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 4 then 'Monthly' else 'Others' end  Payroll,
+
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As EmployeeCost,
+                                [tblEmployee-Benefits].ERCost As EmployerCost
+                                FROM  [tblEmployee-Benefits]
+                                LEFT JOIN [tblCompany-Employee-BasicInfo]  On [tblCompany-Employee-BasicInfo].Id =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-PersonalInfo]  On [tblCompany-Employee-PersonalInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-EmploymentInfo]  On [tblCompany-Employee-EmploymentInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                left JOIN CompanyMaster with (nolock) on CompanyMaster.ID=[tblCompany-Employee-BasicInfo].CompanyId
+                                LEFT JOIN EmployeeState with(nolock) on EmployeeState.Id=[tblCompany-Employee-BasicInfo].WorkLocationID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[tblEmployee-Benefits].PlanID
+                                left join EMG_Division with(nolock) on EMG_Division.ID=[tblCompany-Employee-EmploymentInfo].DivisionID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=EMG_InsurancePlans.PlanCategoryID
+                                INNER JOIN EMG_EmployeeCoverage on EMG_EmployeeCoverage.InsurancePlanID=[tblEmployee-Benefits].PlanID and [tblEmployee-Benefits].EnrollID=EMG_EmployeeCoverage.OpenEnrollID and [tblEmployee-Benefits].EmployeeId=EMG_EmployeeCoverage.EmployeeId
+                                where (CompanyMaster.Id=&#64;CompanyId and [tblCompany-Employee-BasicInfo].IsActive=1 and [tblCompany-Employee-BasicInfo].IsTerminate=0 and ([tblCompany-Employee-BasicInfo].IsArchive=0 OR [tblCompany-Employee-BasicInfo].IsArchive is null))
+
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>13</td>
+                            <td>Emergency Contact</td>
+                            <td>General Administartion Category</td>
+                            <td>
+                                declare &#64;CompanyId bigint=2
+                                SELECT DISTINCT
+                                [tblCompany-Employee-BasicInfo].ID,
+                                [tblCompany-Employee-EmploymentInfo].SSN,
+                                [tblCompany-Employee-BasicInfo].LastName,
+                                [tblCompany-Employee-BasicInfo].FirstName,
+                                case when isnull([tblCompany-Employee-BasicInfo].NameTitle,'')='0' then '' else [tblCompany-Employee-BasicInfo].NameTitle end  Suffix,
+                                [tblCompany-Employee-PersonalInfo].Address,
+                                isnull(dbo.getcity([tblCompany-Employee-PersonalInfo].City),'') City,
+                                isnull(dbo.getstate([tblCompany-Employee-PersonalInfo].[State]),'') [State],
+                                [tblCompany-Employee-PersonalInfo].Zip,
+                                EmployeeState.StateName as [WorkLocation],
+                                EMG_Division.DivisionName as Division,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].EmployeeType,'')=1 then 'Full Time' else 'Part Time' end  [EmployeeType],
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [tblEmployee-Benefits].EffectiveDate,
+                                case when [tblEmployee-Benefits].IsActive =1 then 'No' else 'Yes' end as [WaivedStatus],
+                                '' As EmployeeAnnualAmount,
+                                case when isnull([tblCompany-Employee-EmploymentInfo].MonthlyBasisID,'')=1 then 'Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 2 then 'Bi-Weekly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 3 then 'Bi-Monthly'when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID = 4 then 'Monthly' else 'Others' end  Payroll,
+
+                                ISNULL(
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=1 then  EMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=2 then EMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when [tblCompany-Employee-EmploymentInfo].MonthlyBasisID=3 then EMG_EmployeeCoverage.SemiMonthlyCost else   EMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As EmployeeCost,
+                                [tblEmployee-Benefits].ERCost As EmployerCost
+                                FROM  [tblEmployee-Benefits]
+                                LEFT JOIN [tblCompany-Employee-BasicInfo]  On [tblCompany-Employee-BasicInfo].Id =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-PersonalInfo]  On [tblCompany-Employee-PersonalInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                LEFT JOIN [tblCompany-Employee-EmploymentInfo]  On [tblCompany-Employee-EmploymentInfo].EmployeeID =[tblEmployee-Benefits].EmployeeID
+                                left JOIN CompanyMaster with (nolock) on CompanyMaster.ID=[tblCompany-Employee-BasicInfo].CompanyId
+                                LEFT JOIN EmployeeState with(nolock) on EmployeeState.Id=[tblCompany-Employee-BasicInfo].WorkLocationID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[tblEmployee-Benefits].PlanID
+                                left join EMG_Division with(nolock) on EMG_Division.ID=[tblCompany-Employee-EmploymentInfo].DivisionID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=EMG_InsurancePlans.PlanCategoryID
+                                INNER JOIN EMG_EmployeeCoverage on EMG_EmployeeCoverage.InsurancePlanID=[tblEmployee-Benefits].PlanID and [tblEmployee-Benefits].EnrollID=EMG_EmployeeCoverage.OpenEnrollID and [tblEmployee-Benefits].EmployeeId=EMG_EmployeeCoverage.EmployeeId
+                                where (CompanyMaster.Id=&#64;CompanyId and [tblCompany-Employee-BasicInfo].IsActive=1 and [tblCompany-Employee-BasicInfo].IsTerminate=0 and ([tblCompany-Employee-BasicInfo].IsArchive=0 OR [tblCompany-Employee-BasicInfo].IsArchive is null))
+
+
+
+
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>14</td>
+                            <td>Dependents</td>
+                            <td>General Administartion Category</td>
+                            <td>
+                                Select
+                                CM.CName as [Company Name],
+                                DBO.GetFullName(CEB.ID) As [Employee Name],
+                                CEE.SSN,
+                                CEDep.LastName +','+ CEDep.FirstName as [Dependent Name],
+                                CEDep.SSN,
+                                CASE
+                                WHEN  CEDep.IsActive =0 THEN 'Delallocated' ELSE 'Allocated' END AS [Status],
+                                CEDep.AddOn,
+                                CEDep.UpdatedOn As UpdatedOn,
+                                CEDep.EmployeeId,
+                                CM.ID
+                                from [tblCompany-Employee-DependentInfo] CEDep
+                                inner join [tblCompany-Employee-BasicInfo] CEB on CEB.ID=CEDep.EmployeeId
+                                inner join CompanyMaster CM on CM.ID=CEDep.CompanyID
+                                inner join [tblCompany-Employee-EmploymentInfo] CEE on CEE.EmployeeID= CEB.ID
+                                Where CM.CName='Demogo Inc'
+
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>15</td>
+                            <td>Beneficiaries</td>
+                            <td>General Administartion Category</td>
+                            <td>
+                                select
+                                CName as [Company Name],
+                                [tblCompany-Employee-EmploymentInfo].SSN,
+                                DBO.GetFullName([tblCompany-Employee-BasicInfo].ID) As [Employee Name],
+                                case when IsBeneficiary=1 then EMG_Beneficiary.LastName +','+ EMG_Beneficiary.FirstName else
+                                [tblCompany-Employee-DependentInfo].LastName + ',' + [tblCompany-Employee-DependentInfo].FirstName end
+                                as [Beneficary Name],
+                                case when IsBeneficiary=1 then EMG_Beneficiary.SSN else
+                                [tblCompany-Employee-DependentInfo].SSN end AS SSN,
+                                EMG_OpenEnrollment.Description as [Enroll Name],
+                                EMG_PlanCategory.PlanCategory as [Category],
+                                EMG_InsurancePlans.PlanName as [Plan Name],
+                                Allocation
+                                from EMG_PlanBeneficiary
+                                left join EMG_Beneficiary on EMG_PlanBeneficiary.DependentId=EMG_Beneficiary.ID and IsBeneficiary=1
+                                left join [tblCompany-Employee-DependentInfo] on EMG_PlanBeneficiary.DependentId=[tblCompany-Employee-DependentInfo].ID and IsBeneficiary=0
+                                inner join [tblCompany-Employee-BasicInfo] on [tblCompany-Employee-BasicInfo].ID=EMG_PlanBeneficiary.EmployeeId
+                                inner join CompanyMaster on CompanyMaster.ID=[tblCompany-Employee-BasicInfo].CompanyId
+                                inner join [tblEmployee-Benefits] on [tblEmployee-Benefits].PlanCategoryID=EMG_PlanBeneficiary.CatId and [tblEmployee-Benefits].EmployeeID=EMG_PlanBeneficiary.EmployeeId and [tblEmployee-Benefits].EnrollID=EMG_PlanBeneficiary.OpenEnrollId
+                                inner join EMG_InsurancePlans on EMG_InsurancePlans.ID=[tblEmployee-Benefits].PlanID
+                                inner join EMG_PlanCategory on EMG_PlanCategory.ID=EMG_InsurancePlans.PlanCategoryID
+                                inner join EMG_OpenEnrollment on EMG_OpenEnrollment.ID =[tblEmployee-Benefits].EnrollID
+                                inner join [tblCompany-Employee-EmploymentInfo] on [tblCompany-Employee-EmploymentInfo].EmployeeID= [tblCompany-Employee-BasicInfo].ID
+                                where  EMG_PlanBeneficiary.IsActive=1 and CompanyMaster.CName='PCCW Global'
+                                and EMG_OpenEnrollment.Description='2019 PCCW Global Open Enrollment'
+                                order by [tblCompany-Employee-BasicInfo].ID
+                            </td>
+                            <td></td>
+                            <td>11 Mar 2019 </td>
+                        </tr>
+
+                        <tr>
+                            <td>16</td>
+                            <td>Medical Report With Dependent</td>
+                            <td>Medical Report With Dependent</td>
+                            <td>
+                                declare &#64;CompanyId bigint=11
+                                declare &#64;EnrollID bigint=0
+                                declare &#64;Division bigint=0
+                                declare &#64;PlanType bigint=1
+                                declare &#64;EmployeeWithdependentsId int =1
+                                if(&#64;EmployeeWithdependentsId=1)
+                                begin
+                                select * from (
+                                SELECT  DISTINCT
+                                [AudittblEmployee-Benefits].EnrollID,
+                                Isnull(EMP.EmpCode,'') As EmployeeID,
+                                EMP.SSN,
+                                DependentSSN='',
+                                EMP.LastName,
+                                EMP.FirstName,
+                                isnull(EMP.MiddleName,'') as MiddleName,
+                                EMP.Suffix,
+                                isnull(EMP.Address,'') as Address,
+                                EMP.City,
+                                EMP.[State],
+                                EMP.Zip as ZipCode,
+                                DependentType=(case when EMG_PlanCategory.id in(1,2,3) then  'Self' else ''end),
+                                EMP.DOB as DateofBirth,
+                                EMP.[Age],
+                                EMP.Gender,
+                                EMP.[DateOfHire] as HireDate,
+                                EMG_PlanCategory.PlanCategory as PlanType,
+                                EMG_InsurancePlans.PlanName,
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [AudittblEmployee-Benefits].EffectiveDate,
+                                [AudittblEmployee-Benefits].TerminateDate as EndDate,
+                                case when [AudittblEmployee-Benefits].IsActive =1 then 'No ' else 'Yes' end as [Waived],
+                                CASE WHEN [AudittblEmployee-Benefits].PlanCategoryID in (1,2,3) THEN  (AuditEMG_EmployeeCoverage.CoverageOption) ELSE '' END  As Tier,
+                                EMP. Payroll as PayrollType,
+                                ISNULL(
+                                case when EMP.MonthlyBasisID=1 then  AuditEMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when EMP.MonthlyBasisID=2 then AuditEMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when EMP.MonthlyBasisID=3 then AuditEMG_EmployeeCoverage.SemiMonthlyCost else   AuditEMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As 'EmployeeDeduction',
+                                Dependentsort=0,
+                                EMG_PlanCategory.SortOrder,
+                                'EnrollmentDateTime' =[AudittblEmployee-Benefits].ADateCreated
+                                FROM  [AudittblEmployee-Benefits]
+                                Left join [VW_Company_Employee_Report] EMP on EMP.ID=[AudittblEmployee-Benefits].EmployeeID and EMP.CompanyId=&#64;CompanyId and [AudittblEmployee-Benefits].IsActive =1 and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                left join [tblCompany-Employee-DependentInfo]  DependentInfo on DependentInfo.ID=[AudittblEmployee-Benefits].DependentID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_VolCoverageOptions  ON EMG_VolCoverageOptions.InsurancePlanID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=[AudittblEmployee-Benefits].PlanCategoryID
+                                Left JOIN AuditEMG_EmployeeCoverage on AuditEMG_EmployeeCoverage.InsurancePlanID=[AudittblEmployee-Benefits].PlanID and [AudittblEmployee-Benefits].EnrollID=AuditEMG_EmployeeCoverage.OpenEnrollID and [AudittblEmployee-Benefits].EmployeeId=AuditEMG_EmployeeCoverage.EmployeeId and  AuditEMG_EmployeeCoverage.UidSession=[AudittblEmployee-Benefits].UidSession
+                                left join CompanyMaster with (nolock) on CompanyMaster.ID=EMP.CompanyId
+                                where [AudittblEmployee-Benefits].statusReport=1 and  (CompanyMaster.Id=&#64;CompanyId)
+                                and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                AND ((EMP.DivisionID =&#64;Division and &#64;Division <>'' ) or &#64;Division ='')
+                                and (EMG_PlanCategory.ID IN (1,2,3) and EMG_PlanCategory.ID =(case when &#64;PlanType >0 then &#64;PlanType else EMG_PlanCategory.ID end))
+                                union  all
+                                SELECT   DISTINCT
+                                [AudittblEmployee-Benefits].EnrollID,
+                                Isnull(EMP.EmpCode,'') As EmployeeID,
+                                EMP.SSN,
+                                isnull(DependentInfo.SSN,'') as DependentSSN,
+                                DependentInfo.LastName,
+                                DependentInfo.FirstName,
+                                isnull(DependentInfo.MiddleName,'') as MiddleName,
+                                case when isnull(DependentInfo.NameTitle,'')='0' then '' else DependentInfo.NameTitle end  Suffix,
+                                isnull(DependentInfo.StreetAddress1,'') as StreetAddress1,
+                                isnull(DependentInfo.City,'') as City,
+                                isnull(DependentInfo.[State],'') as [State],
+                                isnull(DependentInfo.ZipCode,'') as ZipCode,
+                                isnull(DependentInfo.Dependent,'') as DependentType,
+                                CONVERT(varchar(30), DependentInfo.DOB) as DateofBirth,
+                                convert(int,round(datediff(hour,DependentInfo.DOB,getdate())/8766.0,0)) as [Age],
+                                case when isnull(DependentInfo.Gender,'')=1 then 'Male' else 'Female' end  Gender,
+                                NULL as HireDate,
+                                EMG_PlanCategory.PlanCategory as PlanType,
+                                EMG_InsurancePlans.PlanName,
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [AudittblEmployee-Benefits].EffectiveDate,
+                                [AudittblEmployee-Benefits].TerminateDate as EndDate,
+                                case when [AudittblEmployee-Benefits].IsActive =1 then 'No ' else 'Yes' end as [Waived],
+                                CASE WHEN [AudittblEmployee-Benefits].PlanCategoryID in (1,2,3) THEN  (AuditEMG_EmployeeCoverage.CoverageOption) ELSE '' END  As Tier,
+                                EMP. Payroll as PayrollType,
+                                EmployeeDeduction=0.000,
+                                Dependentsort= (Case when DependentInfo.Dependent ='Spouse' then 1 when DependentInfo.Dependent ='Child' then 2 when DependentInfo.Dependent ='Other' then 3 else 0 end),
+                                EMG_PlanCategory.SortOrder,
+                                'EnrollmentDateTime' =[AudittblEmployee-Benefits].ADateCreated
+                                FROM  [AudittblEmployee-Benefits]
+                                inner join [tblCompany-Employee-DependentInfo]  DependentInfo on DependentInfo.ID=[AudittblEmployee-Benefits].DependentID
+                                Left join [VW_Company_Employee_Report] EMP on EMP.ID=[AudittblEmployee-Benefits].EmployeeID  and EMP.CompanyId=&#64;CompanyId and [AudittblEmployee-Benefits].IsActive =1 and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_VolCoverageOptions  ON EMG_VolCoverageOptions.InsurancePlanID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=[AudittblEmployee-Benefits].PlanCategoryID
+                                Left JOIN AuditEMG_EmployeeCoverage on AuditEMG_EmployeeCoverage.InsurancePlanID=[AudittblEmployee-Benefits].PlanID and [AudittblEmployee-Benefits].EnrollID=AuditEMG_EmployeeCoverage.OpenEnrollID and [AudittblEmployee-Benefits].EmployeeId=AuditEMG_EmployeeCoverage.EmployeeId
+                                left join CompanyMaster with (nolock) on CompanyMaster.ID=EMP.CompanyId
+                                where [AudittblEmployee-Benefits].statusReport=1 and  (CompanyMaster.Id=&#64;CompanyId)
+                                and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                AND ((EMP.DivisionID =&#64;Division and &#64;Division <>'' ) or &#64;Division ='')
+                                and (EMG_PlanCategory.ID IN (1,2,3) and EMG_PlanCategory.ID =(case when &#64;PlanType >0 then &#64;PlanType else EMG_PlanCategory.ID end) )
+                                ) Detail order by EnrollID , SSN,SortOrder, Dependentsort asc
+                                end
+                                else
+                                begin
+                                select * from (
+                                SELECT  DISTINCT
+                                [AudittblEmployee-Benefits].EnrollID,
+                                Isnull(EMP.EmpCode,'') As EmployeeID,
+                                EMP.SSN,
+                                DependentSSN='',
+                                EMP.LastName,
+                                EMP.FirstName,
+                                isnull(EMP.MiddleName,'') as MiddleName,
+                                EMP.Suffix,
+                                isnull(EMP.Address,'') as Address,
+                                EMP.City,
+                                EMP.[State],
+                                EMP.Zip as ZipCode,
+                                DependentType=(case when EMG_PlanCategory.id in(1,2,3) then  'Self' else ''end),
+                                EMP.DOB as DateofBirth,
+                                EMP.[Age],
+                                EMP.Gender,
+                                EMP.[DateOfHire] as HireDate,
+                                EMG_PlanCategory.PlanCategory as PlanType,
+                                EMG_InsurancePlans.PlanName,
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [AudittblEmployee-Benefits].EffectiveDate,
+                                [AudittblEmployee-Benefits].TerminateDate as EndDate,
+                                case when [AudittblEmployee-Benefits].IsActive =1 then 'No ' else 'Yes' end as [Waived],
+                                CASE WHEN [AudittblEmployee-Benefits].PlanCategoryID in (1,2,3) THEN  (AuditEMG_EmployeeCoverage.CoverageOption) ELSE '' END  As Tier,
+                                EMP. Payroll as PayrollType,
+                                ISNULL(
+                                case when EMP.MonthlyBasisID=1 then  AuditEMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when EMP.MonthlyBasisID=2 then AuditEMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when EMP.MonthlyBasisID=3 then AuditEMG_EmployeeCoverage.SemiMonthlyCost else   AuditEMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As 'EmployeeDeduction',
+                                Dependentsort=0,
+                                'EnrollmentDateTime' =[AudittblEmployee-Benefits].ADateCreated ,
+                                EMG_PlanCategory.SortOrder
+                                FROM  [AudittblEmployee-Benefits]
+                                Left join [VW_Company_Employee_Report] EMP on EMP.ID=[AudittblEmployee-Benefits].EmployeeID  and EMP.CompanyId=&#64;CompanyId and [AudittblEmployee-Benefits].IsActive =1 and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                left join [tblCompany-Employee-DependentInfo]  DependentInfo on DependentInfo.ID=[AudittblEmployee-Benefits].DependentID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_VolCoverageOptions  ON EMG_VolCoverageOptions.InsurancePlanID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=[AudittblEmployee-Benefits].PlanCategoryID
+                                Left JOIN AuditEMG_EmployeeCoverage on AuditEMG_EmployeeCoverage.InsurancePlanID=[AudittblEmployee-Benefits].PlanID and [AudittblEmployee-Benefits].EnrollID=AuditEMG_EmployeeCoverage.OpenEnrollID and [AudittblEmployee-Benefits].EmployeeId=AuditEMG_EmployeeCoverage.EmployeeId and  AuditEMG_EmployeeCoverage.UidSession=[AudittblEmployee-Benefits].UidSession
+                                left join CompanyMaster with (nolock) on CompanyMaster.ID=EMP.CompanyId
+                                where [AudittblEmployee-Benefits].statusReport=1 and  (CompanyMaster.Id=&#64;CompanyId)
+                                and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                AND ((EMP.DivisionID =&#64;Division and &#64;Division <>'' ) or &#64;Division ='')
+                                and (EMG_PlanCategory.ID IN (1,2,3) and EMG_PlanCategory.ID =(case when &#64;PlanType >0 then &#64;PlanType else EMG_PlanCategory.ID end) )
+                                ) Detail order by EnrollID , SSN,SortOrder, Dependentsort asc
+                                end
+
+
+
+                            </td>
+                            <td></td>
+                            <td>13 May 2020 </td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td>Terminate Medical Report With Dependent</td>
+                            <td>Terminate Medical Report With Dependent</td>
+                            <td> 
+                                declare &#64;CompanyId bigint=11
+                                declare &#64;EnrollID bigint=0
+                                declare &#64;Division bigint=0
+                                declare &#64;PlanType bigint=1
+                                declare &#64;EmployeeWithdependentsId int =1
+                                if(&#64;EmployeeWithdependentsId=1)
+                                begin
+                                select * from (
+                                SELECT  DISTINCT
+                                [AudittblEmployee-Benefits].EnrollID,
+                                Isnull(EMP.EmpCode,'') As EmployeeID,
+                                EMP.SSN,
+                                DependentSSN='',
+                                EMP.LastName,
+                                EMP.FirstName,
+                                isnull(EMP.MiddleName,'') as MiddleName,
+                                EMP.Suffix,
+                                isnull(EMP.Address,'') as Address,
+                                EMP.City,
+                                EMP.[State],
+                                EMP.Zip as ZipCode,
+                                DependentType=(case when EMG_PlanCategory.id in(1,2,3) then  'Self' else ''end),
+                                EMP.DOB as DateofBirth,
+                                EMP.[Age],
+                                EMP.Gender,
+                                EMP.[DateOfHire] as HireDate,
+                                EMG_PlanCategory.PlanCategory as PlanType,
+                                EMG_InsurancePlans.PlanName,
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [AudittblEmployee-Benefits].EffectiveDate,
+                                EMP.BenefitTerminateDate as EndDate,
+                                case when [AudittblEmployee-Benefits].IsActive =1 then 'No ' else 'Yes' end as [Waived],
+                                CASE WHEN [AudittblEmployee-Benefits].PlanCategoryID in (1,2,3) THEN  (AuditEMG_EmployeeCoverage.CoverageOption) ELSE '' END  As Tier,
+                                EMP. Payroll as PayrollType,
+                                ISNULL(
+                                case when EMP.MonthlyBasisID=1 then  AuditEMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when EMP.MonthlyBasisID=2 then AuditEMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when EMP.MonthlyBasisID=3 then AuditEMG_EmployeeCoverage.SemiMonthlyCost else   AuditEMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As 'EmployeeDeduction',
+                                Dependentsort=0,
+                                EMG_PlanCategory.SortOrder,
+                                'EnrollmentDateTime' =[AudittblEmployee-Benefits].ADateCreated
+                                FROM  [AudittblEmployee-Benefits]
+                                Left join [VW_Company_Employee_Terminated] EMP on EMP.ID=[AudittblEmployee-Benefits].EmployeeID and EMP.CompanyId=&#64;CompanyId and [AudittblEmployee-Benefits].IsActive =1 and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                left join [tblCompany-Employee-DependentInfo]  DependentInfo on DependentInfo.ID=[AudittblEmployee-Benefits].DependentID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_VolCoverageOptions  ON EMG_VolCoverageOptions.InsurancePlanID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=[AudittblEmployee-Benefits].PlanCategoryID
+                                Left JOIN AuditEMG_EmployeeCoverage on AuditEMG_EmployeeCoverage.InsurancePlanID=[AudittblEmployee-Benefits].PlanID and [AudittblEmployee-Benefits].EnrollID=AuditEMG_EmployeeCoverage.OpenEnrollID and [AudittblEmployee-Benefits].EmployeeId=AuditEMG_EmployeeCoverage.EmployeeId and  AuditEMG_EmployeeCoverage.UidSession=[AudittblEmployee-Benefits].UidSession
+                                left join CompanyMaster with (nolock) on CompanyMaster.ID=EMP.CompanyId
+                                where [AudittblEmployee-Benefits].statusReport=1 and  (CompanyMaster.Id=&#64;CompanyId)
+                                and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                AND ((EMP.DivisionID =&#64;Division and &#64;Division <>'' ) or &#64;Division ='')
+                                and (EMG_PlanCategory.ID IN (1,2,3) and EMG_PlanCategory.ID =(case when &#64;PlanType >0 then &#64;PlanType else EMG_PlanCategory.ID end))
+                                union  all
+                                SELECT   DISTINCT
+                                [AudittblEmployee-Benefits].EnrollID,
+                                Isnull(EMP.EmpCode,'') As EmployeeID,
+                                EMP.SSN,
+                                isnull(DependentInfo.SSN,'') as DependentSSN,
+                                DependentInfo.LastName,
+                                DependentInfo.FirstName,
+                                isnull(DependentInfo.MiddleName,'') as MiddleName,
+                                case when isnull(DependentInfo.NameTitle,'')='0' then '' else DependentInfo.NameTitle end  Suffix,
+                                isnull(DependentInfo.StreetAddress1,'') as StreetAddress1,
+                                isnull(DependentInfo.City,'') as City,
+                                isnull(DependentInfo.[State],'') as [State],
+                                isnull(DependentInfo.ZipCode,'') as ZipCode,
+                                isnull(DependentInfo.Dependent,'') as DependentType,
+                                CONVERT(varchar(30), DependentInfo.DOB) as DateofBirth,
+                                convert(int,round(datediff(hour,DependentInfo.DOB,getdate())/8766.0,0)) as [Age],
+                                case when isnull(DependentInfo.Gender,'')=1 then 'Male' else 'Female' end  Gender,
+                                NULL as HireDate,
+                                EMG_PlanCategory.PlanCategory as PlanType,
+                                EMG_InsurancePlans.PlanName,
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [AudittblEmployee-Benefits].EffectiveDate,
+                                EMP.BenefitTerminateDate as EndDate,
+                                case when [AudittblEmployee-Benefits].IsActive =1 then 'No ' else 'Yes' end as [Waived],
+                                CASE WHEN [AudittblEmployee-Benefits].PlanCategoryID in (1,2,3) THEN  (AuditEMG_EmployeeCoverage.CoverageOption) ELSE '' END  As Tier,
+                                EMP. Payroll as PayrollType,
+                                EmployeeDeduction=0.000,
+                                Dependentsort= (Case when DependentInfo.Dependent ='Spouse' then 1 when DependentInfo.Dependent ='Child' then 2 when DependentInfo.Dependent ='Other' then 3 else 0 end),
+                                EMG_PlanCategory.SortOrder,
+                                'EnrollmentDateTime' =[AudittblEmployee-Benefits].ADateCreated
+                                FROM  [AudittblEmployee-Benefits]
+                                inner join [tblCompany-Employee-DependentInfo]  DependentInfo on DependentInfo.ID=[AudittblEmployee-Benefits].DependentID
+                                Left join [VW_Company_Employee_Terminated] EMP on EMP.ID=[AudittblEmployee-Benefits].EmployeeID  and EMP.CompanyId=&#64;CompanyId and [AudittblEmployee-Benefits].IsActive =1  and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_VolCoverageOptions  ON EMG_VolCoverageOptions.InsurancePlanID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=[AudittblEmployee-Benefits].PlanCategoryID
+                                Left JOIN AuditEMG_EmployeeCoverage on AuditEMG_EmployeeCoverage.InsurancePlanID=[AudittblEmployee-Benefits].PlanID and [AudittblEmployee-Benefits].EnrollID=AuditEMG_EmployeeCoverage.OpenEnrollID and [AudittblEmployee-Benefits].EmployeeId=AuditEMG_EmployeeCoverage.EmployeeId
+                                left join CompanyMaster with (nolock) on CompanyMaster.ID=EMP.CompanyId
+                                where [AudittblEmployee-Benefits].statusReport=1 and  (CompanyMaster.Id=&#64;CompanyId)
+                                and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                AND ((EMP.DivisionID =&#64;Division and &#64;Division <>'' ) or &#64;Division ='')
+                                and (EMG_PlanCategory.ID IN (1,2,3) and EMG_PlanCategory.ID =(case when &#64;PlanType >0 then &#64;PlanType else EMG_PlanCategory.ID end) )
+                                ) Detail order by EnrollID , SSN,SortOrder, Dependentsort asc
+                                end
+                                else
+                                begin
+                                select * from (
+                                SELECT  DISTINCT
+                                [AudittblEmployee-Benefits].EnrollID,
+                                Isnull(EMP.EmpCode,'') As EmployeeID,
+                                EMP.SSN,
+                                DependentSSN='',
+                                EMP.LastName,
+                                EMP.FirstName,
+                                isnull(EMP.MiddleName,'') as MiddleName,
+                                EMP.Suffix,
+                                isnull(EMP.Address,'') as Address,
+                                EMP.City,
+                                EMP.[State],
+                                EMP.Zip as ZipCode,
+                                DependentType=(case when EMG_PlanCategory.id in(1,2,3) then  'Self' else ''end),
+                                EMP.DOB as DateofBirth,
+                                EMP.[Age],
+                                EMP.Gender,
+                                EMP.[DateOfHire] as HireDate,
+                                EMG_PlanCategory.PlanCategory as PlanType,
+                                EMG_InsurancePlans.PlanName,
+                                [dbo].[GetProviderCompanyName](EMG_InsurancePlans.PlanProviderID) Provider,
+                                [AudittblEmployee-Benefits].EffectiveDate,
+                                EMP.BenefitTerminateDate as EndDate,
+                                case when [AudittblEmployee-Benefits].IsActive =1 then 'No ' else 'Yes' end as [Waived],
+                                CASE WHEN [AudittblEmployee-Benefits].PlanCategoryID in (1,2,3) THEN  (AuditEMG_EmployeeCoverage.CoverageOption) ELSE '' END  As Tier,
+                                EMP. Payroll as PayrollType,
+                                ISNULL(
+                                case when EMP.MonthlyBasisID=1 then  AuditEMG_EmployeeCoverage.WeeklyCost
+                                else
+                                case when EMP.MonthlyBasisID=2 then AuditEMG_EmployeeCoverage.BiWeekly
+                                else
+                                case when EMP.MonthlyBasisID=3 then AuditEMG_EmployeeCoverage.SemiMonthlyCost else   AuditEMG_EmployeeCoverage.MonthlyCost end
+                                end  end,0.00 ) As 'EmployeeDeduction',
+                                Dependentsort=0,
+                                'EnrollmentDateTime' =[AudittblEmployee-Benefits].ADateCreated ,
+                                EMG_PlanCategory.SortOrder
+                                FROM  [AudittblEmployee-Benefits]
+                                Left join [VW_Company_Employee_Terminated] EMP on EMP.ID=[AudittblEmployee-Benefits].EmployeeID  and EMP.CompanyId=&#64;CompanyId  and [AudittblEmployee-Benefits].IsActive =1  and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                left join [tblCompany-Employee-DependentInfo]  DependentInfo on DependentInfo.ID=[AudittblEmployee-Benefits].DependentID
+                                LEFT JOIN EMG_InsurancePlans  ON EMG_InsurancePlans.ID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_VolCoverageOptions  ON EMG_VolCoverageOptions.InsurancePlanID=[AudittblEmployee-Benefits].PlanID
+                                LEFT JOIN EMG_PlanCategory  ON EMG_PlanCategory.ID=[AudittblEmployee-Benefits].PlanCategoryID
+                                Left JOIN AuditEMG_EmployeeCoverage on AuditEMG_EmployeeCoverage.InsurancePlanID=[AudittblEmployee-Benefits].PlanID and [AudittblEmployee-Benefits].EnrollID=AuditEMG_EmployeeCoverage.OpenEnrollID and [AudittblEmployee-Benefits].EmployeeId=AuditEMG_EmployeeCoverage.EmployeeId and  AuditEMG_EmployeeCoverage.UidSession=[AudittblEmployee-Benefits].UidSession
+                                left join CompanyMaster with (nolock) on CompanyMaster.ID=EMP.CompanyId
+                                where [AudittblEmployee-Benefits].statusReport=1 and  (CompanyMaster.Id=&#64;CompanyId)
+                                and [AudittblEmployee-Benefits].EnrollID=(select  top 1 EnrollD from AuditEMG_FinalSubmission where empid= [AudittblEmployee-Benefits].EmployeeID  order by  CreatedDate desc)
+                                AND ((EMP.DivisionID =&#64;Division and &#64;Division <>'' ) or &#64;Division ='')
+                                and (EMG_PlanCategory.ID IN (1,2,3) and EMG_PlanCategory.ID =(case when &#64;PlanType >0 then &#64;PlanType else EMG_PlanCategory.ID end) )
+                                ) Detail order by EnrollID , SSN,SortOrder, Dependentsort asc
+                                end
+                            </td>
+                            <td></td>
+                            <td>13 May 2020 </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>

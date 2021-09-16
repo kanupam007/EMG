@@ -1,0 +1,88 @@
+﻿@model  PowerIBroker.Areas.Broker.Models.CompanyClient
+@using (Html.BeginForm("SaveCompanyAdmin", "Admin", FormMethod.Post, new { @id = "frmeditcompany" }))
+{
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Company Administrator</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12" style="padding-right:0px;padding-left:0px">
+                    <div class="@(TempData["CompanyMessage"] != null ? TempData["MessageType"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                        @if (TempData["CompanyMessage"] != null)
+                        {
+                            <i class="fa @(TempData["MessageType"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+                        }
+                        <span>@TempData["CompanyMessage"]</span>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => Model.ID, new { @class = "eID" })
+                @Html.HiddenFor(m => Model.IsActive, new { @class = "eIsActive" })
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">First Name <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.FirstName, new { placeholder = "First Name", @class = "eFirstName form-control", @maxlength = 100 })
+                            @*@Html.ValidationMessageFor(m => Model.FirstName)*@
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Last Name <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.LastName, new { placeholder = "Last Name", @class = "eLastName form-control", @maxlength = 100 })
+                            @*@Html.ValidationMessageFor(m => Model.LastName)*@
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Email, new { placeholder = "Email", @class = "eEmail form-control emailChk", @maxlength = 100 })
+                            @*@Html.ValidationMessageFor(m => Model.Email)*@
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Administrator Type <span style="color:red;">*</span></label>
+
+                            @Html.DropDownListFor(m => Model.AdministratorType, new List<SelectListItem>{
+                                                       new SelectListItem{ Text="HR Administrator", Value = "0" },
+                                                           new SelectListItem{ Text="HR Specialist", Value = "1" }},
+                                                             new { @class = "form-control eAdministratorType", @id = "AdministratorType" })
+                         
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Work Phone <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.WorkPhone, new { placeholder = "Work Phone", @class = "eWorkPhone form-control phonemask" })
+                            @*@Html.ValidationMessageFor(m => Model.WorkPhone)*@
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile Phone </label>
+                            @Html.TextBoxFor(m => Model.Phone, new { placeholder = "Mobile Phone", @class = "ePhone form-control phonemask phoneChk" })                    
+                        </div>
+                    </div>
+                </div>
+             
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="" style="" class="btn btn-primary btnsaveComp">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+}

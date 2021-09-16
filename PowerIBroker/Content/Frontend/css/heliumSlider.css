@@ -1,0 +1,150 @@
+﻿/* ==========================================================================
+   Helium Slider styles
+   ========================================================================== */
+
+/*==== essential styles ====*/
+div.helium-slider{
+    width: 100%;
+    position: relative;
+    margin: 0;
+    }
+div.helium-slider div.slide-window{
+    width: 100%;
+    overflow:hidden;
+    position: relative;
+    margin: 0;
+    }
+div.helium-slider.loading{ background: url('/Content/Frontend/images/loading.gif') no-repeat center center; }
+div.helium-slider ul.slide-holder{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    opacity: 0;
+    }
+div.helium-slider ul.slide-holder li{
+    position: relative;
+    float:left;
+    }
+div.helium-slider ul.slide-holder li.loop{
+    position: absolute !important;
+    float:none !important;
+    }
+div.helium-slider ul.slide-holder li .slide img{ width:100%; }
+div.helium-slider ul.slide-holder li .pane{ position: relative; }
+
+/*==== customizable elements ====*/
+div.helium-slider .next, div.helium-slider .prev{
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+    position: absolute;
+    top:45%;
+    cursor: pointer;
+    z-index: 10;
+    display:block;
+    }
+div.helium-slider .next{right:10px;}
+div.helium-slider .prev{left:10px;}
+div.helium-slider ul.slide-holder li .caption{
+    left: 10%;
+    bottom: 20px;
+    }
+div.helium-slider ul.slide-holder li .caption2{
+    right: 10%;
+    bottom: 20px;
+    }
+div.helium-slider ul.slide-holder li .caption3{
+    left: 50%;
+    top: 20px;
+    }
+div.helium-slider .pauser{
+    display: inline-block;
+    position: absolute;
+    right: 22px;
+    top:22px;
+    border-right: 9px solid #fff;
+    border-left: 9px solid #fff;
+    width: 8px;
+    height: 24px;
+    margin-right: -14px;
+    margin-top: -14px;
+    z-index: 11;
+    opacity: 0;
+    text-indent: -9999px;
+    vertical-align:top;
+    }
+div.helium-slider .controls.on .player:hover, div.helium-slider .controls.on .pauser:hover{
+    opacity: 0.85;
+    }
+div.helium-slider .pauser.paused{
+    opacity: 1 !important;
+    }
+
+div.helium-slider .controls.on{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding:12px 18px;
+    background: black;
+    background: rgba(0,0,0,0.2);
+    z-index: 11;
+}
+div.helium-slider .controls.on .pauser{
+    position: static;
+    margin:0;
+    opacity: 0.7
+}
+div.helium-slider .controls.on .paused.player{
+    display: inline-block;
+    text-indent: -9999px;
+    vertical-align:top;
+    height:0;
+    width:0;
+    border-top: 12px solid transparent;
+    border-right: none;
+    margin: 0 3px;
+    border-bottom: 12px solid transparent;
+    border-left: 20px solid white;
+    opacity: 0.7 !important;
+}
+div.helium-slider ul.slide-nav{
+   text-align: right;
+    list-style-type: none;
+    margin-top: 20px;
+    padding: 0px;
+    position: relative;
+    bottom: 10px;
+    width: 100%;
+    z-index: 11;
+    display: none;
+}
+div.helium-slider ul.slide-nav li{
+    display: inline-block;
+}
+    div.helium-slider ul.slide-nav li a{
+    display: block;
+    background: #999;
+    margin: 0px 4px;
+    height:10px;
+    width: 10px;
+    border-radius: 5px;
+}
+div.helium-slider ul.slide-nav li.active a{ background: #2a8af4; }
+div.helium-slider ul.slide-nav li .access{ text-indent: -9999px; height:0; width:0; }
+div.helium-slider ul.slide-nav.thumbnails li{
+    max-width: 10%;
+}
+div.helium-slider ul.slide-nav.thumbnails li a{
+    background:none;
+    height:auto;
+    width:auto;
+    border-radius: 0;
+    border:2px solid transparent;
+    display: inline-block;
+    box-shadow:  0 2px 4px rgba(0,0,0,0.3);
+}
+div.helium-slider ul.slide-nav.thumbnails li a img{
+    max-width: 100%;
+}
+div.helium-slider ul.slide-nav.thumbnails li.active a{ background: none; border:2px solid #eee; }

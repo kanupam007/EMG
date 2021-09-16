@@ -1,0 +1,48 @@
+﻿@model PowerIBrokerDataLayer.FaqPageContent
+@{
+    ViewBag.Title = "Index";
+ //   Layout = "~/Views/Shared/_LayoutFrontend.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    List<PowerIBrokerDataLayer.FaqPageContent> faqPageContents = ViewBag.FaqPageContents;
+}
+
+<style>
+    .PageName {
+        background: url(@Url.Content("~/Uploads/Admin/FAQBannners/"+ViewBag.FaqBanner)) no-repeat;
+    }
+</style>
+
+ <!--inner pages section-->
+<div class="innerpagesSection">
+    <div class="PageName">
+        <div class="container">
+            <h1>Frequently asked questions (FAQ)</h1>
+        </div>
+    </div>
+    <!--faq-->
+    <div class="faq">
+        <div class="container">
+            <ul>
+                @if(faqPageContents.Count>0)
+                {
+                    foreach(var faq in faqPageContents)
+                    {
+                        <li>
+                         <strong>@faq.Question</strong>
+                            <p>@faq.Answer </p>
+                        </li>
+                    }
+                }
+                
+               
+
+            </ul>
+        </div>
+    </div>
+    <!--faq-->
+
+</div>
+<!--inner pages section-->

@@ -1,0 +1,157 @@
+﻿@using PowerIBrokerBusinessLayer
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+@{
+    List<PowerIBrokerDataLayer.ContactUsEnquiry> enquiries = ViewBag.Enquiries;
+}
+@*<link href="~/AdminContent/customcss/admincustom.css" rel="stylesheet" />*@
+<section class="content">
+    <!-- Info boxes -->
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-people-outline"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text"><a href="@Url.Action("ManageEmployees", "Admin")">No. Of Employee</a></span>
+
+
+                    <span class="info-box-number">@ViewBag.EmployeeCount</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
+     
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text"><a href="@Url.Action("ManageClients", "Admin")">Registered Companies</a></span>
+                    <span class="info-box-number">@ViewBag.CompanyCount</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="ion ion-ios-gear-outline"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text"><a href="@Url.Action("ManageCompanyDemos", "Admin")">New Demo Request</a></span>
+                    <span class="info-box-number">@ViewBag.DemoReqCount</span>
+                </div><!-- /.info-box-content -->
+            </div><!-- /.info-box -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    <!-- Main row -->
+    <div class="row">
+        <!-- Left col -->
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- PRODUCT LIST -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Recently Registered Company</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+
+                            <ul class="products-list product-list-in-box">
+
+                                @if (ViewBag.RegisterCompany != null)
+                                {
+                                    if (ViewBag.RegisterCompany.Count > 0)
+                                    {
+                                        foreach (var data in ViewBag.RegisterCompany)
+                                        {
+                                            var logoPath = "../../Areas/Company/Content/Upload/CompanyLogo/CompanyProfile120x120/" + @data.LogoImage;
+                                            <li class="item">
+
+                                                <div class="product-img">
+
+                                                    <img src=@logoPath onerror='this.src = "/AdminContent/CustomImages/nologo1.jpg"' alt="Company logo" />
+                                                </div>
+                                                <div class="product-info">
+                                                    @if (data.Status == null)
+                                                    {
+                                                        <a href="@Url.Action("AddCompany", "Admin", new { @ID = data.ID })" class="product-title" title="Company Name">@data.CCompanyName </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="javascript:void(0)" class="product-title" title="Company Name">@data.CCompanyName </a>
+                                                    }
+
+
+                                                    <span class="product-description">
+                                                        @*@data.CreatedOn.ToString("MM/dd/yyyy")*@
+                                                        @Helper.CurrencyFormat(Convert.ToDateTime(data.CreatedOn), 0, "", "Date")
+
+                                                    </span>
+                                                </div>
+                                            </li><!-- /.item -->
+                                        }
+                                    }
+                                }
+                            </ul>
+
+                        </div><!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <a href="@Url.Action("ManageClients", "Admin")">View All Company</a></span>
+                            @*<a href="javascript::;" class="uppercase">View All Company</a>*@
+                        </div><!-- /.box-footer -->
+                    </div><!-- /.box -->
+                </div><!-- /.col -->
+                <div class="col-md-6">
+                    <!-- PRODUCT LIST -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Recently Demo Notification</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body" style="height: 365px; overflow: auto;">
+                            <ul class="products-list product-list-in-box" style="padding: 6px 0;">
+                                @if (ViewBag.DemoRequest != null)
+                                {
+                                    if (ViewBag.DemoRequest.Count > 0)
+                                    {
+                                        foreach (var data in ViewBag.DemoRequest)
+                                        {
+                                            <li class="item">
+                                                <div class="product-info" style="margin-left:5px">
+                                                    @if (data.Status == null)
+                                                    {
+                                                        <a href="@Url.Action("AddCompany", "Admin", new { @ID = data.ID })" class="product-title">@data.CCompanyName @*<span class="label label-warning pull-right">$1800</span>*@</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="javascript:void(0)" class="product-title">@data.CCompanyName @*<span class="label label-warning pull-right">$1800</span>*@</a>
+                                                    }
+                                                    <span class="product-description">
+                                                        Contact Person :<small>@data.CName</small>
+                                                    </span>
+                                                    <span class="product-description">
+                                                        Contact :<small>@data.CContact</small>
+                                                    </span>
+                                                    <span class="product-description">
+                                                        Request On :<small>@Helper.CurrencyFormat(Convert.ToDateTime(data.CreatedOn), 0, "", "Date")</small>
+                                                    </span>
+                                                </div>
+                                            </li><!-- /.item -->
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </div><!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <a href="@Url.Action("ManageClients", "Admin")">View All Notifications</a></span>
+                            @*<a href="javascript::;" class="uppercase">View All Company</a>*@
+                        </div><!-- /.box-footer -->
+                    </div><!-- /.box -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+            <!-- TABLE: LATEST ORDERS -->
+            
+        </div><!-- /.col -->
+       
+    </div><!-- /.row -->
+</section><!-- /.content -->

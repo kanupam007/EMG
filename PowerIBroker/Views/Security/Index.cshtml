@@ -1,0 +1,28 @@
+﻿@model PowerIBrokerDataLayer.OtherPageContent
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_LayoutFrontend.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .PageName {
+        background: url(@Url.Content("~/Uploads/Admin/OtherPageBanners/"+Model.Banner)) no-repeat;
+    }
+</style>
+ <!--inner pages section-->
+<div class="innerpagesSection">
+    <div class="PageName">
+        <div class="container">
+            <h1>@Model.Title</h1>
+        </div>
+    </div>
+    <div class="termCon">
+        <div class="container">
+            @Html.Raw(Model.Content)
+        </div>
+            
+        </div>
+
+</div>
+<!--inner pages section-->

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Manage Insurance Policies";
+   Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div>
+
+        </div>
+        <div class="col-lg-12">
+            <h2>Manage Company Premium Data</h2>
+            @*@if (TempData["SuccessMessage"] != null && TempData["SuccessMessage"] != "")
+                {
+                    <div class="alert alert-success">
+                        <h4>Success Logs</h4>
+                        <div><ul>@Html.Raw(TempData["SuccessMessage"])</ul></div>
+                    </div>
+                }
+                @if (TempData["ErrorMessage"] != null && TempData["ErrorMessage"] != "")
+                {
+                    <div class="alert alert-danger">
+
+                        <h4>Error Logs</h4>
+                        <div><ul>@Html.Raw(TempData["ErrorMessage"])</ul></div>
+                    </div>
+                }*@
+            @if (TempData["SuccessMessage"] == "")//TempData["SuccessMessage"] != null &&
+            {
+                <div class="alert alert-success">
+                    @*<h4><a href="~/Content/ErrorLog/Error_Message6.txt">Click to see the success log file</a></h4>*@
+                    Record Added Successfully
+                    @*<div><ul>@Html.Raw(TempData["SuccessMessage"])</ul></div>*@
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null && TempData["ErrorMessage"] != "")
+            {
+                <div class="alert alert-danger">
+                    <h4>Error</h4>
+                    <a href="~/Content/ErrorLog/Error_Message.txt">Click to see the error log file</a>
+                    @*<div><ul>@Html.Raw(TempData["ErrorMessage"])</ul></div>*@
+                </div>
+            }
+
+            @using (Html.BeginForm("ManageInsurancePolicies", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label>Upload File (.xls)</label>
+                    <input type="file" name="file" id="File" onchange="checkDocumentFile(this,'xls')" style="height:40px;margin-top:10px" />
+                    <a href="~/Uploads/Admin/Sample-Plans-File.xls">Click here to download the sample file</a>
+                    @Html.Hidden("FileName")
+                </div>
+                <button class="btn btn-primary btn-lg" id="btnUploadCompanyPremium" type="submit">Upload</button>
+            }
+
+            @*<a href="~/Uploads/Admin/Rate Grid Sample.xls">Click here to download the sample file</a>*@
+        </div>
+
+
+    </div>
+</div>
+<script>
+    document.title = '@ViewBag.Title';
+</script>

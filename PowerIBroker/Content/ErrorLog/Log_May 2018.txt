@@ -1,0 +1,849 @@
+-------------------START-------------5/18/2018 12:28:54 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:28:54 PM
+
+-------------------START-------------5/18/2018 12:31:30 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:31:30 PM
+
+-------------------START-------------5/18/2018 12:37:00 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:37:00 PM
+
+-------------------START-------------5/18/2018 12:37:42 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:37:42 PM
+
+-------------------START-------------5/18/2018 12:39:17 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:39:17 PM
+
+-------------------START-------------5/18/2018 12:41:45 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:41:45 PM
+
+-------------------START-------------5/18/2018 12:42:11 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:42:11 PM
+
+-------------------START-------------5/18/2018 12:43:12 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:43:12 PM
+
+-------------------START-------------5/18/2018 12:44:32 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:44:32 PM
+
+-------------------START-------------5/18/2018 12:44:39 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:44:39 PM
+
+-------------------START-------------5/18/2018 12:44:40 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:44:40 PM
+
+-------------------START-------------5/18/2018 12:44:40 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 12:44:40 PM
+
+-------------------START-------------5/18/2018 1:07:55 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 1:07:55 PM
+
+-------------------START-------------5/18/2018 1:07:58 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 1:07:58 PM
+
+-------------------START-------------5/18/2018 1:14:28 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 1:14:28 PM
+
+-------------------START-------------5/18/2018 1:37:54 PM
+
+Controller Name : BenefitAgeRange Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------END-------------5/18/2018 1:37:54 PM
+
+-------------------START-------------5/18/2018 8:10:04 PM
+
+Controller Name : Employee Controller
+Function in which error found :  GetEmployeeList
+Process Type : 
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/18/2018 8:10:04 PM
+
+-------------------START-------------5/18/2018 8:10:54 PM
+
+Controller Name : Employee Controller
+Function in which error found :  GetEmployeeList
+Process Type : 
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/18/2018 8:10:54 PM
+
+-------------------START-------------5/18/2018 8:11:41 PM
+
+Controller Name : Employee Controller
+Function in which error found :  GetEmployeeList
+Process Type : 
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/18/2018 8:11:41 PM
+
+-------------------START-------------5/18/2018 8:12:04 PM
+
+Controller Name : Employee Controller
+Function in which error found :  GetEmployeeList
+Process Type : 
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/18/2018 8:12:04 PM
+
+-------------------START-------------5/21/2018 12:47:37 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 12:47:37 PM
+
+-------------------START-------------5/21/2018 12:52:00 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 12:52:00 PM
+
+-------------------START-------------5/21/2018 1:18:43 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 1:18:43 PM
+
+-------------------START-------------5/21/2018 1:52:16 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 1:52:16 PM
+
+-------------------START-------------5/21/2018 1:55:03 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 1:55:03 PM
+
+-------------------START-------------5/21/2018 1:59:23 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 1:59:23 PM
+
+-------------------START-------------5/21/2018 2:55:08 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 2:55:08 PM
+
+-------------------START-------------5/21/2018 2:56:03 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 2:56:03 PM
+
+-------------------START-------------5/21/2018 2:58:10 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 2:58:10 PM
+
+-------------------START-------------5/21/2018 2:58:46 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 2:58:46 PM
+
+-------------------START-------------5/21/2018 3:00:00 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 3:00:00 PM
+
+-------------------START-------------5/21/2018 3:00:33 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 3:00:33 PM
+
+-------------------START-------------5/21/2018 3:19:29 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 3:19:29 PM
+
+-------------------START-------------5/21/2018 3:31:51 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 3:31:51 PM
+
+-------------------START-------------5/21/2018 4:03:06 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 4:03:06 PM
+
+-------------------START-------------5/21/2018 4:05:25 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 4:05:25 PM
+
+-------------------START-------------5/21/2018 4:06:10 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 4:06:10 PM
+
+-------------------START-------------5/21/2018 4:06:41 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 4:06:41 PM
+
+-------------------START-------------5/21/2018 4:10:08 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 4:10:08 PM
+
+-------------------START-------------5/21/2018 4:35:50 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 4:35:50 PM
+
+-------------------START-------------5/21/2018 4:37:10 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 4:37:10 PM
+
+-------------------START-------------5/21/2018 4:37:45 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 4:37:45 PM
+
+-------------------START-------------5/21/2018 5:08:58 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 5:08:58 PM
+
+-------------------START-------------5/21/2018 6:04:27 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 6:04:27 PM
+
+-------------------START-------------5/21/2018 6:06:19 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 6:06:19 PM
+
+-------------------START-------------5/21/2018 6:07:37 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 6:07:37 PM
+
+-------------------START-------------5/21/2018 6:10:49 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 6:10:49 PM
+
+-------------------START-------------5/21/2018 6:36:41 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : An error occurred while executing the command definition. See the inner exception for details.
+-------------------END-------------5/21/2018 6:36:41 PM
+
+-------------------START-------------5/21/2018 6:41:10 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Input string was not in a correct format.
+-------------------END-------------5/21/2018 6:41:10 PM
+
+-------------------START-------------5/21/2018 6:41:56 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:41:56 PM
+
+-------------------START-------------5/21/2018 6:42:17 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:42:17 PM
+
+-------------------START-------------5/21/2018 6:42:40 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:42:40 PM
+
+-------------------START-------------5/21/2018 6:43:01 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:43:01 PM
+
+-------------------START-------------5/21/2018 6:43:07 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:43:07 PM
+
+-------------------START-------------5/21/2018 6:44:01 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:44:01 PM
+
+-------------------START-------------5/21/2018 6:45:51 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:45:51 PM
+
+-------------------START-------------5/21/2018 6:46:04 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:46:04 PM
+
+-------------------START-------------5/21/2018 6:46:33 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:46:33 PM
+
+-------------------START-------------5/21/2018 6:48:34 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:48:34 PM
+
+-------------------START-------------5/21/2018 6:49:56 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:49:56 PM
+
+-------------------START-------------5/21/2018 6:52:45 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:52:45 PM
+
+-------------------START-------------5/21/2018 6:53:10 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 6:53:10 PM
+
+-------------------START-------------5/21/2018 7:00:54 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:00:54 PM
+
+-------------------START-------------5/21/2018 7:02:37 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:02:37 PM
+
+-------------------START-------------5/21/2018 7:24:12 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:24:12 PM
+
+-------------------START-------------5/21/2018 7:24:50 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:24:50 PM
+
+-------------------START-------------5/21/2018 7:26:18 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:26:18 PM
+
+-------------------START-------------5/21/2018 7:26:38 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:26:38 PM
+
+-------------------START-------------5/21/2018 7:27:41 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:27:41 PM
+
+-------------------START-------------5/21/2018 7:27:53 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:27:53 PM
+
+-------------------START-------------5/21/2018 7:28:16 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:28:16 PM
+
+-------------------START-------------5/21/2018 7:28:23 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:28:23 PM
+
+-------------------START-------------5/21/2018 7:50:49 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:50:49 PM
+
+-------------------START-------------5/21/2018 7:52:47 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:52:47 PM
+
+-------------------START-------------5/21/2018 7:53:08 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:53:08 PM
+
+-------------------START-------------5/21/2018 7:53:08 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:53:08 PM
+
+-------------------START-------------5/21/2018 7:53:24 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:53:24 PM
+
+-------------------START-------------5/21/2018 7:54:05 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:54:05 PM
+
+-------------------START-------------5/21/2018 7:55:42 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:55:42 PM
+
+-------------------START-------------5/21/2018 7:56:09 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:56:09 PM
+
+-------------------START-------------5/21/2018 7:56:33 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:56:33 PM
+
+-------------------START-------------5/21/2018 7:58:06 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 7:58:06 PM
+
+-------------------START-------------5/21/2018 8:03:29 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 8:03:29 PM
+
+-------------------START-------------5/21/2018 8:13:19 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 8:13:19 PM
+
+-------------------START-------------5/21/2018 8:13:29 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 8:13:29 PM
+
+-------------------START-------------5/21/2018 8:13:54 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 8:13:54 PM
+
+-------------------START-------------5/21/2018 8:14:31 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 8:14:31 PM
+
+-------------------START-------------5/21/2018 8:15:55 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 8:15:55 PM
+
+-------------------START-------------5/21/2018 8:16:26 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 8:16:26 PM
+
+-------------------START-------------5/21/2018 8:17:04 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/21/2018 8:17:04 PM
+
+-------------------START-------------5/22/2018 10:03:15 AM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/22/2018 10:03:15 AM
+
+-------------------START-------------5/22/2018 10:05:09 AM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/22/2018 10:05:09 AM
+
+-------------------START-------------5/22/2018 10:05:10 AM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/22/2018 10:05:10 AM
+
+-------------------START-------------5/22/2018 11:03:40 AM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/22/2018 11:03:40 AM
+
+-------------------START-------------5/22/2018 11:03:47 AM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/22/2018 11:03:47 AM
+
+-------------------START-------------5/22/2018 2:40:09 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/22/2018 2:40:09 PM
+
+-------------------START-------------5/23/2018 1:18:28 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/23/2018 1:18:28 PM
+
+-------------------START-------------5/23/2018 2:27:53 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Input string was not in a correct format.
+-------------------END-------------5/23/2018 2:27:53 PM
+
+-------------------START-------------5/24/2018 2:15:32 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+-------------------END-------------5/24/2018 2:15:32 PM
+
+-------------------START-------------5/31/2018 5:28:23 PM
+
+Controller Name : BenefitOpenEnrollment Controller
+Function in which error found : ActionResult Index()
+Process Type : ActionResult=[HttpGet]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------5/31/2018 5:28:23 PM
+

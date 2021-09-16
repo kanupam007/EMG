@@ -1,0 +1,238 @@
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PowerIBroker.dll.config
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PowerIBroker.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PowerIBroker.pdb
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\Antlr3.Runtime.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\DocX.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\Elmah.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\evohtmltopdf.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\JWT.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\Microsoft.Web.Infrastructure.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\Newtonsoft.Json.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PagedList.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PagedList.Mvc.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\pokitdok-csharp.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PowerIBrokerBusinessLayer.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PowerIBrokerDataLayer.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Net.Http.Formatting.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Helpers.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Http.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Http.WebHost.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Mvc.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Mvc.Extensions.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Optimization.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Providers.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Razor.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.WebPages.Deployment.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.WebPages.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.WebPages.Razor.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\Twilio.Api.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\WebGrease.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PowerIBrokerBusinessLayer.pdb
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PowerIBrokerDataLayer.pdb
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PowerIBrokerDataLayer.dll.config
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\evohtmltopdf.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\Newtonsoft.Json.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PagedList.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\PagedList.Mvc.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Helpers.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Mvc.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Mvc.Extensions.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.WebPages.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Net.Http.Formatting.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Http.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Http.WebHost.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.Razor.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.WebPages.Deployment.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\System.Web.WebPages.Razor.xml
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\bin\evointernal.dat
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\obj\Debug\PowerIBroker.csprojAssemblyReference.cache
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\obj\Debug\PowerIBroker.csproj.CoreCompileInputs.cache
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\obj\Debug\PowerIBroker.csproj.CopyComplete
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\obj\Debug\PowerIBroker.dll
+E:\EnRollMyGroup\Project\EMG Web Scrum\Development\Vineet\PowerIBroker\PowerIBroker\obj\Debug\PowerIBroker.pdb
+E:\EnRollMyGroup\EMGDev\PowerIBroker\obj\Debug\PowerIBroker.csprojAssemblyReference.cache
+E:\EnRollMyGroup\EMGDev\PowerIBroker\obj\Debug\PowerIBroker.csproj.CoreCompileInputs.cache
+E:\EnRollMyGroup\EMGDev\PowerIBroker\obj\Debug\PowerIBroker.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\obj\Debug\PowerIBroker.pdb
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PowerIBroker.dll.config
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PowerIBroker.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PowerIBroker.pdb
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\Antlr3.Runtime.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\DocX.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\Elmah.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\evohtmltopdf.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\JWT.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\Microsoft.Web.Infrastructure.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\Newtonsoft.Json.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PagedList.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PagedList.Mvc.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\pokitdok-csharp.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PowerIBrokerBusinessLayer.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PowerIBrokerDataLayer.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Net.Http.Formatting.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Helpers.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Http.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Http.WebHost.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Mvc.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Mvc.Extensions.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Optimization.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Providers.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Razor.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.WebPages.Deployment.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.WebPages.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.WebPages.Razor.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\Twilio.Api.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\WebGrease.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PowerIBrokerBusinessLayer.pdb
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PowerIBrokerDataLayer.pdb
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PowerIBrokerDataLayer.dll.config
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\evohtmltopdf.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\Newtonsoft.Json.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PagedList.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\PagedList.Mvc.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Helpers.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Mvc.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Mvc.Extensions.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.WebPages.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Net.Http.Formatting.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Http.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Http.WebHost.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.Razor.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.WebPages.Deployment.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\System.Web.WebPages.Razor.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\evointernal.dat
+E:\EnRollMyGroup\EMGDev\PowerIBroker\obj\Debug\PowerIBroker.csproj.CopyComplete
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\ClosedXML.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\DocumentFormat.OpenXml.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\ExcelNumberFormat.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\ClosedXML.pdb
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\ClosedXML.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\DocumentFormat.OpenXml.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\ExcelNumberFormat.xml
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\BouncyCastle.Crypto.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\itextsharp.dll
+E:\EnRollMyGroup\EMGDev\PowerIBroker\bin\itextsharp.xml
+E:\Avdhesh\PowerIBroker\bin\PowerIBroker.dll.config
+E:\Avdhesh\PowerIBroker\bin\PowerIBroker.dll
+E:\Avdhesh\PowerIBroker\bin\PowerIBroker.pdb
+E:\Avdhesh\PowerIBroker\bin\Antlr3.Runtime.dll
+E:\Avdhesh\PowerIBroker\bin\BouncyCastle.Crypto.dll
+E:\Avdhesh\PowerIBroker\bin\ClosedXML.dll
+E:\Avdhesh\PowerIBroker\bin\DocumentFormat.OpenXml.dll
+E:\Avdhesh\PowerIBroker\bin\DocX.dll
+E:\Avdhesh\PowerIBroker\bin\Elmah.dll
+E:\Avdhesh\PowerIBroker\bin\evohtmltopdf.dll
+E:\Avdhesh\PowerIBroker\bin\ExcelNumberFormat.dll
+E:\Avdhesh\PowerIBroker\bin\itextsharp.dll
+E:\Avdhesh\PowerIBroker\bin\JWT.dll
+E:\Avdhesh\PowerIBroker\bin\Microsoft.Web.Infrastructure.dll
+E:\Avdhesh\PowerIBroker\bin\Newtonsoft.Json.dll
+E:\Avdhesh\PowerIBroker\bin\PagedList.dll
+E:\Avdhesh\PowerIBroker\bin\PagedList.Mvc.dll
+E:\Avdhesh\PowerIBroker\bin\pokitdok-csharp.dll
+E:\Avdhesh\PowerIBroker\bin\PowerIBrokerBusinessLayer.dll
+E:\Avdhesh\PowerIBroker\bin\PowerIBrokerDataLayer.dll
+E:\Avdhesh\PowerIBroker\bin\System.Net.Http.Formatting.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.Helpers.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.Http.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.Http.WebHost.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.Mvc.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.Mvc.Extensions.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.Optimization.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.Providers.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.Razor.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.WebPages.Deployment.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.WebPages.dll
+E:\Avdhesh\PowerIBroker\bin\System.Web.WebPages.Razor.dll
+E:\Avdhesh\PowerIBroker\bin\Twilio.Api.dll
+E:\Avdhesh\PowerIBroker\bin\WebGrease.dll
+E:\Avdhesh\PowerIBroker\bin\PowerIBrokerBusinessLayer.pdb
+E:\Avdhesh\PowerIBroker\bin\PowerIBrokerDataLayer.pdb
+E:\Avdhesh\PowerIBroker\bin\PowerIBrokerDataLayer.dll.config
+E:\Avdhesh\PowerIBroker\bin\ClosedXML.pdb
+E:\Avdhesh\PowerIBroker\bin\ClosedXML.xml
+E:\Avdhesh\PowerIBroker\bin\DocumentFormat.OpenXml.xml
+E:\Avdhesh\PowerIBroker\bin\evohtmltopdf.xml
+E:\Avdhesh\PowerIBroker\bin\ExcelNumberFormat.xml
+E:\Avdhesh\PowerIBroker\bin\itextsharp.xml
+E:\Avdhesh\PowerIBroker\bin\Newtonsoft.Json.xml
+E:\Avdhesh\PowerIBroker\bin\PagedList.xml
+E:\Avdhesh\PowerIBroker\bin\PagedList.Mvc.xml
+E:\Avdhesh\PowerIBroker\bin\System.Web.Helpers.xml
+E:\Avdhesh\PowerIBroker\bin\System.Web.Mvc.xml
+E:\Avdhesh\PowerIBroker\bin\System.Web.Mvc.Extensions.xml
+E:\Avdhesh\PowerIBroker\bin\System.Web.WebPages.xml
+E:\Avdhesh\PowerIBroker\bin\System.Net.Http.Formatting.xml
+E:\Avdhesh\PowerIBroker\bin\System.Web.Http.xml
+E:\Avdhesh\PowerIBroker\bin\System.Web.Http.WebHost.xml
+E:\Avdhesh\PowerIBroker\bin\System.Web.Razor.xml
+E:\Avdhesh\PowerIBroker\bin\System.Web.WebPages.Deployment.xml
+E:\Avdhesh\PowerIBroker\bin\System.Web.WebPages.Razor.xml
+E:\Avdhesh\PowerIBroker\bin\evointernal.dat
+E:\Avdhesh\PowerIBroker\obj\Debug\PowerIBroker.csprojAssemblyReference.cache
+E:\Avdhesh\PowerIBroker\obj\Debug\PowerIBroker.csproj.CoreCompileInputs.cache
+E:\Avdhesh\PowerIBroker\obj\Debug\PowerIBroker.csproj.CopyComplete
+E:\Avdhesh\PowerIBroker\obj\Debug\PowerIBroker.dll
+E:\Avdhesh\PowerIBroker\obj\Debug\PowerIBroker.pdb
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PowerIBroker.dll.config
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PowerIBroker.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PowerIBroker.pdb
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\Antlr3.Runtime.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\BouncyCastle.Crypto.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\ClosedXML.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\DocumentFormat.OpenXml.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\DocX.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\Elmah.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\evohtmltopdf.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\ExcelNumberFormat.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\itextsharp.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\JWT.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\Microsoft.Web.Infrastructure.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\Newtonsoft.Json.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PagedList.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PagedList.Mvc.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\pokitdok-csharp.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PowerIBrokerBusinessLayer.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PowerIBrokerDataLayer.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Net.Http.Formatting.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Helpers.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Http.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Http.WebHost.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Mvc.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Mvc.Extensions.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Optimization.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Providers.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Razor.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.WebPages.Deployment.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.WebPages.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.WebPages.Razor.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\Twilio.Api.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\WebGrease.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PowerIBrokerBusinessLayer.pdb
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PowerIBrokerDataLayer.pdb
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PowerIBrokerDataLayer.dll.config
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\ClosedXML.pdb
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\ClosedXML.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\DocumentFormat.OpenXml.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\evohtmltopdf.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\ExcelNumberFormat.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\itextsharp.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\Newtonsoft.Json.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PagedList.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\PagedList.Mvc.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Helpers.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Mvc.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Mvc.Extensions.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.WebPages.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Net.Http.Formatting.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Http.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Http.WebHost.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.Razor.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.WebPages.Deployment.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\System.Web.WebPages.Razor.xml
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\bin\evointernal.dat
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\obj\Debug\PowerIBroker.csproj.AssemblyReference.cache
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\obj\Debug\PowerIBroker.csproj.CoreCompileInputs.cache
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\obj\Debug\PowerIBroker.csproj.CopyComplete
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\obj\Debug\PowerIBroker.dll
+D:\Anupam\Clients\Peter Sherr\EMG CleanUp\PowerIBroker\obj\Debug\PowerIBroker.pdb

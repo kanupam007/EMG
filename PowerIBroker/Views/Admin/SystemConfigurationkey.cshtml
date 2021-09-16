@@ -1,0 +1,245 @@
+﻿@model PowerIBrokerDataLayer.SystemConfiguration
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+<link href="~/Content/Admin/css/Admin.css" rel="stylesheet" />
+
+@*<div class="content-wrapper" style="min-height: 960px;">*@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+   
+    <ol class="breadcrumb">
+        <li><a href="/Admin/Dashboard"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active"> System Configuration</li>
+    </ol>
+</section>
+<br />
+
+<!-- Main content -->
+<section class="content">
+    <!-- Info boxes -->
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title"> System Configuration</h3>
+
+                </div><!-- /.box-header -->
+                <div class="@(TempData["CustomMessageSCK"] != null ? TempData["MessageTypeSCK"] == "Success" ? "success-msg" : "error-msg" : "")">
+                    @if (TempData["CustomMessageSCK"] != null)
+                    {
+                        <i class="fa @(TempData["MessageTypeSCK"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+
+                    }
+                    <span>@TempData["CustomMessageSCK"]</span>
+
+                </div>
+
+                @using (Html.BeginForm("SystemConfigurationkey", "Admin", FormMethod.Post, new { Id = "formId" }))
+                {
+                    @Html.HiddenFor(model => model.ID)
+                    <div class="box-body">
+
+                        <form role="form">
+                            <div class="box-body">
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Deactivate minutes</label>
+                                        @*<input type="text" class="form-control" placeholder="Enter Plan Category" maxlength="50">*@
+
+                                        @Html.TextBoxFor(model => model.DeactivateHours, new { @class = "form-control", placeholder = "Deactivate minutes ", maxlength = "4", id = "DeactivateHours" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">No Of Attempts</label>
+                                        @*<input type="text" class="form-control" placeholder="Enter Plan Category" maxlength="50">*@
+
+                                        @Html.TextBoxFor(model => model.NoOfAttempts, new { @class = "form-control", placeholder = "No Of Attempts", maxlength = "2", id = "NoOfAttempt" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Admin Email</label>
+                                        @*<input type="text" class="form-control" placeholder="Enter Plan Category" maxlength="50">*@
+
+                                        @Html.TextBoxFor(model => model.AdminEmail, new { @class = "form-control", placeholder = "Admin Email", maxlength = "48" })
+                                    </div>
+                                </div>
+                                @if (Model!= null)
+                                {
+                                    <div class="box-footer" style="margin-top:14px">
+                                        <button type="button" id="btnSave" class="btn btn-primary">Save</button>
+                                    </div>
+                                }
+                            </div><!-- /.box-body -->
+
+
+
+                        </form>
+                        <br /><br /><br />
+                        <!-- Main content -->
+                        <section class="content">
+                            <!-- Info boxes -->
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+                                    <div class="box">
+                                        <div class="box-header">
+
+                                            <h3 class="box-title">System Configuration- List</h3>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body">
+
+                                            @if (ViewBag.SystemConfiguration.Count > 0)
+                                            {
+                                                <table id="example1" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="70%">Deactivate minutes</th>
+                                                            <th width="10%">No Of Attempts</th>
+                                                            <th width="10%">Admin Email</th>
+                                                            <th width="20%">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (ViewBag.SystemConfiguration != null)
+                                                        {
+
+                                                            foreach (var plancat in ViewBag.SystemConfiguration)
+                                                            {
+                                                                <tr>
+                                                                    <td>@plancat.DeactivateHours</td>
+                                                                    <td>@plancat.NoOfAttempts</td>
+                                                                    <td>@plancat.AdminEmail</td>
+                                                                    <td>
+                                                                        <a href="@Url.Action("EditSystemConfiguration", "Admin", new { @id = plancat.ID })" class="btn btn-primary btn-xs">Edit</a>
+
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                        }
+
+
+
+                                                    </tbody>
+                                                </table>
+                                            }
+                                            else
+                                            {
+                                                <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                                            }
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!-- /.box-footer -->
+
+                                </div><!-- /.col -->
+                            </div>
+
+                        </section><!-- /.content -->
+
+
+                    </div><!-- ./box-body -->
+
+                }
+                <!-- /.box-footer -->
+            </div><!-- /.box -->
+        </div><!-- /.col -->
+    </div>
+
+</section><!-- /.content -->
+@*</div>*@
+@*<script src="~/Scripts/jquery-1.8.2.js"></script>*@
+<script type="text/javascript">
+    $('#btnSave').click(function (e) {
+        
+        var isValid = true;
+        if ($.trim($('#DeactivateHours').val()) == '') {
+            isValid = false;
+            $('#DeactivateHours').removeClass('custom-input-success').addClass('custom-input-error');
+            $('#DeactivateHours').keypress(function () {
+                $('#DeactivateHours').removeClass('custom-input-error').addClass('custom-input-success');
+            });
+
+        }
+        if ($.trim($('#NoOfAttempt').val()) == '') {
+            isValid = false;
+            $('#NoOfAttempt').removeClass('custom-input-success').addClass('custom-input-error');
+            $('#NoOfAttempt').keypress(function () {
+                $('#NoOfAttempt').removeClass('custom-input-error').addClass('custom-input-success');
+            });
+
+        }
+        if (isValid == false)
+            e.preventDefault();
+        else
+            $("#formId").submit();
+    });
+
+</script>
+@*<script>
+
+    function DeleteCode14(id) {
+        
+        if (confirm("Are you sure to delete this Code 14 ? ")) {
+            //var PlanId = $(elem).attr("data-Id");
+            $.ajax({
+                type: "POST",
+                url: "/Admin/DeleteCode14",
+                data: "{'EnrollId':'" + id + "'}",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    
+                    location.reload(true);
+                }
+            });
+        }
+    }
+
+</script>*@
+
+<script>
+    function GetData() {
+        
+        var value = $('#value').prop('checked');
+        if (value == true) {
+            value = "1";
+        }
+        else {
+            value = "0";
+        }
+        $.ajax({
+            type: 'GET',
+            contentType: false,
+            url: '@Url.Action("GetDeletedCode14", "Admin")',
+            data: { value: value },
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                $('#example1').html('');
+                $('#example1').html(data);
+
+            }
+        });
+    }
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#Deactivehours,#NoOfAttempt').keydown(function (e) {
+            if (e.shiftKey || e.ctrlKey || e.altKey) {
+                e.preventDefault();
+            } else {
+                var key = e.keyCode;
+                if (!((key == 8) || (key == 46) || (key >= 35 && key <= 40) || (key >= 48 && key <= 57) || (key >= 96 && key <= 105))) {
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+</script>

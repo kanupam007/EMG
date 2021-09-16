@@ -1,0 +1,109 @@
+﻿#LoadMain {
+    position: fixed;
+    background-color: rgba(0,0,0,.6);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    display: none;
+}
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+    border: 1px solid #c1c1c1;
+    background-color: #eeeeee;
+    color: black;
+}
+
+.loader {
+    position: relative;
+}
+
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px; /* -1 * image width / 2 */
+    margin-top: -32px; /* -1 * image height / 2 */
+}
+
+#tblBrokerCompanyEmployee_length {
+    display: none;
+}
+
+#tblBrokerCompany_length {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #a94442 !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+    background-color: #FBE8E8 !important;
+}
+
+.short {
+    font-weight: bold;
+    color: #FF0000;
+    font-size: larger;
+}
+
+.weak {
+    font-weight: bold;
+    color: orange;
+    font-size: larger;
+}
+
+.good {
+    font-weight: bold;
+    color: #2D98F3;
+    font-size: larger;
+}
+
+.strong {
+    font-weight: bold;
+    color: limegreen;
+    font-size: larger;
+}
+ .checkbox label, .radio label {
+        min-height: 20px;
+        padding-left: 30px;
+        margin-bottom: 0;
+        font-weight: 400;
+        cursor: pointer;
+    }
+
+.box-body {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 3px;
+        border-bottom- -left-radius: 3px;
+        padding: 10px;
+        padding-bottom: 0px;
+    }
+
+.custom-input-error {
+        border: 1px solid #a94442 !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        background-color: #FBE8E8 !important;
+    }
+
+.custom-input-success {
+        border: 1px solid #3c763d !important;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075) !important;
+        background-color: #D6F3D6 !important;
+    }
+
+.checkbox label, .radio label {
+        min-height: 20px;
+        padding-left: 2px;
+        margin-bottom: 0;
+        font-weight: 400;
+        cursor: pointer;
+    }

@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+@using PowerIBrokerBusinessLayer;
+@{
+    CmsManagement obj = new CmsManagement();
+    ViewBag.ContactUsContent = obj.GetContactUsContent();
+    PowerIBrokerDataLayer.ContactUsPageContent ContactUsContent = ViewBag.ContactUsContent;
+
+}
+<html>
+<head>
+    <link rel="shortcut icon" type="image/ico" href="~/Content/Frontend/images/favicon.ico">
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!--css-->
+    <script type="text/javascript" src="@Url.Content("~/content/frontend/js/jquery.min.js")"></script>
+    <link rel="stylesheet" href="@Url.Content("~/content/frontend/css/fonts.css")" media="all">
+    <link rel="stylesheet" href="@Url.Content("~/content/frontend/css/style.css")" media="all">
+    <link rel="stylesheet" href="@Url.Content("~/content/frontend/css/animate.css")" media="all">
+    <link rel="stylesheet" href="@Url.Content("~/content/frontend/css/responsive.css")" media="all">
+    <script src="/Content/Frontend/js/helium.mutate.js"></script>
+    <script src="/Content/Frontend/js/helium.slider.js"></script>
+    <link href="/Content/Frontend/css/heliumSlider.css" rel="stylesheet" />
+    <script src="~/Content/Frontend/js/function.js"></script>
+    <!--css-->
+    <title>ENROLLMYGROUP</title>
+    
+    <script src="@Url.Content("~/Content/Frontend/js/validations.js")"></script>
+    
+</head>
+<body>
+    <div class="mainCon">
+        <!--header-->
+        <div class="headerCon">
+            <div class="logo"><a href="@Url.Content("~/")"><img src="@Url.Content("~/content/frontend/images/logo.png")"></a></div>
+            <!--for resonsive menu-->
+
+            <div class="MenuBack"></div>
+            <button data-page-id="home" class="btn-menu normal">
+                <span>Menu</span>
+            </button>
+            <!--for resonsive menu-->
+            <div class="navCon">
+                <img src="@Url.Content("~/content/frontend/images/landing-logo.png")" class="reslogo">
+                <ul>
+                    @*<li class="navActive"><div class="navItem"><a href="@Url.Content("~/Home")#benifts" class="scroll">BENEFITS</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>*@
+                    <li><div class="navItem"><a href="@Url.Content("~/Home")#feature" class="scroll">FEATURES</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>
+                    @*<li><div class="navItem"><a href="@Url.Content("~/Home")#pricing" class="scroll">PRICING</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>*@
+                    @*<li><div class="navItem"><a href="#reqDemo" class="scroll">Request Demo</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>*@
+                    <li><div class="navItem"><a id="loginLink" href="javascript:void(0)" class="login">Login</a><div class="backOver"></div></div><div class="bdrForeResponsive"></div></li>
+                    <li><div class="navItem"><a id="signUpLink" href="@Url.Content("~/Home")#signUp" class="scroll">Schedule Demo</a><div class="backOver"></div></div></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+
+        </div>
+        <!--header-->
+        @RenderBody()
+
+        <!--topFooter-->
+        <div class="topFooter">
+            <div class="container">
+                <div class="foterNav">
+                    <h2>Overview</h2>
+                    @*<a href="#benifts" class="scroll">Benefits</a>*@
+                    <a href="#feature" class="scroll">Features</a>
+                    @*<a href="#pricing" class="scroll">Pricing</a>*@
+                    <a href="@Url.Content("~/AboutUs")" class="">About Us</a>
+                    <a href="@Url.Content("~/FAQs")" class="">FAQ’s</a>
+                    <a href="@Url.Content("~/Contact")" class="">Contact Us</a>
+                    <a href="@Url.Content("~/Security")" class="">Security</a>
+                    <a href="@Url.Content("~/Terms-Conditions")" class="">Terms of Use</a>
+                    <a href="@Url.Content("~/Privacy-Policy")" class="">Privacy Policy</a>
+                </div>
+
+                <div class="footerNews">
+                   @{
+                    var latestNewsContent = obj.GetNewsContent(false, "1");
+                    if (latestNewsContent.Count > 0)
+                    {
+                        foreach (var news in latestNewsContent)
+                        {
+                            <h2>@news.Title</h2>
+                            <p>@news.Description</p>
+                            <a target="_blank" class="newsLink" href="@news.Link">@news.Link</a>
+                        }
+                    }
+                   }
+
+                @*<a href="javascript:void(0)" class="rwadMore">Read More</a>*@
+                </div>
+
+                @*<div class="footContactus" id="formEnquiry">
+
+                    @using (Html.BeginForm("ContactUs", "ContactUs"))
+                    {
+                        <h2>Contact Us</h2>
+                        @Html.TextBox("ContactUsName", "", new { id = "ContactUs_Name", @class = "inputTxt", placeholder = "Name" })
+                        @Html.TextBox("ContactUsPhone", "", new { id = "ContactUs_Phone", @class = "inputTxt", placeholder = "Phone Number" })
+                        @Html.TextBox("ContactUsEmail", "", new { id = "ContactUs_Email", @class = "inputTxt", placeholder = "Email" })
+                        @Html.TextArea("Query", new { id = "ContactUs_Query", @class = "inputTxt", cols = "10", placeholder = "Message" })
+                        <input type="submit" value="submit" class="submitBtn" id="btn_ContactUs" />
+                        <div class="@(TempData["EnquiryMessage"] != null ? TempData["MessageType"] == "success" ? "successMsgDiv" : "errorMsgDiv" : "")">
+                            <span>@TempData["EnquiryMessage"]</span>
+                        </div>
+                    }
+
+                    @*<input type="text" placeholder="Your Name" class="inputTxt">
+                        <input type="text" placeholder="Email Address" class="inputTxt">
+                        <input type="text" placeholder="Phone No." class="inputTxt">
+                        <textarea placeholder="Enter Message Here" class="inputTxt"></textarea>
+
+                </div>*@
+
+                @*<div class="footContactus" id="formEnquiry">
+                    <img src="~/Content/Frontend/images/ISI.png" width="300px" height="150px" />
+                    <p style="color: black">Enroll My Group support our troops, police and fire departments</p>
+                </div>
+                <div class="clearfix"></div>*@
+
+            </div>
+        </div>
+        <!--topFooter-->
+        <!--footer-->
+        <div class="footerCon">
+            <div class="container">
+                <div class="copyRight"> Copyright &copy; @DateTime.Now.Year ENROLLMYGROUP</div>
+                <div class="socIcons">                  
+                    @{                       
+                     var socialMediaLinks = obj.GetSocialMediaLink(false);
+                    }
+                    @if (socialMediaLinks.Count > 0)
+                    {
+                        foreach (var link in socialMediaLinks)
+                        {
+                            <a href="@link.Link" class="@(link.Title.ToLower() == "facebook" ? "facebook" : link.Title.ToLower() == "twitter" ? "tw" : link.Title.ToLower() == "linkedin" ? "in" : "tube")"></a>
+                        }
+                    }
+
+                    @*<a href="javascript:void(0)" class="tw"></a>
+                        <a href="javascript:void(0)" class="in"></a>
+                        <a href="javascript:void(0)" class="tube"></a>*@
+                            <div class="clearfix"></div>
+
+            </div>
+        </div>
+        <!--footer-->
+        <!--LoginPop -->
+        <div class="backbg"></div>
+        @using (Html.BeginForm("Index", "UserLogin"))
+        {
+            <div class="loginPop lognp">
+
+                <div class="closeCon">
+                    <a href="javascript:void(0)" class="close">Close X</a>
+                    <div class="clearfix"></div>
+                    <img src="@Url.Content("~//content/frontend/images/logo.png")" class="loginLogo" />
+                </div>
+
+                <div class="loginCon">
+                    <ul>
+                        <li><input type="text" placeholder="Email Address" value="@(Request.Cookies["UserEmail"] != null ? Request.Cookies["UserEmail"].Value : "")" name="Email" id="LoginEmail" class="inputTxt1" /></li>
+                        <li><input type="password" placeholder="Password" value="@(Request.Cookies["UserPassword"] != null ? Request.Cookies["UserPassword"].Value : "")" name="Password" id="LoginPassword" class="inputTxt1" /></li>
+                        <li class="forgotPass"><input type="checkbox" name="rememberMe" value="true" /><strong>Remember me</strong><a class="forgotPassLink" href="javascript:void(0)">forgot password? </a><div class="clearfix"></div></li>
+                        <li><input type="submit" value="Login" class="btn signin" id="btnUserLogin" /></li>
+                        <li class="signInError">@TempData["Message"]</li>
+                    </ul>
+
+                </div>
+
+            </div>
+        }
+
+        <!--LoginPop -->
+        <!--ForgotPasswordPopup -->
+        <div class="backbg"></div>
+
+        <div class="frgtPassPop lognp">
+
+            <div class="closeCon">
+                <a href="javascript:void(0)" class="close">Close X</a>
+                <div class="clearfix"></div>
+                <img src="@Url.Content("~/content/frontend/images/logo.png")" class="frgtPassPopLogo" />
+            </div>
+
+            <div class="frgtPassPopCon">
+                <ul>
+                    <li><input type="text" placeholder="Email Address" name="Email" id="ForgotPass_Email" class="inputTxt1" /></li>
+
+                    <li><input type="submit" value="Reset Password" class="btn signin" id="btnFrgtPass" /></li>
+                    <li class="signInError">@TempData["Message"]</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!--ForgotPasswordPopup -->
+    </div>
+        </div>
+    <!--script-->
+    <script src="~/Content/Frontend/js/jquery.scrolly.js"></script>
+ 
+    <script>
+        $(document).ready(function () {
+            $('.parallax').scrolly({ bgParallax: true });
+        });
+    </script>
+    <script type="text/javascript" src="@Url.Content("~/content/frontend/js/function.js")"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/html5.js"></script>
+    <script src="js/placeholder.js"></script>
+      <![endif]-->
+    <script src="@Url.Content("~/content/frontend/js/wow.min.js")"></script>
+    <script>
+        new WOW().init();
+    </script>
+  
+    <!---- start-smoth-scrolling---->
+    <script type="text/javascript" src="@Url.Content("~/content/frontend/js/easing.js")"></script>
+  
+    <!---- start-smoth-scrolling---->
+    <!--script-->
+    
+
+</body>
+
+</html>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125727191-1"></script>
+<script>
+   
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-125727191-1');
+</script>

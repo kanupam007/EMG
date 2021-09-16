@@ -1,0 +1,192 @@
+@media(max-width:1209px) {
+.clBox{ margin: 0 3px;}
+.leftCon{ width:30%;}
+.rightCon{ width:68%;}
+.rightPrice{ width:48%;}
+.leftPrice{ width:48%;}
+.signUpCon li{ width:42%; margin:10px 3%;}
+.foterNav{ width:20%;}
+.footerNews{ width:36%; margin:0 2%;}
+.footContactus{ width:36%;}
+.headinDiv{ left:15px;}
+/*CONTACT PAGE CSS*/
+.contactbx{ width:206px;}
+}
+
+@media(max-width:1023px) {
+.logo img {  padding: 7px 0;  width: 150px;}
+.bannerCon{ height:550px;}
+.bannerCon h1{ padding-top:240px;}
+.bannerCon{ background-position:50% 0;}
+
+/*added by ikhlaq 12 aug*/
+.background{ height:550px !important }
+.background h1{padding-top:240px !important}
+.background{ background-position:50% 0 !important}
+/*added by ikhlaq 12 aug*/
+
+
+.clBox { margin: 6px 15px;}
+.stepCon > strong{ font-size:15px;}
+.leftCon h2{ font-size:30px;}
+.leftCon strong{ font-size:60px; line-height:60px;}
+.featBox{ vertical-align:top;}
+.featBox > strong{ font-size:15px;}
+.featBox p{ font-size:14px;}
+.stepCon p{ font-size:14px;}
+.rightCon li{ font-size:14px; line-height:23px;}
+.featureCon h1{ margin-bottom:40px;}
+.leftPrice{ font-size:14px;}
+.rightPrice{ font-size:14px;}
+.pricing span{ font-size:20px;}
+.inputCmpny {  max-width: 90%; width: 100% !important;}
+/*CONTACT PAGE CSS*/
+.contactbx{ min-height:inherit; margin-bottom:15px;}
+.downloadbx{ margin-top:0;}
+.downsep , .upsep{ width:auto; max-width:100%; padding:10px 0; margin:0 !important;}
+.tol > h1{ padding:2px 0}
+.tol{ float:none; width:100%;}
+.downloadbx img{ float:none; margin-top:10px;}
+.contactbx h2{ margin-top:0;}
+.leftTxt{ margin-top:30px;}
+
+.logo.landing-logo{ padding:23px 0;}
+.bannerCon.landingBanner h1{ font-size:40px;}
+.bannerCon.landingBanner strong{ font-size:20px}
+.bannerCon.landingBanner.parallax{ height:550px;}
+}
+
+@media(max-width:767px) {
+    .inputTxt1-new{ background: #fff none repeat scroll 0 0; border:1px solid #e4e1e1;   color: #a8a8a8;  font-family: open_sansregular;  font-size: 15px;  margin-bottom: 10px;  padding: 14px 10px;  width: 100%;}
+
+.create-pwd { width:100%!important;}
+    .foterNav > a {width: 50%; float: left;}
+    .footContactus img { width:100%;}
+.bannerCon{ height:400px; clear:both;}
+.bannerCon h1{ font-size:40px; padding-top:170px;}
+.bannerCon strong{ font-size:26px; line-height:19px;}
+
+/*added by ikhlaq 12 aug*/
+.background{ height:400px !important; clear:both !important;}
+.background h1{ font-size:40px !important; padding-top:170px !important;}
+.background strong{ font-size:26px !important; line-height:19px !important;}
+/*added by ikhlaq 12 aug*/
+
+.signUp{ width:120px; padding:10px 0; margin-top:20px; font-size:14px;}
+.imgbox{ width:120px; height:120px;}
+.bacKBox{ width:120px; height:120px;}
+.featureImgBack , .fetuImg{ height:120px; width:120px;}
+.videoCon{ width:70%;}
+.tabback{ background-position:50% 0 !important;}
+
+/*-------------Responive Menu--------------*/
+.navCon {  width: 80%;  margin: auto;  float:none;  position:absolute; z-index:5000;  left:-1500px; right:0;  margin-top:22px; transition: all 0.4s ease-in-out 0s; -webkit-transition: all 0.4s ease-in-out 0s; -o-transition: all 0.4s ease-in-out 0s; -moz-transition: all 0.4s ease-in-out 0s; outline:none;}
+.navCon ul li {  float: none;  display: block;  text-align: center;  margin-left: auto; position:relative;}
+.navItem {  overflow: hidden;  width: 100%;}
+.MenuBack {  background: #6cbbb6 none repeat scroll 0 0;  bottom: 0;   position: fixed;  right: 0;  top: 0; left:-1500px; width:100%;  z-index: 4500;  transition: all 0.4s ease-in-out 0s; -webkit-transition: all 0.4s ease-in-out 0s; -o-transition: all 0.4s ease-in-out 0s; -moz-transition: all 0.4s ease-in-out 0s; outline:none;}
+.navCon ul li a {  color: #fff;  padding: 10px 0;  text-align: center;  display: block;}
+.navCon ul li.navActive .backOver {  left: 0;  background: transparent;}
+.navCon ul li.reqDemo.req3 {  margin-left: auto;}
+.reqDemo.req2 .navItem {  width: 100%;}
+.navCon ul li.reqDemo a {  color: #fff;  text-transform: uppercase;}
+.navCon ul li:hover a{ color:#fff;}
+.navCon ul li:hover .backOver{ left:-100%;}
+.navCon ul li.reqDemo a:hover { color: #fff;}
+.reslogo{ display:block; margin:auto; text-align:center; z-index:6000; margin-bottom:20px;}
+.bdrForeResponsive {  background: #45a5ef none repeat scroll 0 0;  bottom: 0;  height: 1px;  left: 0;  margin: auto;  position: absolute;  right: 0;  width: 0%;  z-index: 6000; transition: all 1s ease-in-out 0s; -webkit-transition: all 1s ease-in-out 0s; -o-transition: all 1s ease-in-out 0s; -moz-transition: all 1s ease-in-out 0s; outline:none;}
+.MenuBack.MenuBack1{ left:0;}
+.navCon.navOpen{ left:0;}
+.bdrForeResponsive.bdrs1{ width:100%;}
+.navCon ul li .navItem .reqDemo1{ color:#fff;}
+.btn-menu{ display:block;}
+.reslogo{ display:block;}
+.PageName{ height:200px; padding-top:120px;}
+.PageName h1{ font-size:24px;}
+.termCon p{ font-size:14px; line-height:24px;}
+.termCon ul li{ font-size:14px; line-height:24px;}
+.termCon h1{ font-size:20px;}
+.PageName.aboutbanr{ height:250px;}
+.inerMission p , .aboutText p{ font-size:14px; line-height:23px;}
+.loginPop{ position:absolute; top:30px; margin:0 auto;}
+.hiddenss{ overflow:inherit;}
+
+.logo.landing-logo{ width:auto;}
+.sixStep{ padding:20px 0;}
+.bannerCon.landingBanner.parallax{ height:400px;}
+.subTxt{ font-size:22px;}
+.sixBoxes{ margin-top:20px;}
+
+
+}
+
+@media(max-width:639px) {
+.clBox{ margin:5px;}
+.clBox img{ width:120px;}
+.tabLink{ width:80%;}
+.leftCon{ width:100%; float:none;}
+.headinDiv{ position:relative;}
+.rightCon{ width:100%; float:none;}
+.featBox{ margin:15px 10px; width:190px;}
+.rightPrice ,.leftPrice{ width:100%; float:none; margin-bottom:15px; margin:0 auto 15px;}
+.signUpCon li,.inputCmpny{ width:100% !important; margin:10px 0;}
+
+.foterNav {  width: 46%;  float: none;  display: inline-block; vertical-align:top;}
+.footerNews{ width:46%; float:none; display:inline-block; vertical-align:top;}
+.footContactus{ width:100%; float:none; display:inline-block; margin-top:20px;}
+.topFooter h2{ font-size:14px;}
+.tabCon{ padding:50px 0;}
+.footerNews > p{ font-size:14px; line-height:23px;}
+.termCon h2{ font-size:17px;}
+.aboutText h1{ font-size:24px;}
+.inerMission{ padding:20px;}
+.inerMission h1{ font-size:26px; margin-bottom:10px;}
+.box1 {  float: none;  margin: 10px auto 50px;  width: 100%;  display: inline-block;}
+.box1 img{ width:100%; max-width:370px; margin: 0 auto 20px;}
+.threeBox{ text-align:center;}
+.loginPop{ width:93%; transform:scale(1);}
+.inputCmpny {  max-width: 100%; width: 100% !important;}
+/*CONTACT PAGE CSS*/
+.leftTxt{ width:100%; margin-bottom:20px; float:none;}
+.rightForm{ width:100%; margin:auto; float:none;}
+.formbox li{ margin-bottom:10px;}
+.searchInput{ padding:10px;}
+.submitBtn{ width:180px; padding:5px 0}
+.termCon.contactusCon li{ margin-bottom:12px;}
+.mapCon{ height:150px; overflow:hidden;}
+.contactbx{ width:250px;}
+.bannerCon.landingBanner strong{ display:none;}
+.bannerCon.landingBanner h1{ font-size:30px; padding-top:150px;}
+.bannerCon.landingBanner .down_arrow{ display:none;}
+.bannerCon.landingBanner.parallax{ height:320px;}
+.bannerCon.landingBanner.parallax {background-position: center bottom !important;}
+.subTxt{ font-size:18px;}
+.sxbox{ width:260px; height:auto;}
+}
+
+@media(max-width:479px) {
+.bannerCon{ height:300px;}
+.bannerCon h1{ font-size:30px;}
+.bannerCon strong{ font-size:15px;}
+
+/*added by ikhlaq 12 aug*/
+.background{ height:300px !important; }
+.background h1{ font-size:30px !important;}
+.background strong{ font-size:15px !important; }
+/*added by ikhlaq 12 aug*/
+
+.down_arrow{ display:none;}
+.stepCon{ width:200px; margin:0 0 30px 0;}
+.requestDemo{ padding:30px 0;}
+.requestDemo > h1{ margin-bottom:10px;}
+.videoCon{ width:100%;}
+.foterNav{ width:100%; margin-bottom:30px;}
+.footerNews{ width:100%;}
+.footerCon{ text-align:center}
+copyRight{ width:100%; float:none; display:inline-block; text-align:center; margin-bottom:5px;}
+.socIcons{ float:none; width:150px; margin:10px auto 0;}
+.navCon ul li a {  color: #fff;  padding: 18px 0;  text-align: center;  display: block;}
+.navCon{ margin-top:60px;}
+.PageName{ padding-top:105px;}
+.tabLink a{ padding:14px 5px;}
+.copyRight{ float:none;}
+}

@@ -1,0 +1,118 @@
+﻿@model  PowerIBroker.Areas.Broker.Models.CompanyBroker
+
+<form id="frmeditbroker">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Broker Company</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12" style="padding-right:0px;padding-left:0px">
+                    <div class="@(TempData["CompanyMessage"] != null ? TempData["MessageType"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                        @if (TempData["CompanyMessage"] != null)
+                            {
+                            <i class="fa @(TempData["MessageType"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+
+                            }
+                        <span>@TempData["CompanyMessage"]</span>
+                    </div>
+                </div>
+
+                @Html.HiddenFor(m => Model.BrokerId, new { @class = "bID" })
+
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Broker Company Name <span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => Model.BrokerName, new { placeholder = "Broker Company Name", @class = "PBrokerName form-control" })
+                            @*@Html.ValidationMessageFor(m => Model.BrokerName)*@
+                        </div>
+                    </div>
+
+                
+                </div>
+                <div class="clearfix">
+                 
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Street Name <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Street, new { placeholder = "Street Name", @class = "PStreet form-control", @maxlength = 100 })
+                            @*@Html.ValidationMessageFor(m => Model.Street)*@
+                        </div>
+                    </div>
+
+                  </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">City <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.City, new { placeholder = "City", @class = "PCity form-control", @maxlength = 40 })
+                            @*@Html.ValidationMessageFor(m => Model.City)*@
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">State <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.State, new { placeholder = "State", @class = "PState form-control" })
+                            @*@Html.ValidationMessageFor(m => Model.State)*@
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Zip Code <span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => Model.ZipCode, new { placeholder = "Zip Code", @class = "PZipCode form-control", @maxlength = 5 })
+                            @*@Html.ValidationMessageFor(m => Model.ZipCode)*@
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Country <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Country, new { placeholder = "Country", @class = "PCountry form-control" })
+                            @*@Html.ValidationMessageFor(m => Model.Country)*@
+                        </div>
+                    </div>
+                </div>
+                @*<div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Email, new { placeholder = "Email", @class = "PEmail form-control" })
+                         
+                        </div>
+                    </div>
+                    
+                </div>*@
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Work Phone</label>
+                            @Html.TextBoxFor(m => Model.WorkPhone, new { placeholder = "Work Phone", @class = "PWorkPhone form-control phonemask" })
+                        </div>
+                    </div>
+                    @*<div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile Phone <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Phone, new { placeholder = "Mobile Phone", @class = "PPhone form-control phonemask" })
+
+                        </div>
+                    </div>*@
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-id="@Model.BrokerId" class="btn btn-primary btnsaveBroker">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</form>

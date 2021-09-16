@@ -1,0 +1,31 @@
+﻿<table id="tblReasonMaster" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+         
+            <td width="35%">Reason</td>
+            <td width="15%">Status</td>
+            <th width="20%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.ReasonMaster != null)
+        {
+
+            foreach (var reasonMaster in ViewBag.ReasonMaster)
+            {
+                <tr>                   
+                    <td>@reasonMaster.ReasonName</td>
+                    <td>
+                        @(reasonMaster.IsActive == true ? "Active" : "Inactive")
+
+                    </td>
+                    <td>
+                        <a href="@Url.Action("EditReason", "Admin", new { @id = reasonMaster.ReasonId })" class="btn btn-primary btn-xs">Edit</a>                       
+                    </td>
+
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>

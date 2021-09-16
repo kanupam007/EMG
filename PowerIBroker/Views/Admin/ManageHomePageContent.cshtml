@@ -1,0 +1,90 @@
+﻿@model PowerIBrokerDataLayer.HomePageContent
+
+@{
+    ViewBag.Title = "ManageHomePageContent";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+        <div>
+
+        </div>
+        <div class="col-lg-12">
+            <h2>Manage Home Page</h2>
+
+            <div class="@(TempData["CustomMessageHPC"] != null ? TempData["MessageTypeHPC"].ToString() == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                @if (TempData["CustomMessageHPC"] != null)
+                {
+                    <i class="fa @(TempData["MessageTypeHPC"].ToString() == "Success" ? "fa-check-circle" : "fa-times-circle")"></i>
+
+                }
+                <span>@TempData["CustomMessageHPC"]</span>
+            </div>
+
+            @using (Html.BeginForm("ManageHomePageContent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label>Banner Text 1</label>
+                    @Html.TextBoxFor(model => model.Heading, new { @class = "form-control", placeholder = "Heading" })
+
+                </div>
+                <div class="form-group">
+                    <label>Banner Text 2</label>
+                    @Html.TextBoxFor(model => model.HeaderText, new { @class = "form-control", rows = "3", placeholder = "Header Text" })
+
+                </div>
+
+                <div class="form-group">
+                    <label>Meta Title</label>
+                    @Html.TextBoxFor(model => model.MetaTitle, new { @class = "form-control", rows = "1", placeholder = "Meta Title" })
+
+                </div>
+
+                <div class="form-group">
+                    <label>Meta Keywords</label>
+                    @Html.TextBoxFor(model => model.MetaKeywords, new { @class = "form-control", rows = "3", placeholder = "Meta Keywords" })
+
+                </div>
+                <div class="form-group">
+                    <label>Meta Descriptions</label>
+                    @Html.TextBoxFor(model => model.MetaDescriptions, new { @class = "form-control", rows = "3", placeholder = "Meta Descriptions" })
+                </div>
+                <div class="form-group">
+                    <label>Meta Robots</label>
+                    @Html.TextBoxFor(model => model.MetaKeyPhrase, new { @class = "form-control", rows = "3", placeholder = "Meta Robots" })
+                </div>
+                <div class="form-group">
+                    <label>Banner Image (min:1300x830)</label>
+                    <input type="file" id="file" name="file" accept="image/*" onchange="showfilepreview(this, 'homepageBanner')">
+
+                </div>
+                  <div class="form-group">
+                    @if (Model.Id > 0 && !string.IsNullOrEmpty(Model.Banner))
+                    {
+                        <a href="javascript:void(0)" class="BannerImageHome" data-id="@Model.Id" style="float:right;">Delete Image</a>
+                    }                   
+                </div>
+                <div class="form-group">                  
+
+                    <img class="img-thumbnail" src="@(Model != null ? string.IsNullOrEmpty(Model.Banner) ? "http://placehold.it/1300x830" : Url.Content("~/Uploads/Admin/HomePageBanners/" + Model.Banner) : "http://placehold.it/1300x830")" />
+                </div>
+                @*<div class="form-group">
+                    <label>Banner Link</label>
+                     @Html.TextBoxFor(model => model.Link , new { @class = "form-control", placeholder = "Banner Link" })
+                     <p class="help-block">Example Banner link here.</p>
+                    </div>*@
+                @Html.HiddenFor(model => model.Banner)
+                <div class="form-group">
+                    <button class="btn btn-primary " id="btnSaveHomePageContent" type="submit">Submit</button>
+                </div>
+            }
+
+
+        </div>
+
+
+    </div>
+</div>

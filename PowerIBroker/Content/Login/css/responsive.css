@@ -1,0 +1,25 @@
+@media only screen and (max-width: 1160px) {
+.clientList ul li img {height:60px;}
+}
+
+
+@media only screen and (max-width: 999px) {
+body {font-size:13px;}
+.topTxtBox {line-height:20px;}
+.topList li {padding:20px 10px 30px 10px; line-height:20px;}
+.topList li span {font-size:15px;}
+.topList li .img {width:90px; height:90px;}
+.benefitHd {font-size:20px; left:20px; top:20px;}
+.benefitHd span {font-size:45px; line-height:50px;}
+.benefitTxt {padding:20px 20px 30px 280px;}
+.benefitTxt ul li {font-size:15px; background:url(../images/wht_arrow.png) no-repeat 0 14px;}
+.featureBox {padding:20px 0;}
+.featureHd {font-size:26px;}
+.featureList ul li {font-size:15px;}
+.featureList ul li span {font-size:17px;}
+.featureList ul li .img {width:100px; height:100px; border:2px solid #e0dddd; padding-top:16px;}
+.featureList ul li .img img {max-width:70%;}
+.clientList {margin-bottom:20px;}
+.clientList ul li img {height:40px;}
+}
+

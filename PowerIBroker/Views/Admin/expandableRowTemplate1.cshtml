@@ -1,0 +1,154 @@
+﻿
+
+<div class="container-fluid">
+
+
+    <div class="responsive">
+        <div class="midInner">
+            @*<div class="bradcrumb"><a href="~/Employee/Dashboard">Dashboard</a> <span>&gt;</span>Medical Plans</div>*@
+      
+
+
+            <div class="responsive">
+                @if (ViewBag.PlanDetails != null)
+                {
+                    if (ViewBag.PlanDetails.Count > 0)
+                    {
+                        foreach (var options in ViewBag.PlanDetails)
+                        {
+                            TempData["PhysicianReq"] = options.IsPhysicianRequired;
+                            <div class="accDiv">
+                                <button class="accordion">
+                                    @options.PlanName
+                                    @if (options.EndDate < DateTime.UtcNow)
+                                    {
+                                        <span style="float:right;margin-right:30px;color:red">This Plan has Expired</span>
+                                    }
+                                </button>
+                                <div class="boxed panel" style="padding-bottom:10px">
+                                    <div class="companyInfo">PLAN DESCRIPTION</div>
+                                    <p class="listTxt">@options.Description</p>
+
+                                    <div class="companyInfo" style="padding-top:30px">PLAN RESOURSE</div>
+                                    <ul>
+                                        @if (ViewBag.ResourceDetails != null)
+                                        {
+                                            if (ViewBag.ResourceDetails.Count > 0)
+                                            {
+
+                                                foreach (var resource in ViewBag.ResourceDetails)
+                                                {
+                                                    if (options.ID == resource.PlanID)
+                                                    {
+                                                        @*
+                                                            <li class="listtxt" style="padding:10px">@resource.DocName</li>*@
+
+                                                        <li class="listtxt" style="padding:10px">
+                                                            @if (resource.DocMapName == "")
+                                                            {
+                                                                <a href='@resource.FullName'><img src="" /></a>
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href='@Url.Action("Download", "OpenEnrollment", new { filename = @resource.FullName })'>
+                                                                    <img src="~/Areas/Company/Content/images/519672-178_Download-128.png" style="height: 30px;
+    width: 30px;
+    margin-left: 30px;" />
+
+                                                                </a>
+                                                            }
+
+                                                        </li>
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                                            }
+                                        }
+
+                                    </ul>
+                                    <div class="companyInfo" style="padding-top:30px">COVERAGE OPTIONS</div>
+                                    <div class="departmentTable teamTable">
+                                        @if (ViewBag.CoverageDetails != null)
+                                        {
+                                            <table cellpadding="0" cellspacing="1" width="100%">
+                                                <tr class="hd">
+                                                    <td width="25%">COVERAGE</td>
+                                                    <td width="15%">COST</td>
+                                                    <td width="15%">COPAY</td>
+                                                    <td width="15%">DEDUCTIBLE</td>
+                                                    <td width="20%">OUT OF POCKET MAX</td>
+                                                    @if (options.EndDate > DateTime.UtcNow)
+                                                    {
+                                                        <td width="10%">ACTION</td>
+                                                    }
+                                                </tr>
+                                                @if (ViewBag.CoverageDetails.Count > 0)
+                                                {
+                                                    foreach (var coverage in ViewBag.CoverageDetails)
+                                                    {
+                                                        if (options.ID == coverage.InsurancePlanID)
+                                                        {
+                                                            <tr>
+                                                                <td>@coverage.CoverageOption</td>
+                                                                <td>0</td>
+                                                                <td>@coverage.Copay</td>
+                                                                <td>@coverage.Deductible</td>
+                                                                <td>@coverage.OutofPocketMax</td>
+
+                                                                @if (options.EndDate > DateTime.UtcNow)
+                                                                {
+
+                                                                    <td>
+                                                                        <div class="actionBtn">
+                                                                            @*<a href="javascript:void(0)" class="transition">Select</a>*@
+                                                                            @if (@coverage.DependentCoveragrID != 1)
+                                                                            {
+                                                                                <a href="#addEmpPopup"
+                                                                                   class="transition showPopup" onclick="GetEmployeeList(@options.ID,@options.OpenEnrollmentID,'@options.Type',@options.PlanCategoryID,@coverage.ID,@coverage.DependentCoveragrID)">Select</a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="#addEmpPopup"
+                                                                                   class="transition showPopup1" onclick="GetEmployeeList(@options.ID,@options.OpenEnrollmentID,'@options.Type',@options.PlanCategoryID,@coverage.ID,@coverage.DependentCoveragrID);">Select</a>
+                                                                            }
+                                                                        </div>
+                                                                    </td>
+                                                                }
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                                                }
+
+                                            </table>
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <span style="margin-left: 226px; font-size: 15px;">No record found</span>
+                    }
+                }
+
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

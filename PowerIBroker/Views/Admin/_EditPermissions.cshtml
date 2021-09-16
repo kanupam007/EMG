@@ -1,0 +1,45 @@
+﻿@if (ViewBag.Permissions != null)
+{
+    if (ViewBag.Permissions.Count > 0)
+    {
+        <span style="font-weight:bold;font-size:16px">Company Module</span><br /><br />
+        for (int i = 0; i < 7; i++)
+        {
+            var item = ViewBag.Permissions[i];
+            var data = "";
+            if (item.IsActive == true)
+            {
+                data = "checked";
+            }
+            <div id="divCompany">
+                <input type="checkbox" name="AccessRightID" value="@item.Id" @data />&nbsp;@item.AcessDescription
+
+            </div>
+        }
+        <br /><br />
+        <span style="font-weight:bold;font-size:16px">Employee Module</span><br /><br />
+        for (int y = 7; y < 11; y++)
+        {
+            var item = ViewBag.Permissions[y];
+            var data = "";
+            if (item.IsActive == true)
+            {
+                data = "checked";
+            }
+            <div id="divCompany">
+                <input type="checkbox" name="AccessRightID" value="@item.Id" @data />&nbsp;@item.AcessDescription
+
+            </div>
+
+        }
+    }
+
+}
+
+
+<script>
+    $('input[type=checkbox]').each(function () {
+		$(this).wrap( "<span class='checkWrapper'></span>" );
+		$(this).after( "<i class='bg'></i>" );
+	});
+</script>

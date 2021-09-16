@@ -1,0 +1,260 @@
+﻿@using PowerIBrokerDataLayer;
+@using PagedList.Mvc;
+@using PowerIBrokerBusinessLayer;
+@using PowerIBroker.Models;
+@model PagedList.IPagedList<VW_Company_Employee>
+@{
+    ManagePageSize pagesize = new ManagePageSize();
+}
+
+@{
+    ViewBag.Title = "Manage Employees";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+}
+@*<style>
+        #LoadMain {
+            position: fixed;
+            background-color: rgba(0,0,0,.6);
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 5;
+            display: none;
+        }
+
+        .loader {
+            position: relative;
+        }
+
+        .ajax-loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -32px; /* -1 * image width / 2 */
+            margin-top: -32px; /* -1 * image height / 2 */
+        }
+    </style>*@
+<link href="~/Content/Admin/css/stylesheet.css" rel="stylesheet" />
+@*<link href="/Content/sweetalert-master/dist/sweetalert.css" rel="stylesheet" />
+    <script src="/Content/sweetalert-master/dist/sweetalert-dev.js"></script>
+    <script src="/Content/sweetalert-master/dist/sweetalert.min.js"></script>*@
+
+<script>
+    document.title = '@ViewBag.Title';
+</script>
+<!--Start of Right Part-->
+<section class="content">
+    <div>
+        <h3 class="box-title">
+            Registered Employees
+            @*<span class="btn btn-primary" style="float:right"><a href="~/Admin/AddClient">Add Company</a></span>*@
+        </h3>
+
+        <div class="compTble-bot">
+            @using (Html.BeginForm("ManageEmployees", "Admin", FormMethod.Get))
+            {
+
+                <div class="searchBox" style="width: 50%; margin-left: 30%; margin-top: -30px; margin-bottom: 30px;">
+                    @if (ViewBag.Company != null)
+                    {
+                        @Html.DropDownList("CompanyID", ViewBag.Company as SelectList, "Select Company", new { CompanyID = Request["CompanyID"], onchange = "this.form.submit()" })
+                    }
+                </div>
+                <div class="box-header with-border">
+                    @Html.DropDownList("PageSize", new SelectList(new Dictionary<string, string> { { "50", "50" }, { "100", "100" }, { "200", "200" }, { "500", "500" }, { "1", "All" } }, "Key", "Value"), new { @class = "btn btn-default pull-right", CompanyID = Request["CompanyID"], onchange = "this.form.submit()" })
+                    <div class="box-tools pull-left">
+
+                    </div><!-- /.box-tools -->
+                </div>
+            }
+
+
+            <br />
+
+            <div class="box">
+                <div id="dv1" style="overflow-y: scroll;max-height: 600px;">
+
+                @if (Model != null)
+                {
+                    if (Model.Count > 0)
+                    {
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <tr style="text-align:left">
+                                    <td><input type="checkbox" id="select_all"></td>
+                                    <td width="20%" style="font-size: 15px; font-weight: bold;">Employee Name</td>
+                                    <td width="25%" style="font-size: 15px; font-weight: bold;">Location</td>
+                                    <td width="20%" style="font-size: 15px; font-weight: bold;">Department</td>
+                                    <td width="30%" style="font-size: 15px; font-weight: bold;">Email</td>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td> <input type="checkbox" name="empChk" value="@item.Id" class="checkbox" /></td>
+                                        <td><a title="View OpenEnrollment" href="@Url.Action("ViewOpenEnrollment", "Admin", new { @EmpID = item.Id })">@item.EmpName</a></td>
+                                        <td>@item.Location</td>
+                                        <td>@item.Department</td>
+                                        <td>@item.Email</td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <tr style="text-align:left">
+                                    <td><input type="checkbox" id="select_all"></td>
+                                    <td width="20%" style="font-size: 15px; font-weight: bold;">Employee Name</td>
+                                    <td width="20%" style="font-size: 15px; font-weight: bold;">Location</td>
+                                    <td width="20%" style="font-size: 15px; font-weight: bold;">Department</td>
+                                    <td width="30%" style="font-size: 15px; font-weight: bold;">Email</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <span>No Record Found</span>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    }
+                }
+
+                </div>
+            </div>
+
+        </div>
+        @if (ViewBag.Total > pagesize.ManageComapanyPageSize)
+        {
+            <p class="pagingCounter">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+            @*@Html.PagedListPager(Model,, new { onchange = "GetData();" })*@
+            <div id="contentPager">
+                @Html.PagedListPager(Model, page => Url.Action("ManageEmployees", new { page, CompanyID = Request["CompanyID"] }))
+            </div>
+        }
+        @*<div class="pager-List"> <a href="javascript:void(0)"><</a> <a href="javascript:void(0)" class="active">1</a> <a href="javascript:void(0)">2</a> <a href="javascript:void(0)">3</a> <a href="javascript:void(0)">4</a> <a href="javascript:void(0)">5</a> ... <a href="javascript:void(0)">10</a> <a href="javascript:void(0)">></a> </div>*@
+        <div class="clr">&nbsp;</div>
+        <div class="box-footer">
+            <button type="button" id="btnSave" class="btn btn-primary" onclick="SendMailonCompanyEmployees()">Send Mail</button>
+        </div>
+        @*<footer>Copyright &copy; 2015 ENROLLMYGROUP</footer>*@
+    </div>
+</section>
+<div id="LoadMain" style="display:none">
+    <div id="load">
+        <img src="~/Areas/Employee/Content/images/loading(1).gif" class="ajax-loader" />
+    </div>
+</div>
+<!--Start of Right Part-->
+@*$(document).on("click", "#contentPager a", function () {
+
+
+            GetPagedData();
+        });
+        function GetData() {
+
+            var CompanyID = $("#CompanyID option:selected").val();
+            var PageSize = $("#pagesizelist option:selected").val();
+            var Page = null;
+            $.ajax({
+                type: 'GET',
+                contentType: false,
+                url: '@Url.Action("ManageEmployees", "Admin")',
+                data: { CompanyID: CompanyID, pageSize: PageSize, page: Page },
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    if (CompanyID == "0" || CompanyID == 0) {
+                        $('#dv1').html('');
+                        $("#dv1").append("<span style='color:black'>No Record Found </span>");
+                    }
+                    else {
+                        $('#dv1').html(data);
+                    }
+
+
+                }
+            });
+        }
+
+        function GetPagedData() {
+
+            var CompanyID = $("#CompanyID option:selected").val();
+            var PageSize = $("#pagesizelist option:selected").val();
+            var Page = $('.PagedList-skipToNext').children().attr("href").split("=");
+            $.ajax({
+                type: 'GET',
+                contentType: false,
+                url: '@Url.Action("ManageEmployees", "Admin")',
+                data: { CompanyID: CompanyID, pageSize: PageSize, page: Page[1] },
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    if (CompanyID == "0" || CompanyID == 0) {
+                        $('#dv1').html('');
+                        $("#dv1").append("<span style='color:black'>Please select the company.</span>");
+                    }
+                    else {
+                        $('#dv1').html(data);
+                    }
+
+
+                }
+            });
+        }
+    </script>*@
+<script>
+    function SendMailonCompanyEmployees() {
+
+        var CompanyID = $('#CompanyID').val();
+        var selectedval = "";
+        var arr = $('input[name="empChk"]:checked');
+        arr.each(function () {
+            if (selectedval == "") {
+                selectedval = $(this).val();
+            }
+            else {
+                selectedval = selectedval + "," + $(this).val();
+            }
+
+        });
+        $("#LoadMain").addClass("loader");   
+        $("#LoadMain").css({ display: "block" });
+        if (selectedval != "") {
+            $.ajax({
+                type: 'GET',
+                contentType: false,
+                url: '@Url.Action("SendMailonCompanyEmployees", "Admin")',
+                data: { empID: selectedval },
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#LoadMain").css({ display: "none" });
+                    sweetAlert({
+                        title: "Confirmation",
+                        text: "Mail sent successfully.",
+                        type: "success"
+                    },
+                      function () {
+                          location.reload();
+                      });
+                }
+            });
+        }
+        else {
+            $("#LoadMain").removeClass("loader");
+            $("#LoadMain").css({ display: "none" });
+            toastr["error"]("Please select atleast one employee", "Error !");
+        }
+
+    }
+    $("#select_all").change(function () {  //"select all" change
+        $(".checkbox").prop('checked', $(this).prop("checked")); //change all ".checkbox" checked status
+    });
+</script>

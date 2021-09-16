@@ -1,0 +1,188 @@
+﻿@using PowerIBrokerBusinessLayer.Admin
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ManageDashboard objdash = new ManageDashboard();
+    var DemoRequest = objdash.GetDemoRequest();
+    var Company = objdash.GetCompanyList();
+}
+<style>
+    .dataTables_filter {
+        height: 50px;
+        padding-bottom: 5% !important;
+        padding-top: 0.5% !important;
+    }
+
+    .table-responsive {
+        padding: 1% !important;
+    }
+
+    .dataTables_wrapper .dataTables_filter input {
+        margin-left: 5px !important;
+    }
+
+    .dataTables_info {
+        margin-left: 2%;
+    }
+    .dataTables_filter label{
+        width:45% !important;
+    }
+    .dataTables_info {
+        width: 35% !important;
+        font-size: 10px;
+    }
+    .paging_simple_numbers {
+        width: 60% !important;
+        font-size: 10px;
+    }
+</style>
+<div class="container">
+    
+
+    
+
+    <div class="card card-dash-one mg-t-20">
+        <div class="row no-gutters">
+            <div class="col-lg-4">
+                <i class="icon ion-ios-people"></i>
+                <div class="dash-content">
+                
+                <label class="tx-primary"><a href="/Super-Admin/ManageEmployees">NO. OF EMPLOYEE</a></label>
+                    <h2>@objdash.GetEmployeeCount()</h2>
+                </div><!-- dash-content -->
+            </div><!-- col-3 -->
+            <div class="col-lg-4">
+                <i class="icon ion-ios-cart"></i>
+                <div class="dash-content">
+                    
+                <label class="tx-success"><a href="/Super-Admin/ManageClient">REGISTERED COMPANIES</a></label>
+                    <h2>@Company.Where(x=>x.IsActive).Count()</h2>
+                </div><!-- dash-content -->
+            </div><!-- col-3 -->
+            <div class="col-lg-4">
+                <i class="icon ion-gear-b"></i>
+                <div class="dash-content">
+                    <label class="tx-purple"><a href="/Super-Admin/DemoRequest">NEW DEMO REQUEST</a></label>
+                    <h2>@DemoRequest.Where(x => !x.IsActive).Count()</h2>
+                </div><!-- dash-content -->
+            </div>
+            
+        </div><!-- row -->
+    </div><!-- card -->
+
+    <div class="row row-sm mg-t-20">
+    @if(Company!=null&&Company.Count>0)
+            {
+                    <div class="col-lg-6">
+                        <div class="card card-table">
+                            <div class="card-header">
+                                <h6 class="slim-card-title">Recently Registered Company</h6>
+                            </div><!-- card-header -->
+                            <div class="table-responsive">
+                                <table class="table mg-b-0 tx-13 datatable">
+                                    <thead>
+                                        <tr class="tx-10">
+                                            <th class="wd-10p pd-y-5">&nbsp;</th>
+                                            <th class="pd-y-5">Name</th>
+                                            <th class="pd-y-5 tx-left">Company</th>
+                                            <th class="pd-y-5">Date</th>
+                                            @*<th class="pd-y-5 tx-center">Actions</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Company)
+                                        {
+                                            var logoPath = "../../Areas/Company/Content/Upload/CompanyLogo/CompanyProfile120x120/" + item.LogoImage;
+                                        <tr>
+                                            <td class="pd-l-20">
+                                                <img src="@logoPath" onerror='this.src = "http://via.placeholder.com//800x533"' class="wd-55" alt="Image">
+                                            </td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(item.BrokerName))
+                                                {
+                                                    <a href="" class="tx-inverse tx-14 tx-medium d-block">@item.BrokerName.Split(' ')[0]</a>
+                                                    <span class="tx-11 d-block"><span class="square-8 @(item.BrokerName.Split(' ').Length>1?"bg-success":"bg-danger") mg-r-5 rounded-circle"></span> @(item.BrokerName.Split(' ').Length>1? item.BrokerName.Split(' ')[1] : "-----")</span>
+                                                }
+                                                else
+                                                {
+                                                    <a href="" class="tx-inverse tx-14 tx-medium d-block">N.A</a>
+                                                    <span class="tx-11 d-block"><span class="square-8 bg-danger mg-r-5 rounded-circle"></span> N.A</span>
+                                                }
+                                            </td>
+                                
+                                            <td class="valign-middle tx-left">@item.CCompanyName</td>
+                                
+                                            <td class="valign-middle"><span class="tx-@(@item.DateCreated.GetValueOrDefault().Year==DateTime.Now.Year?"success":"danger")"><i class="icon ion-android-arrow-@(@item.DateCreated.GetValueOrDefault().Year==DateTime.Now.Year?"up":"down") mg-r-5"></i>@item.DateCreated.GetValueOrDefault().ToString("dd MMM")</span> @item.DateCreated.GetValueOrDefault().Year</td>
+                               
+                                        </tr>
+                                        }
+                            
+                                    </tbody>
+                                </table>
+                            </div><!-- table-responsive -->
+                            <!--<div class="card-footer tx-12 pd-y-15 bg-transparent">
+                                <a href="/Super-Admin/ManageClient"><i class="fa fa-angle-down mg-r-5"></i>View All Registered Company</a>
+                            </div>--><!-- card-footer -->
+                        </div><!-- card -->
+                    </div>
+            }
+        <!-- col-6 -->
+    @if(DemoRequest!=null&&DemoRequest.Count>0)
+            {
+    <div class="col-lg-6 mg-t-20 mg-lg-t-0">
+        <div class="card card-table">
+            <div class="card-header">
+                <h6 class="slim-card-title">Recently Demo Notification</h6>
+            </div><!-- card-header -->
+            <div class="table-responsive">
+                <table class="table mg-b-0 tx-13 datatable">
+                    <thead>
+                        <tr class="tx-10">
+                            <th class="wd-10p pd-y-5">&nbsp;</th>
+                            <th class="pd-y-5">Name</th>
+                            <th class="pd-y-5">Contact</th>
+                            <th class="pd-y-5">Request Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in DemoRequest.OrderByDescending(x=>x.CreatedOn))
+                        {
+                            var logoPath = "../../Areas/Company/Content/Upload/CompanyLogo/CompanyProfile120x120/" + item.LogoImage;
+                            <tr>
+                                <td class="pd-l-20">
+                                    <img src="@logoPath" onerror='this.src = "http://via.placeholder.com//500x500"'  class="wd-36 rounded-circle" alt="Image">
+                                </td>
+                                <td>
+                                    <a href="" class="tx-inverse tx-14 tx-medium d-block">@(string.IsNullOrEmpty(item.BrokerName)?"N.A": item.BrokerName)</a>
+                                    <span class="tx-11 d-block">@item.CCompanyName</span>
+                                </td>
+                                <td class="tx-12">
+                                    @if (!string.IsNullOrEmpty(item.CContact))
+                                    {
+                                        <span class="square-8 bg-success mg-r-5 rounded-circle"></span> @item.CContact
+                                    }
+                                    else
+                                    {
+                                        <span class="square-8 bg-danger mg-r-5 rounded-circle"></span> <span>N.A</span>
+                                    }
+                                </td>
+                                <td>@item.CreatedOn.GetValueOrDefault().ToString("dd MMM yyyy")</td>
+                            </tr>
+                        }
+                       
+
+                    </tbody>
+                </table>
+            </div><!-- table-responsive -->
+            <!--<div class="card-footer tx-12 pd-y-15 bg-transparent">
+                <a href="/Super-Admin/DemoRequest"><i class="fa fa-angle-down mg-r-5"></i>View All Demo Notification</a>
+            </div>--><!-- card-footer -->
+        </div><!-- card -->
+    </div>
+            }
+        <!-- col-6 -->
+    </div><!-- row -->
+
+    
+
+</div><!-- container -->

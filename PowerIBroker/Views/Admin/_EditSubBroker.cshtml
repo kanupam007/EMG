@@ -1,0 +1,89 @@
+﻿@model  PowerIBroker.Areas.Broker.Models.Broker
+
+<form id="frmeditbroker">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Broker User</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12" style="padding-right:0px;padding-left:0px">
+                    <div class="@(TempData["CompanyMessage"] != null ? TempData["MessageType"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")">
+                        @if (TempData["CompanyMessage"] != null)
+                        {
+                            <i class="fa @(TempData["MessageType"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+
+                        }
+                        <span>@TempData["CompanyMessage"]</span>
+                    </div>
+                </div>
+                @Html.HiddenFor(m => Model.SubBrokerId, new { @class = "sbID" })
+                @Html.HiddenFor(m => Model.BrokerId, new { @class = "bID" })
+
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Broker Company Name <span style="color:red;">*</span></label>
+                            @Html.DropDownListFor(m => Model.ddlBrokerId, ViewBag.BrokerGet as SelectList, "Select", new { @class = "SBddlBroker form-control", @id = "SBddlBrokerId", @disabled="disabled" })
+                            @*@Html.ValidationMessageFor(m => Model.ddlBrokerId)*@
+                        </div>
+                    </div>
+
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">First Name <span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => Model.FirstName, new { placeholder = "Broker First Name", @class = "SBFirstName form-control" })
+                            @*@Html.ValidationMessageFor(m => Model.FirstName)*@
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Last Name</label>
+                            @Html.TextBoxFor(m => Model.LastName, new { placeholder = "Broker Last Name", @class = "SBLastName form-control" })
+                        </div>
+                    </div>
+                </div>
+
+            
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email <span style="color:red;">*</span></label>
+
+                            @Html.TextBoxFor(m => Model.Email, new { placeholder = "Email", @class = "SBEmail form-control" })
+                            @*@Html.ValidationMessageFor(m => Model.Email)*@
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="clearfix">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Work Phone</label>
+                            @Html.TextBoxFor(m => Model.WorkPhone, new { placeholder = "Work Phone", @class = "SBWorkPhone form-control phonemask" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mobile Phone</label>
+
+                            @Html.TextBoxFor(m => Model.Phone, new { placeholder = "Mobile Phone", @class = "SBPhone form-control phonemask" })
+                            @*@Html.ValidationMessageFor(m => Model.Phone)*@
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" data-id="@Model.SubBrokerId" class="btn btn-primary btnsaveSubBroker">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+

@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "BadRequest";
+    Layout = null;
+    var returnUrl = ViewBag.ReturnUrl;
+}
+
+<style>
+    body {
+        font-family: 'open_sansregular';
+        background: #F3F3F3;
+        color: rgb(86, 180, 137);
+        margin: 10% 25%;
+    }
+    .goBack {
+        background: rgb(86, 180, 137);
+        border-radius: 3px;
+        color: #fff;
+        display: block;
+        font-family: open_sansbold;
+        font-size: 19px;
+        margin: 40px auto auto;
+        padding: 18px 0;
+        width: 200px;
+        text-decoration:none;
+    }
+
+        .goBack:hover {
+            background: #444;
+        }
+</style>
+<center>
+    <div>
+        <span style="font-size: 10em;">
+            500
+        </span>
+        <span style="font-size: 3em;display: block;">
+           Something went wrong ! please try again
+        </span>
+
+        <a class="goBack" href="@returnUrl">Go back</a>
+
+    </div>
+</center>

@@ -1,0 +1,64 @@
+-------------------START-------------4/4/2018 10:58:56 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult AddEmployee()
+Process Type : ActionResult=[HttpPost]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------4/4/2018 10:58:56 AM
+
+-------------------START-------------4/4/2018 10:59:09 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult AddEmployee()
+Process Type : ActionResult=[HttpPost]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------4/4/2018 10:59:09 AM
+
+-------------------START-------------4/4/2018 10:59:36 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult AddEmployee()
+Process Type : ActionResult=[HttpPost]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------4/4/2018 10:59:36 AM
+
+-------------------START-------------4/4/2018 11:08:40 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult AddEmployee()
+Process Type : ActionResult=[HttpPost]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------4/4/2018 11:08:40 AM
+
+-------------------START-------------4/4/2018 11:09:12 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult AddEmployee()
+Process Type : ActionResult=[HttpPost]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------4/4/2018 11:09:12 AM
+
+-------------------START-------------4/4/2018 11:15:04 AM
+
+Controller Name : Company Controller
+Function in which error found : ActionResult AddEmployee()
+Process Type : ActionResult=[HttpPost]
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------4/4/2018 11:15:04 AM
+
+-------------------START-------------4/11/2018 5:57:14 PM
+
+Controller Name : Department Controller
+Function in which error found : ActionResult AddDepartment()
+Process Type : ActionResult=[HttpPost]
+Error Message : Input string was not in a correct format.
+-------------------END-------------4/11/2018 5:57:14 PM
+
+-------------------START-------------4/13/2018 5:06:53 PM
+
+Controller Name : Employee Controller
+Function in which error found :  UpdateEmployeePersonalInfo
+Process Type : JsonCalling function
+Error Message : Object reference not set to an instance of an object.
+-------------------END-------------4/13/2018 5:06:53 PM
+

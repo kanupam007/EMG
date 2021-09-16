@@ -1,0 +1,8 @@
+﻿@*@model  PowerIBroker.Areas.Broker.Models.CompanyBroker*@
+<div class="col-lg-3">
+    <div class="form-group">
+       
+        @Html.DropDownList("ddlBrokerId", ViewBag.BrokerGet as SelectList, "Select", new { @class = "ddlBrokerIdchange form-control", @style = "margin-bottom:-25px;" })
+       
+    </div>
+</div>

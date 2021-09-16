@@ -1,0 +1,346 @@
+﻿@model PowerIBroker.Areas.Broker.Models.ClientMasterValidation
+@{
+    ViewBag.Title = "Edit Company";
+    Layout = "~/Views/Shared/_emgadminlayout.cshtml";
+    
+}
+
+<meta name="viewport" content="width=device-width" />
+@* <script type="text/javascript" src="@Url.Content("~/Areas/Broker/Scripts/jquery-2.1.1.js")"></script>*@
+
+<link href="~/Content/Admin/css/stylesheet.css" rel="stylesheet" />
+@*<link rel="stylesheet" href="@Url.Content("~/Areas/Broker/Content/css/validate.css")" />*@
+<script type="text/javascript" src="@Url.Content("/Areas/Employee/Content/js/maskedinput.js")"></script>
+<script>
+    document.title = '@ViewBag.Title';
+</script>
+
+<script src="~/Content/Frontend/js/jquery-ui.min.js"></script>
+@*<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />*@
+<link href="/Content/Frontend/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/Content/Frontend/css/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+
+<style type="text/css">
+    .ui-autocomplete {
+        z-index: 99999;
+    }
+
+    .ui-menu .ui-menu-item a, .ui-menu .ui-menu-item a.ui-state-hover, .ui-menu .ui-menu-item a.ui-state-active {
+        font-weight: normal;
+        margin: -1px;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .ui-autocomplete-loading {
+        background: white url("ui-anim_basic_16x16.gif") right center no-repeat;
+    }
+
+    element.style {
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-top: 45px;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $("#CCityName").autocomplete({
+            source: function (request, response) {
+                jQuery.getJSON(
+                   "http://gd.geobytes.com/AutoCompleteCity?callback=?&q=" + request.term,
+                   function (data) {
+                       response(data);
+                   }
+                );
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                var selectedObj = ui.item;
+                jQuery("#CCityName").val(selectedObj.value);
+                getcitydetails(selectedObj.value);
+                return false;
+            },
+            open: function () {
+                jQuery(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                jQuery(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        }); jQuery("#CCityName").autocomplete("option", "delay", 100);
+    });
+
+    function getcitydetails(fqcn) {
+
+        if (typeof fqcn == "undefined") fqcn = jQuery("#txtCity").val();
+
+        cityfqcn = fqcn;
+
+        if (cityfqcn) {
+
+            jQuery.getJSON(
+                   "http://gd.geobytes.com/GetCityDetails?callback=?&fqcn=" + cityfqcn,
+                function (data) {
+                    jQuery("#CCityName").val(data.geobytescity);
+                    jQuery("#txtCountry").val(data.geobytescountry);
+                    jQuery("#txtState").val(data.geobytesregion);
+                    //jQuery("#latitude").val(data.geobyteslatitude);
+                    //jQuery("#longitude").val(data.geobyteslongitude);
+                    document.getElementById('txtState').style.borderColor = '#c5c5c5';
+                    document.getElementById('txtCountry').style.borderColor = '#c5c5c5';
+                }
+            );
+        }
+    }
+</script>
+
+<section class="content-header">
+    <h1>
+        Edit Company
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Admin/AdminRole"><i class="fa fa-dashboard"></i>Company</a></li>
+        <li class="active">Edit Company</li>
+    </ol>
+    <div class="col-lg-12" style="padding-top: 5px;">
+        <div class="@(TempData["CustomMessage"] != null ? TempData["MessageType"] == "Success" ? "alert alert-success" : "alert alert-danger" : "")" style=" height 30px;padding 5px;">
+            @if (TempData["CustomMessage"] != null)
+            {
+
+                <i class="fa @(TempData["MessageType"] == "Success" ? "fa fa-check" : "fa fa-times-circle")"></i>
+
+            }
+            <span>@TempData["CustomMessage"]</span>
+            @{
+                TempData["CustomMessage"] = null;
+                TempData["MessageType"] = null;
+            }
+        </div>
+    </div>
+
+</section>
+
+
+@using (Html.BeginForm("EditClient", "Admin", FormMethod.Post))
+{
+  
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.ID)
+      @Html.HiddenFor(m => m.EmployeeID)
+    
+    <input type="hidden" id="empID" name="empID" value="@ViewBag.employeeId" />
+    <!--Start of Right Part-->
+    <div class="rightpart">
+
+        <div class="addcl-L">
+
+            <div class="compTble" style="position: relative; min-height: 1px; padding-right: 15px; padding-top: 50px">
+                <div class="half-L">
+                    <label class="lblTxt">Company Name </label>
+                    @*  <input type="text" name="name" placeholder="Enter Company Name" class="dashInp">*@
+                    @Html.TextBoxFor(m => m.CCompanyName, new { placeholder = "Enter Company Name", @class = "dashInp" })<br />
+                    @Html.ValidationMessageFor(m => m.CCompanyName)
+                </div>
+
+                <div class="half-R">
+                    <label class="lblTxt">No of Employees </label>
+                    @*   <input type="text" name="name" placeholder="Enter Client Name" class="dashInp">*@
+                    @Html.TextBoxFor(m => m.NoOfEmp, new { placeholder = "Enter no of Employees", @class = "dashInp" })<br />
+                </div>
+
+                <div class="half-L">
+                    <label class="lblTxt">Client Name </label>
+                    @* <input type="text" name="name" placeholder="Enter Client Name" class="dashInp">*@
+                    @Html.TextBoxFor(m => m.CName, new { placeholder = "Enter Client Name", @class = "dashInp" })<br />
+                    @Html.ValidationMessageFor(m => m.CName)
+                </div>
+
+
+                <div class="half-R">
+                    <label class="lblTxt">Mobile Phone </label>
+                    @* <input type="text" name="name" placeholder="Enter Client Contact Number" class="dashInp">*@      
+                    @Html.TextBoxFor(m => m.CContact, new { placeholder = "Phone", @class = "dashInp phonemask" })<br />
+                    @Html.ValidationMessageFor(m => m.CContact)
+                </div>
+
+                <div class="half-L">
+                    <label class="lblTxt">Email </label>
+                    @*<input type="text" name="name" placeholder="Enter Email" class="dashInp">*@
+                    @Html.TextBoxFor(m => m.CEmail, new { placeholder = "Enter Email", @class = "dashInp" })<br />
+                    @Html.ValidationMessageFor(m => m.CEmail)
+                </div>
+
+                <div class="half-R">
+                    <label class="lblTxt">Confirm Email </label>
+                    @*<input type="text" name="name" placeholder="Enter Email" class="dashInp">*@
+                    @Html.TextBoxFor(m => m.ConfirmEmail, new { placeholder = "Enter Confirm Email", @class = "dashInp" })<br />
+                    @Html.ValidationMessageFor(m => m.ConfirmEmail)
+                </div>
+
+                <div class="half-L">
+                    <label class="lblTxt">Broker Name </label>
+                    @*<input type="text" name="name" placeholder="Enter Email" class="dashInp">*@
+                    @Html.TextBoxFor(m => m.BrokerName, new { placeholder = "Enter Broker Name", @class = "dashInp" })<br />
+                    @Html.ValidationMessageFor(m => m.BrokerName)
+                </div>
+
+                <div class="half-R">
+                    <label class="lblTxt">Broker Email </label>
+                    @*<input type="text" name="name" placeholder="Enter Email" class="dashInp">*@
+                    @Html.TextBoxFor(m => m.BrokerEmail, new { placeholder = "Enter Broker Email", @class = "dashInp" })<br />
+                    @Html.ValidationMessageFor(m => m.BrokerEmail)
+                </div>
+                @*<div class="half-R">
+                        <label class="lblTxt">Message</label>
+
+                        @Html.TextBoxFor(m => m.CompanyMessage, new { placeholder = "Enter message", @class = "dashInp" })<br />
+                    </div>*@
+                <div class="clr"></div>
+            </div>
+            <div class="clr"></div>
+            <h2 style="font-size: 16px; font-family: font-family:'open_sanssemibold'; color: #34495e; font-weight:bold">
+                Company Address
+            </h2>
+            <div class="compTble">
+                <div class="fullwidth">
+                    <label class="lblTxt">Street Name</label>
+                    @* <input type="text" name="name" placeholder="Enter Street Name" class="dashInp">*@
+                    @Html.TextBoxFor(m => m.CStreetName, new { placeholder = "Enter Street Name", @class = "dashInp" })
+                </div>
+                <div class="half-L">
+                    <label class="lblTxt">City </label>
+                    @*<input type="text" name="name" placeholder="Enter City" class="dashInp">*@
+                    @Html.TextBoxFor(m => m.CCityName, new { placeholder = "Enter City", @class = "dashInp" })<br />
+                    @Html.ValidationMessageFor(m => m.CCityName)
+                </div>
+                <div class="half-R">
+                    <label class="lblTxt">State</label>
+                    @* <select name="listmenu" class="custom-select">
+                          <option class="optsmall">Select State</option>
+                        </select>*@
+                    @Html.TextBoxFor(m => m.CStateName, new { placeholder = "Enter State", @class = "dashInp", id = "txtState" })<br />
+                    @Html.ValidationMessageFor(m => m.CStateName)
+                </div>
+                <div class="half-L">
+                    <label class="lblTxt">Zip Code</label>
+                    @* <input type="text" name="name" placeholder="Enter Zip Code " class="dashInp">*@
+                    @Html.TextBoxFor(m => m.CZipCode, new { placeholder = "Enter Zip Code", @class = "dashInp", @maxlength = 5 })<br />
+                    @Html.ValidationMessageFor(m => m.CZipCode)
+                </div>
+
+                <div class="half-R">
+                    <label class="lblTxt">Country</label>
+                    @*<select name="listmenu" class="custom-select">
+                          <option class="optsmall">Select Country</option>
+                        </select>*@
+                    @Html.TextBoxFor(m => m.CCountryName, new { placeholder = "Enter Country", @class = "dashInp", id = "txtCountry" })<br />
+                    @Html.ValidationMessageFor(m => m.CCountryName)
+
+                </div>
+                <div class="half-L">
+                    <input type="checkbox" name="status" value="true" @(Model.IsActive == true ? "checked" : "") style="margin-right: 5px;">
+                    <label class="lblTxt" style="display: inline-block;">Active</label>
+                </div>
+                @*<div class="half-L">
+
+                        <input type="submit" name="Approved" value="Approved" class="btn btn-primary btn-lg">
+                        <input type="submit" name="Rejected" value="Rejected" class="btn btn-primary btn-lg">
+                    </div>*@
+                <div class="clr"></div>
+                <input type="submit" name="button" value="Update" class="btn btn-primary btnCurrSave">
+                <input type="button" name="button" value="Cancel" class="btn btn-primary" style="display:none">
+            </div>
+        </div>
+        @*	<div class="addcl-R">
+                <h3 class="compHd"><a>Send Invitation</a></h3>
+                <div class="inviteMain">
+                  <div class="half-L">
+                    <label class="lblTxt">Company Name </label>
+                    <input type="text" name="name" placeholder="Enter Company Name" class="dashInp">
+                  </div>
+                  <div class="half-R">
+                    <label class="lblTxt">Email</label>
+                    <input type="text" name="name" placeholder="Enter Email" class="dashInp">
+                  </div>
+                  <div class="clr"></div>
+                 <input type="submit" name="button" value="INVITE" class="addBtn">
+                </div>
+            </div>*@
+        <div class="clr"></div>
+        @*<footer>Copyright &copy; 2015 ENROLLMYGROUP</footer>*@
+    </div>
+  <!--Start of Right Part-->
+
+
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+    
+        var curr = $('#CultureCode').val();
+        var phoneFormat = getmaskingformat(curr);
+        $("#CContact").mask(phoneFormat);
+        //$("#CContact").mask("999-999-9999");
+    });
+</script>
+<script>
+    function RemoveCommas(value) {
+
+        return value.replace(/\D/g, '');
+    }
+    function getmaskingformat(curr) {
+
+        var phoneFormat = "";
+        switch (curr) {
+            case "en-IN":
+                phoneFormat = "(999) 999-9999";
+                break;
+            case "en-GB":
+                phoneFormat = "(999) 999-9999";
+                break;
+            case "es-ES":
+                phoneFormat = "(999) 999-9999";
+                break;
+            case "fr-CA":
+                phoneFormat = "99 99 99 99 99";
+                break;
+            case "de-CH":
+                phoneFormat = "999 999-9999";
+                break;
+
+            case "zh-CN":
+                phoneFormat = "99-9999-9999";
+                break;
+            case "fr-FR":
+                phoneFormat = "99 99 99 99 99";
+                break;
+
+            case "pl-PL":
+                phoneFormat = "999-999-9999";
+                break;
+            case "zh-SG":
+                phoneFormat = "99-9999-9999";
+                break;
+
+            case "th-TH":
+                phoneFormat = "(999) 999-9999";
+                break;
+
+            default:
+                phoneFormat = "(999) 999-9999";
+                break;
+        }
+        return phoneFormat;
+
+
+    }
+    $(document).on('click', '.btnCurrSave', function (e) {
+        $('.phonemask').each(function () {
+            $(this).val(RemoveCommas($(this).val()));
+        })
+
+    });
+</script>
